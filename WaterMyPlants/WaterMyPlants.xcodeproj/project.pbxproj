@@ -101,14 +101,10 @@
 		1D7E5EFD249D83760033B97B /* WaterMyPlants */ = {
 			isa = PBXGroup;
 			children = (
-				1D7E5EFE249D83760033B97B /* AppDelegate.swift */,
-				1D7E5F00249D83760033B97B /* SceneDelegate.swift */,
-				1D7E5F02249D83760033B97B /* ViewController.swift */,
-				1D7E5F04249D83760033B97B /* Main.storyboard */,
-				1D7E5F0A249D83780033B97B /* Assets.xcassets */,
-				1D7E5F0C249D83780033B97B /* LaunchScreen.storyboard */,
-				1D7E5F0F249D83780033B97B /* Info.plist */,
-				1D7E5F07249D83760033B97B /* WaterMyPlants.xcdatamodeld */,
+				1D7E5F37249D848F0033B97B /* ViewControllers */,
+				1D7E5F38249D849D0033B97B /* Storyboards */,
+				1D7E5F39249D84B20033B97B /* Model */,
+				1D7E5F31249D844C0033B97B /* Application */,
 			);
 			path = WaterMyPlants;
 			sourceTree = "<group>";
@@ -129,6 +125,50 @@
 				1D7E5F25249D83780033B97B /* Info.plist */,
 			);
 			path = WaterMyPlantsUITests;
+			sourceTree = "<group>";
+		};
+		1D7E5F31249D844C0033B97B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				1D7E5EFE249D83760033B97B /* AppDelegate.swift */,
+				1D7E5F00249D83760033B97B /* SceneDelegate.swift */,
+				1D7E5F0A249D83780033B97B /* Assets.xcassets */,
+				1D7E5F0F249D83780033B97B /* Info.plist */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		1D7E5F37249D848F0033B97B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1D7E5F02249D83760033B97B /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1D7E5F38249D849D0033B97B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1D7E5F0C249D83780033B97B /* LaunchScreen.storyboard */,
+				1D7E5F04249D83760033B97B /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		1D7E5F39249D84B20033B97B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1D7E5F3B249D84CC0033B97B /* CoreData */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1D7E5F3B249D84CC0033B97B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1D7E5F07249D83760033B97B /* WaterMyPlants.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
