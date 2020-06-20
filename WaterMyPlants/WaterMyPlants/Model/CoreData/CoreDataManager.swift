@@ -16,11 +16,11 @@ class CoreDataManager {
     static let shared = CoreDataManager()
     
     // create container
-    lazy var persistantContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Tasks")
-        container.loadPersistentStores { (_, error) in
+    lazy var container: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "WaterMyPlants")
+        container.loadPersistentStores { _, error in
             if let error = error {
-                fatalError("Failed to load persistent stores: \(error)")
+                fatalError("Failed loading persistent stores: \(error)")
             }
         }
         return container
@@ -28,7 +28,21 @@ class CoreDataManager {
     
     // create context -> everything done in the app uses the context
     var mainContext: NSManagedObjectContext {
-        persistantContainer.viewContext
+        container.viewContext
     }
+    
+    func save(context: NSManagedObjectContext = CoreDataManager.shared.mainContext) throws {
+        var saveError: Error?
+        context.performAndWait {
+            do {
+                try context.save()
+            } catch {
+                context.reset()
+                saveError = error
+            }
+        }
+        if let error = saveError {throw error}
+    }
+
     
 }
