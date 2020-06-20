@@ -19,8 +19,11 @@
 		1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F87249DB82D007D15C3 /* HomeVC.swift */; };
 		1DF93F8A249DB844007D15C3 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F89249DB844007D15C3 /* DetailVC.swift */; };
 		1DF93F8C249DB860007D15C3 /* CreatePlantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */; };
-		8E9E67A1249DA57B00E3569D /* OnboardAndLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E67A0249DA57B00E3569D /* OnboardAndLogin.storyboard */; };
 		8E9E67A5249DA67700E3569D /* ColorScheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */; };
+		8EEA5D8B249DC7E7000E4420 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D89249DC7E7000E4420 /* OnboardViewController.swift */; };
+		8EEA5D8C249DC7E7000E4420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D8A249DC7E7000E4420 /* LoginViewController.swift */; };
+		8EEA5D8F249DC809000E4420 /* TextFieldBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */; };
+		8EEA5D91249DC82D000E4420 /* OnboardAndLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EEA5D90249DC82D000E4420 /* OnboardAndLogin.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +62,11 @@
 		1DF93F87249DB82D007D15C3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		1DF93F89249DB844007D15C3 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlantVC.swift; sourceTree = "<group>"; };
-		8E9E67A0249DA57B00E3569D /* OnboardAndLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardAndLogin.storyboard; sourceTree = "<group>"; };
 		8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorScheme.xcassets; sourceTree = "<group>"; };
+		8EEA5D89249DC7E7000E4420 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		8EEA5D8A249DC7E7000E4420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldBottomBorder.swift; sourceTree = "<group>"; };
+		8EEA5D90249DC82D000E4420 /* OnboardAndLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OnboardAndLogin.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,7 @@
 		1D7E5EFD249D83760033B97B /* WaterMyPlants */ = {
 			isa = PBXGroup;
 			children = (
+				8EEA5D8D249DC800000E4420 /* Helpers */,
 				8E9E67A3249DA65D00E3569D /* CustomAssets */,
 				1D7E5F37249D848F0033B97B /* ViewControllers */,
 				1D7E5F38249D849D0033B97B /* Storyboards */,
@@ -152,6 +159,7 @@
 		1D7E5F37249D848F0033B97B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8EEA5D88249DC7D3000E4420 /* OnboardingVCs */,
 				1DF93F87249DB82D007D15C3 /* HomeVC.swift */,
 				1DF93F89249DB844007D15C3 /* DetailVC.swift */,
 				1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */,
@@ -162,9 +170,9 @@
 		1D7E5F38249D849D0033B97B /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				8EEA5D90249DC82D000E4420 /* OnboardAndLogin.storyboard */,
 				1D7E5F0C249D83780033B97B /* LaunchScreen.storyboard */,
 				1D7E5F04249D83760033B97B /* Main.storyboard */,
-				8E9E67A0249DA57B00E3569D /* OnboardAndLogin.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -192,6 +200,23 @@
 				8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */,
 			);
 			path = CustomAssets;
+			sourceTree = "<group>";
+		};
+		8EEA5D88249DC7D3000E4420 /* OnboardingVCs */ = {
+			isa = PBXGroup;
+			children = (
+				8EEA5D8A249DC7E7000E4420 /* LoginViewController.swift */,
+				8EEA5D89249DC7E7000E4420 /* OnboardViewController.swift */,
+			);
+			path = OnboardingVCs;
+			sourceTree = "<group>";
+		};
+		8EEA5D8D249DC800000E4420 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,9 +324,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7E5F0E249D83780033B97B /* LaunchScreen.storyboard in Resources */,
+				8EEA5D91249DC82D000E4420 /* OnboardAndLogin.storyboard in Resources */,
 				1D7E5F0B249D83780033B97B /* Assets.xcassets in Resources */,
 				8E9E67A5249DA67700E3569D /* ColorScheme.xcassets in Resources */,
-				8E9E67A1249DA57B00E3569D /* OnboardAndLogin.storyboard in Resources */,
 				1D7E5F06249D83760033B97B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,8 +352,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EEA5D8C249DC7E7000E4420 /* LoginViewController.swift in Sources */,
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,
 				1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */,
+				8EEA5D8B249DC7E7000E4420 /* OnboardViewController.swift in Sources */,
+				8EEA5D8F249DC809000E4420 /* TextFieldBottomBorder.swift in Sources */,
 				1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */,
 				1DF93F8C249DB860007D15C3 /* CreatePlantVC.swift in Sources */,
 				1D7E5F3D249D85310033B97B /* CoreDataManager.swift in Sources */,
