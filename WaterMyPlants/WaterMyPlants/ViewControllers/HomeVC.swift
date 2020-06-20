@@ -8,9 +8,9 @@
 
 import UIKit
 
-class HomeVC: UIViewController, UICollectionViewDataSource {
+class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-
+    
     @IBOutlet weak var horizontalCollectionView: UICollectionView!
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     
@@ -20,39 +20,40 @@ class HomeVC: UIViewController, UICollectionViewDataSource {
     
     // MARK: - Collection views data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case horizontalCollectionView:
-            return 10
-        case verticalCollectionView:
-            return 10
-        default:
-            print("Error: Default value triggered in a switch statement for numberOfItemsInSection - Perhaps a new collection view has been added")
-            fatalError()
-        }
+        collectionView == horizontalCollectionView ? 10 : 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView {
-        case horizontalCollectionView:
-            let cell = horizontalCollectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath)
-            return cell
-        case verticalCollectionView:
-            let cell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath)
-            return cell
-        default:
-            print("Error: Default value triggered in a switch statement for cellForItemAt - Perhaps a new collection view has been added")
-            fatalError()
+        if collectionView == horizontalCollectionView {
+            let horizontalCell = horizontalCollectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath) as! HorizontalCVCell
+            stylizeCell(horizontalCell)
+            return horizontalCell
+        } else { // verticalCollectionView
+            let  verticalCell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCVCell
+            stylizeCell(verticalCell)
+            return verticalCell
         }
     }
-
-    /*
+        /// Used to style the cells if there are many tweaks done to the cell. Otherwise this method may not be neccasary.
+        func stylizeCell(_ cell: UICollectionViewCell) {
+            cell.layer.cornerRadius = 12
+        }
+    
+    /// Customizes sizing for collectionViews
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == horizontalCollectionView {
+            return CGSize(width: 97, height: 127)
+        } else { // verticalCollectionView
+            return CGSize(width: self.view.frame.width / 2 - 27, height: self.view.frame.width / 2)
+        }
+    }
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
-
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailVC: UIViewController {
+class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -19,13 +19,24 @@ class DetailVC: UIViewController {
         updateViews()
     }
     
+    
     private func setupViews() {
-        // imageView
+//        imageView
         imageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+//        backButton
     }
     
     private func updateViews() {
         
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
+        return cell
     }
 
 }
