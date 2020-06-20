@@ -14,16 +14,78 @@
             <objects>
                 <viewController id="A55-Te-ght" customClass="CreatePlantVC" customModule="WaterMyPlants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nZT-EC-GhD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqB-jS-7xN">
+                                <rect key="frame" x="100" y="145" width="214" height="177.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EqB-jS-7xN" secondAttribute="height" multiplier="119:100" id="pdo-eu-ZbO"/>
+                                </constraints>
+                                <color key="tintColor" name="MyLightGreen"/>
+                                <state key="normal" backgroundImage="camera.viewfinder" catalog="system">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00b-X4-2Mf">
+                                <rect key="frame" x="186" y="288" width="0.0" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qty-5j-UQm">
+                                <rect key="frame" x="20" y="44" width="132" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="Uon-4v-Qft"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title=" Cancel" image="xmark" catalog="system">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="6ut-nb-q3x"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIW-6O-DvN">
+                                <rect key="frame" x="276" y="44" width="118" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="118" id="s2T-QB-7HM"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title=" Done" image="checkmark" catalog="system">
+                                    <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="fOH-ew-zUh"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EqB-jS-7xN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" constant="100" id="61D-gQ-rgM"/>
+                            <constraint firstItem="EqB-jS-7xN" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="100" id="Kb4-HB-sF6"/>
+                            <constraint firstItem="Qty-5j-UQm" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="OaS-pc-laH"/>
+                            <constraint firstItem="sIW-6O-DvN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="P7Z-BB-ChW"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="sIW-6O-DvN" secondAttribute="trailing" constant="20" id="VIE-mD-E20"/>
+                            <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Ws3-YQ-QBw"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="EqB-jS-7xN" secondAttribute="trailing" constant="100" id="vO1-ik-aSv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="24z-iF-4KP"/>
                     </view>
                     <navigationItem key="navigationItem" id="6wt-PX-0Zn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZJ-Qy-nKL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048" y="-558"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="-558.48214285714278"/>
+        </scene>
+        <!--OnboardAndLogin-->
+        <scene sceneID="Il7-dK-yNH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OnboardAndLogin" id="SU8-Q3-80t" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zmb-3f-mp2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1615" y="-266"/>
         </scene>
         <!--Water Today-->
         <scene sceneID="tne-QT-ifu">
@@ -132,7 +194,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="plusButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOv-OX-C15"/>
-                                    <segue destination="A55-Te-ght" kind="presentation" modalTransitionStyle="flipHorizontal" id="odF-Xk-Flz"/>
+                                    <segue destination="A55-Te-ght" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="odF-Xk-Flz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -155,6 +217,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Water Today" id="tKM-wt-ESr">
                         <barButtonItem key="backBarButtonItem" title=" " id="uEm-tG-FoX"/>
+                        <barButtonItem key="rightBarButtonItem" title="GoToLogin (Temporary)" id="z5j-JM-S5F">
+                            <color key="tintColor" name="MyLightGreen"/>
+                            <connections>
+                                <segue destination="SU8-Q3-80t" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="7Fz-Qc-EEq"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="horizontalCollectionView" destination="Dt7-fv-LDj" id="JHk-wR-gJ6"/>
@@ -277,9 +345,15 @@
         <segue reference="HCt-FL-R6w"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="camera.viewfinder" catalog="system" width="128" height="114"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="logo" width="500" height="500"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="MyLightBlue">
             <color red="0.71372549019607845" green="0.77647058823529413" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="MyLightGreen">
+            <color red="0.56862745098039214" green="0.64313725490196072" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
