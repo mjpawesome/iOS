@@ -16,6 +16,10 @@ class LoginViewController: UIViewController {
 
     }
     
+    @IBAction func dontHaveAccountButtonPressed(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true) {
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
