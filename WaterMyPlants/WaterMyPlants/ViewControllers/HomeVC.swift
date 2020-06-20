@@ -8,14 +8,42 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController, UICollectionViewDataSource {
+    
 
+    @IBOutlet weak var horizontalCollectionView: UICollectionView!
+    @IBOutlet weak var verticalCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
+    // MARK: - Collection views data source
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView {
+        case horizontalCollectionView:
+            return 10
+        case verticalCollectionView:
+            return 10
+        default:
+            print("Error: Default value triggered in a switch statement for numberOfItemsInSection - Perhaps a new collection view has been added")
+            fatalError()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch collectionView {
+        case horizontalCollectionView:
+            let cell = horizontalCollectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath)
+            return cell
+        case verticalCollectionView:
+            let cell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath)
+            return cell
+        default:
+            print("Error: Default value triggered in a switch statement for cellForItemAt - Perhaps a new collection view has been added")
+            fatalError()
+        }
+    }
 
     /*
     // MARK: - Navigation
