@@ -17,6 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YYk-n4-aGM">
+                                <rect key="frame" x="20" y="74" width="374" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="kmn-Am-Vd0"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqB-jS-7xN">
                                 <rect key="frame" x="100" y="145" width="214" height="177.5"/>
                                 <constraints>
@@ -26,6 +32,9 @@
                                 <state key="normal" backgroundImage="camera.viewfinder" catalog="system">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="addPhotoButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="d3x-3k-880"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00b-X4-2Mf">
                                 <rect key="frame" x="186" y="288" width="0.0" height="0.0"/>
@@ -60,20 +69,36 @@
                                     <action selector="doneButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="fOH-ew-zUh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pch-4U-HeK">
+                                <rect key="frame" x="160" y="267" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="pch-4U-HeK" firstAttribute="top" secondItem="EqB-jS-7xN" secondAttribute="bottom" constant="-57" id="10n-Ii-Ehf"/>
+                            <constraint firstItem="YYk-n4-aGM" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="4E8-WI-WHT"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" constant="100" id="61D-gQ-rgM"/>
+                            <constraint firstItem="pch-4U-HeK" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="KCR-3K-tbu"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="100" id="Kb4-HB-sF6"/>
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="OaS-pc-laH"/>
                             <constraint firstItem="sIW-6O-DvN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="P7Z-BB-ChW"/>
+                            <constraint firstItem="YYk-n4-aGM" firstAttribute="top" secondItem="Qty-5j-UQm" secondAttribute="bottom" constant="8" id="RhR-6B-Rxj"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="sIW-6O-DvN" secondAttribute="trailing" constant="20" id="VIE-mD-E20"/>
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Ws3-YQ-QBw"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="YYk-n4-aGM" secondAttribute="trailing" constant="20" id="XbB-xK-Aav"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="EqB-jS-7xN" secondAttribute="trailing" constant="100" id="vO1-ik-aSv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24z-iF-4KP"/>
                     </view>
                     <navigationItem key="navigationItem" id="6wt-PX-0Zn"/>
+                    <connections>
+                        <outlet property="addAPhotoLabel" destination="pch-4U-HeK" id="K47-8F-Fiv"/>
+                        <outlet property="addPhotoButton" destination="EqB-jS-7xN" id="uUh-pX-5YU"/>
+                        <outlet property="selectedImage" destination="YYk-n4-aGM" id="Hvi-cJ-ieZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZJ-Qy-nKL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
