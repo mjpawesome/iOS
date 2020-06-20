@@ -14,11 +14,12 @@
             <objects>
                 <viewController id="A55-Te-ght" customClass="CreatePlantVC" customModule="WaterMyPlants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nZT-EC-GhD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="24z-iF-4KP"/>
                     </view>
+                    <navigationItem key="navigationItem" id="6wt-PX-0Zn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZJ-Qy-nKL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -131,6 +132,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="plusButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOv-OX-C15"/>
+                                    <segue destination="A55-Te-ght" kind="presentation" modalTransitionStyle="flipHorizontal" id="odF-Xk-Flz"/>
                                 </connections>
                             </button>
                         </subviews>
