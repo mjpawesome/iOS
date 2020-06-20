@@ -17,7 +17,15 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sendUserToLoginIfNecessary()
         setupInitialViews()
+    }
+    
+    /// Checks if user is logged in. If the aren't, they are sent to login
+    private func sendUserToLoginIfNecessary() {
+        if !UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            performSegue(withIdentifier: "OnboardingSegue", sender: self)
+        }
     }
     
     private func setupInitialViews() {
@@ -40,6 +48,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     private func setupNavigationBar() {
         self.navigationController!.navigationBar.largeTitleTextAttributes = [.font: UIFont(name: "HoeflerText-Black", size: 34)!]
+    }
+    
+    @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
     
     @IBAction func plusButtonPressed(_ sender: UIButton) {

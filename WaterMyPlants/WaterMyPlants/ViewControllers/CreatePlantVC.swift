@@ -17,11 +17,11 @@ class CreatePlantVC: UIViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
     /*

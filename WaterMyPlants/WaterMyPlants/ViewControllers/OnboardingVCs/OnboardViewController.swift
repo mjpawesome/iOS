@@ -32,7 +32,12 @@ import UIKit
 
     }
     
-
+    @IBAction func signUpButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true) {
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

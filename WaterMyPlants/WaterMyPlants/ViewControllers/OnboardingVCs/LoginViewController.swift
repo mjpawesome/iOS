@@ -16,7 +16,12 @@ class LoginViewController: UIViewController {
 
     }
     
-
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true) {
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        }
+    }
+    
     
     // MARK: - Navigation
 
