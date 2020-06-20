@@ -75,20 +75,59 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fz-kY-V3W">
+                                <rect key="frame" x="20" y="440" width="374" height="30"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="m3x-Vh-RN1"/>
+                                </constraints>
+                                <state key="normal" title="Remove This Image">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeThisImageButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="nlz-5X-AkS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEP-zl-4bo">
+                                <rect key="frame" x="20" y="402" width="374" height="30"/>
+                                <color key="backgroundColor" name="MyLightGreen"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="tA7-pZ-dfP"/>
+                                </constraints>
+                                <state key="normal" title="Upload This Image">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadThisImageButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="bjk-wh-f2B"/>
+                                </connections>
+                            </button>
+                            <progressView opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q2n-QH-bHw">
+                                <rect key="frame" x="20" y="416" width="374" height="2"/>
+                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="pch-4U-HeK" firstAttribute="top" secondItem="EqB-jS-7xN" secondAttribute="bottom" constant="-57" id="10n-Ii-Ehf"/>
                             <constraint firstItem="YYk-n4-aGM" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="4E8-WI-WHT"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" constant="100" id="61D-gQ-rgM"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="2Fz-kY-V3W" secondAttribute="trailing" constant="20" id="BDM-kf-KtU"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="wEP-zl-4bo" secondAttribute="trailing" constant="20" id="Bie-Ph-0lZ"/>
+                            <constraint firstItem="q2n-QH-bHw" firstAttribute="centerY" secondItem="wEP-zl-4bo" secondAttribute="centerY" id="FPz-65-rAb"/>
+                            <constraint firstItem="2Fz-kY-V3W" firstAttribute="top" secondItem="wEP-zl-4bo" secondAttribute="bottom" constant="8" id="JYf-S7-pMD"/>
                             <constraint firstItem="pch-4U-HeK" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="KCR-3K-tbu"/>
+                            <constraint firstItem="wEP-zl-4bo" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="KDi-mX-3gV"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="100" id="Kb4-HB-sF6"/>
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="OaS-pc-laH"/>
                             <constraint firstItem="sIW-6O-DvN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="P7Z-BB-ChW"/>
                             <constraint firstItem="YYk-n4-aGM" firstAttribute="top" secondItem="Qty-5j-UQm" secondAttribute="bottom" constant="8" id="RhR-6B-Rxj"/>
+                            <constraint firstItem="2Fz-kY-V3W" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="UOm-lK-lMJ"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="sIW-6O-DvN" secondAttribute="trailing" constant="20" id="VIE-mD-E20"/>
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Ws3-YQ-QBw"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="YYk-n4-aGM" secondAttribute="trailing" constant="20" id="XbB-xK-Aav"/>
+                            <constraint firstItem="q2n-QH-bHw" firstAttribute="leading" secondItem="nZT-EC-GhD" secondAttribute="leadingMargin" id="eD7-MY-f4o"/>
+                            <constraint firstItem="wEP-zl-4bo" firstAttribute="top" secondItem="YYk-n4-aGM" secondAttribute="bottom" constant="8" id="ppq-e5-JUe"/>
+                            <constraint firstItem="q2n-QH-bHw" firstAttribute="trailing" secondItem="nZT-EC-GhD" secondAttribute="trailingMargin" id="rgY-WV-qHR"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="EqB-jS-7xN" secondAttribute="trailing" constant="100" id="vO1-ik-aSv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24z-iF-4KP"/>
@@ -97,7 +136,10 @@
                     <connections>
                         <outlet property="addAPhotoLabel" destination="pch-4U-HeK" id="K47-8F-Fiv"/>
                         <outlet property="addPhotoButton" destination="EqB-jS-7xN" id="uUh-pX-5YU"/>
+                        <outlet property="removeThisImageButton" destination="2Fz-kY-V3W" id="fDE-V4-Ge3"/>
                         <outlet property="selectedImage" destination="YYk-n4-aGM" id="Hvi-cJ-ieZ"/>
+                        <outlet property="uploadProgressBar" destination="q2n-QH-bHw" id="b7O-UU-Ys9"/>
+                        <outlet property="uploadThisImageButton" destination="wEP-zl-4bo" id="NkA-xg-vG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZJ-Qy-nKL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

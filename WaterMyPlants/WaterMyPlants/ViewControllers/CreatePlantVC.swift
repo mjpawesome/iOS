@@ -13,12 +13,20 @@ class CreatePlantVC: UIViewController {
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var addAPhotoLabel: UILabel!
+    @IBOutlet weak var uploadThisImageButton: UIButton!
+    @IBOutlet weak var uploadProgressBar: UIProgressView!
+    @IBOutlet weak var removeThisImageButton: UIButton!
     
     public var imagePicker: UIImagePickerController? // save reference to it
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setupInitialViews()
+    }
+    
+    private func setupInitialViews() {
+        deactivateButton(uploadThisImageButton)
+        deactivateButton(removeThisImageButton)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -30,9 +38,6 @@ class CreatePlantVC: UIViewController {
     }
     
     @IBAction func addPhotoButtonPressed(_ sender: UIButton) {
-        // hide button
-        addPhotoButton.alpha = 0
-        addAPhotoLabel.alpha = 0
         presentPhotoLibraryActionSheet()
     }
     
@@ -74,6 +79,31 @@ class CreatePlantVC: UIViewController {
         self.present(controller, animated: true)
     }
     
+    @IBAction func uploadThisImageButtonPressed(_ sender: UIButton) {
+        deactivateButton(uploadThisImageButton)
+        uploadProgressBar.alpha = 1
+        // TODO: activate and scale progress bar height
+        // TODO: upload image to cloudinary or firebase
+    }
+    
+    @IBAction func removeThisImageButtonPressed(_ sender: UIButton) {
+        selectedImage.image = nil // reset image
+        activateButton(addPhotoButton)
+        addAPhotoLabel.alpha = 1
+        deactivateButton(removeThisImageButton)
+        deactivateButton(uploadThisImageButton)
+    }
+    
+    func activateButton(_ button: UIButton) {
+        button.isEnabled = true
+        button.alpha = 1
+    }
+    
+    func deactivateButton(_ button: UIButton) {
+        button.isEnabled = false
+        button.alpha = 0
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -97,7 +127,10 @@ extension CreatePlantVC: UIImagePickerControllerDelegate, UINavigationController
             picker.delegate = nil
             self.imagePicker = nil
         }
-//        self.uploadImageButton.alpha = 1
+        deactivateButton(addPhotoButton)
+        addAPhotoLabel.alpha = 0
+        activateButton(uploadThisImageButton)
+        activateButton(removeThisImageButton)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
