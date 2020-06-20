@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5EFE249D83760033B97B /* AppDelegate.swift */; };
 		1D7E5F01249D83760033B97B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F00249D83760033B97B /* SceneDelegate.swift */; };
-		1D7E5F03249D83760033B97B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F02249D83760033B97B /* ViewController.swift */; };
 		1D7E5F06249D83760033B97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7E5F04249D83760033B97B /* Main.storyboard */; };
 		1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F07249D83760033B97B /* WaterMyPlants.xcdatamodeld */; };
 		1D7E5F0B249D83780033B97B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D7E5F0A249D83780033B97B /* Assets.xcassets */; };
@@ -42,7 +41,6 @@
 		1D7E5EFB249D83760033B97B /* WaterMyPlants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterMyPlants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D7E5EFE249D83760033B97B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D7E5F00249D83760033B97B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1D7E5F02249D83760033B97B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D7E5F05249D83760033B97B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D7E5F08249D83760033B97B /* WaterMyPlants.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WaterMyPlants.xcdatamodel; sourceTree = "<group>"; };
 		1D7E5F0A249D83780033B97B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 		1D7E5F37249D848F0033B97B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1D7E5F02249D83760033B97B /* ViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -321,7 +318,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D7E5F03249D83760033B97B /* ViewController.swift in Sources */,
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,
 				1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */,
 				1D7E5F3D249D85310033B97B /* CoreDataManager.swift in Sources */,
