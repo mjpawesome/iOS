@@ -22,6 +22,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     private func setupInitialViews() {
         setupPlusButton()
+        setupNavigationBar()
     }
     
     private func setupPlusButton() {
@@ -35,6 +36,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         // shape
         plusButton.layer.cornerRadius = plusButton.frame.width / 2
         plusButton.layer.masksToBounds = false
+    }
+    
+    private func setupNavigationBar() {
+        self.navigationController!.navigationBar.largeTitleTextAttributes = [.font: UIFont(name: "HoeflerText-Black", size: 34)!]
     }
     
     @IBAction func plusButtonPressed(_ sender: UIButton) {
