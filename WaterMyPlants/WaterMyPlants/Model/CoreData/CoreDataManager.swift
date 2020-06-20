@@ -43,6 +43,4 @@ class CoreDataManager {
         }
         if let error = saveError {throw error}
     }
-
-    
 }
