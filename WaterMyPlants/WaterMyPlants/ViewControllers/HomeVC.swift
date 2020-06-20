@@ -47,10 +47,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     private func performSpringAnimation(forButton_ button: UIButton) {
-        UIButton.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+        UIButton.animate(withDuration: 0.05, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
             button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         }) { (_) in
-            UIButton.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+            UIButton.animate(withDuration: 0.005, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
                 button.transform = CGAffineTransform.identity
             }, completion: nil)
         }
