@@ -21,6 +21,9 @@
 		1DF93F8C249DB860007D15C3 /* CreatePlantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */; };
 		8E9E67A1249DA57B00E3569D /* OnboardAndLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E67A0249DA57B00E3569D /* OnboardAndLogin.storyboard */; };
 		8E9E67A5249DA67700E3569D /* ColorScheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */; };
+		8E9E67A7249DB2F900E3569D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E67A6249DB2F900E3569D /* LoginViewController.swift */; };
+		8E9E67AB249DB34600E3569D /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E67AA249DB34600E3569D /* OnboardViewController.swift */; };
+		8E9E67AE249DB65D00E3569D /* TextFieldBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E67AD249DB65D00E3569D /* TextFieldBottomBorder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlantVC.swift; sourceTree = "<group>"; };
 		8E9E67A0249DA57B00E3569D /* OnboardAndLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardAndLogin.storyboard; sourceTree = "<group>"; };
 		8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorScheme.xcassets; sourceTree = "<group>"; };
+		8E9E67A6249DB2F900E3569D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8E9E67AA249DB34600E3569D /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		8E9E67AD249DB65D00E3569D /* TextFieldBottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBottomBorder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,7 @@
 		1D7E5EFD249D83760033B97B /* WaterMyPlants */ = {
 			isa = PBXGroup;
 			children = (
+				8E9E67AC249DB64B00E3569D /* Helpers */,
 				8E9E67A3249DA65D00E3569D /* CustomAssets */,
 				1D7E5F37249D848F0033B97B /* ViewControllers */,
 				1D7E5F38249D849D0033B97B /* Storyboards */,
@@ -152,9 +159,14 @@
 		1D7E5F37249D848F0033B97B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+				1D7E5F02249D83760033B97B /* ViewController.swift */,
+				8E9E67A9249DB33200E3569D /* OnboardingVCs */,
+=======
 				1DF93F87249DB82D007D15C3 /* HomeVC.swift */,
 				1DF93F89249DB844007D15C3 /* DetailVC.swift */,
 				1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */,
+>>>>>>> 151d29e6504c39dd2cdc736f8daf988132755b78
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -192,6 +204,23 @@
 				8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */,
 			);
 			path = CustomAssets;
+			sourceTree = "<group>";
+		};
+		8E9E67A9249DB33200E3569D /* OnboardingVCs */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E67A6249DB2F900E3569D /* LoginViewController.swift */,
+				8E9E67AA249DB34600E3569D /* OnboardViewController.swift */,
+			);
+			path = OnboardingVCs;
+			sourceTree = "<group>";
+		};
+		8E9E67AC249DB64B00E3569D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E67AD249DB65D00E3569D /* TextFieldBottomBorder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +356,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
+				8E9E67A7249DB2F900E3569D /* LoginViewController.swift in Sources */,
+				8E9E67AB249DB34600E3569D /* OnboardViewController.swift in Sources */,
+				8E9E67AE249DB65D00E3569D /* TextFieldBottomBorder.swift in Sources */,
+				1D7E5F03249D83760033B97B /* ViewController.swift in Sources */,
+=======
+>>>>>>> 151d29e6504c39dd2cdc736f8daf988132755b78
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,
 				1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */,
 				1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */,
