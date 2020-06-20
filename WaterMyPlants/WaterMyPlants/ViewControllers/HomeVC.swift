@@ -37,6 +37,20 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         plusButton.layer.masksToBounds = false
     }
     
+    @IBAction func plusButtonPressed(_ sender: UIButton) {
+        performSpringAnimation(forButton_: sender)
+    }
+    
+    private func performSpringAnimation(forButton_ button: UIButton) {
+        UIButton.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }) { (_) in
+            UIButton.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+                button.transform = CGAffineTransform.identity
+            }, completion: nil)
+        }
+    }
+    
     // MARK: - Collection views data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         collectionView == horizontalCollectionView ? 10 : 10
