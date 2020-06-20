@@ -10,21 +10,22 @@ import UIKit
 
 class DetailVC: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupViews()
+        updateViews()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupViews() {
+        // imageView
+        imageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
     }
-    */
+    
+    private func updateViews() {
+        
+    }
 
 }
