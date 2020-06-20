@@ -16,7 +16,7 @@ struct PlantRepresentation: Codable, Equatable {
 }
 
 struct PlantRepresentations: Codable {
-    var plants: [PlantRepresentation]
+    var results: [PlantRepresentation]
 }
 
 
