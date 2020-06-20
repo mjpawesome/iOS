@@ -13,9 +13,28 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     @IBOutlet weak var horizontalCollectionView: UICollectionView!
     @IBOutlet weak var verticalCollectionView: UICollectionView!
+    @IBOutlet weak var plusButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupInitialViews()
+    }
+    
+    private func setupInitialViews() {
+        setupPlusButton()
+    }
+    
+    private func setupPlusButton() {
+        // image
+        plusButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        // shadow
+        plusButton.layer.shadowColor = UIColor(red: 171/255, green: 178/255, blue: 186/255, alpha: 1).cgColor
+        plusButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        plusButton.layer.shadowOpacity = 1
+        plusButton.layer.shadowRadius = 4
+        // shape
+        plusButton.layer.cornerRadius = plusButton.frame.width / 2
+        plusButton.layer.masksToBounds = false
     }
     
     // MARK: - Collection views data source
