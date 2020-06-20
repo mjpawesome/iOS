@@ -16,6 +16,9 @@
 		1D7E5F19249D83780033B97B /* WaterMyPlantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F18249D83780033B97B /* WaterMyPlantsTests.swift */; };
 		1D7E5F24249D83780033B97B /* WaterMyPlantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F23249D83780033B97B /* WaterMyPlantsUITests.swift */; };
 		1D7E5F3D249D85310033B97B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F3C249D85310033B97B /* CoreDataManager.swift */; };
+		1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F87249DB82D007D15C3 /* HomeVC.swift */; };
+		1DF93F8A249DB844007D15C3 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F89249DB844007D15C3 /* DetailVC.swift */; };
+		1DF93F8C249DB860007D15C3 /* CreatePlantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */; };
 		8E9E67A1249DA57B00E3569D /* OnboardAndLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E67A0249DA57B00E3569D /* OnboardAndLogin.storyboard */; };
 		8E9E67A5249DA67700E3569D /* ColorScheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */; };
 /* End PBXBuildFile section */
@@ -53,6 +56,9 @@
 		1D7E5F23249D83780033B97B /* WaterMyPlantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterMyPlantsUITests.swift; sourceTree = "<group>"; };
 		1D7E5F25249D83780033B97B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D7E5F3C249D85310033B97B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1DF93F87249DB82D007D15C3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		1DF93F89249DB844007D15C3 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlantVC.swift; sourceTree = "<group>"; };
 		8E9E67A0249DA57B00E3569D /* OnboardAndLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardAndLogin.storyboard; sourceTree = "<group>"; };
 		8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorScheme.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +152,9 @@
 		1D7E5F37249D848F0033B97B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1DF93F87249DB82D007D15C3 /* HomeVC.swift */,
+				1DF93F89249DB844007D15C3 /* DetailVC.swift */,
+				1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -319,9 +328,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,
+				1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */,
 				1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */,
+				1DF93F8C249DB860007D15C3 /* CreatePlantVC.swift in Sources */,
 				1D7E5F3D249D85310033B97B /* CoreDataManager.swift in Sources */,
 				1D7E5F01249D83760033B97B /* SceneDelegate.swift in Sources */,
+				1DF93F8A249DB844007D15C3 /* DetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
