@@ -11,6 +11,7 @@
 		184B5818249EBD0F00E33651 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B5817249EBD0F00E33651 /* Bearer.swift */; };
 		184B581A249EBD4000E33651 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B5819249EBD4000E33651 /* HTTPMethods.swift */; };
 		184B581C249EBD7D00E33651 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B581B249EBD7D00E33651 /* NetworkError.swift */; };
+		184B581E249EBEFC00E33651 /* PlantRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B581D249EBEFC00E33651 /* PlantRepresentation.swift */; };
 		1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5EFE249D83760033B97B /* AppDelegate.swift */; };
 		1D7E5F01249D83760033B97B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F00249D83760033B97B /* SceneDelegate.swift */; };
 		1D7E5F06249D83760033B97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7E5F04249D83760033B97B /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		184B5817249EBD0F00E33651 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		184B5819249EBD4000E33651 /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
 		184B581B249EBD7D00E33651 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		184B581D249EBEFC00E33651 /* PlantRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantRepresentation.swift; sourceTree = "<group>"; };
 		1D7E5EFB249D83760033B97B /* WaterMyPlants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterMyPlants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D7E5EFE249D83760033B97B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D7E5F00249D83760033B97B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				1D7E5F3B249D84CC0033B97B /* CoreData */,
 				184B5815249EBCA100E33651 /* User.swift */,
 				184B5817249EBD0F00E33651 /* Bearer.swift */,
+				184B581D249EBEFC00E33651 /* PlantRepresentation.swift */,
 				184B5819249EBD4000E33651 /* HTTPMethods.swift */,
 				184B581B249EBD7D00E33651 /* NetworkError.swift */,
 			);
@@ -389,6 +392,7 @@
 				8EEA5D8F249DC809000E4420 /* TextFieldBottomBorder.swift in Sources */,
 				1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */,
 				1DF93F8C249DB860007D15C3 /* CreatePlantVC.swift in Sources */,
+				184B581E249EBEFC00E33651 /* PlantRepresentation.swift in Sources */,
 				1D7E5F3D249D85310033B97B /* CoreDataManager.swift in Sources */,
 				184B5818249EBD0F00E33651 /* Bearer.swift in Sources */,
 				1D7E5F01249D83760033B97B /* SceneDelegate.swift in Sources */,
