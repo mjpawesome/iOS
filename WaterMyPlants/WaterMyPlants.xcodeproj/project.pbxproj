@@ -12,7 +12,6 @@
 		184B581A249EBD4000E33651 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B5819249EBD4000E33651 /* HTTPMethods.swift */; };
 		184B581C249EBD7D00E33651 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B581B249EBD7D00E33651 /* NetworkError.swift */; };
 		184B581E249EBEFC00E33651 /* PlantRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B581D249EBEFC00E33651 /* PlantRepresentation.swift */; };
-		1D30E187249FB1B400D509A8 /* TimeIntervalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D30E186249FB1B400D509A8 /* TimeIntervalPicker.swift */; };
 		1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5EFE249D83760033B97B /* AppDelegate.swift */; };
 		1D7E5F01249D83760033B97B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F00249D83760033B97B /* SceneDelegate.swift */; };
 		1D7E5F06249D83760033B97B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7E5F04249D83760033B97B /* Main.storyboard */; };
@@ -489,7 +488,6 @@
 				184B581C249EBD7D00E33651 /* NetworkError.swift in Sources */,
 				8EEA5D8C249DC7E7000E4420 /* LoginViewController.swift in Sources */,
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,
-				1D30E187249FB1B400D509A8 /* TimeIntervalPicker.swift in Sources */,
 				1DF93F91249E6B03007D15C3 /* VerticalCVCell.swift in Sources */,
 				1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */,
 				184B581A249EBD4000E33651 /* HTTPMethods.swift in Sources */,
