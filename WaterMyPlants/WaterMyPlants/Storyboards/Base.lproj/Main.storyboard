@@ -201,7 +201,7 @@
         <!--Water Today-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeVC" customModule="WaterMyPlants" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="HomeVC" customModule="WaterMyPlants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -305,7 +305,6 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="plusButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOv-OX-C15"/>
-                                    <segue destination="A55-Te-ght" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="yWr-Wx-9FB"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -341,6 +340,7 @@
                         <outlet property="plusButton" destination="Xjd-UY-mgg" id="uFB-mB-THv"/>
                         <outlet property="verticalCollectionView" destination="f1R-vH-1rN" id="2N5-9Z-TaQ"/>
                         <segue destination="SU8-Q3-80t" kind="presentation" identifier="OnboardingSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="N6g-8k-Bb6"/>
+                        <segue destination="A55-Te-ght" kind="presentation" identifier="HomeToCreatePlantVC" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Jjn-dI-frH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

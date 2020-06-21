@@ -59,15 +59,18 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     /// segues to the CreatePlant VC
     @IBAction func plusButtonPressed(_ sender: UIButton) {
-        performSpringAnimation(forButton_: sender) // FIXME: - this is cut short because the page curl animation takes over. is okay or should be improved?
+        performSpringAnimation(forButton_: sender)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.performSegue(withIdentifier: "HomeToCreatePlantVC", sender: self)
+        }
     }
     
     /// button will appear bounce when called
     private func performSpringAnimation(forButton_ button: UIButton) {
-        UIButton.animate(withDuration: 0.05, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+        UIButton.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
             button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         }) { (_) in
-            UIButton.animate(withDuration: 0.005, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+            UIButton.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
                 button.transform = CGAffineTransform.identity
             }, completion: nil)
         }
