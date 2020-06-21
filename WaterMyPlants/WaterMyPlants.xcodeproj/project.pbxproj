@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		184B5818249EBD0F00E33651 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B5817249EBD0F00E33651 /* Bearer.swift */; };
-		184B581A249EBD4000E33651 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B5819249EBD4000E33651 /* HTTPMethods.swift */; };
-		184B581C249EBD7D00E33651 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B581B249EBD7D00E33651 /* NetworkError.swift */; };
 		184B581E249EBEFC00E33651 /* PlantRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B581D249EBEFC00E33651 /* PlantRepresentation.swift */; };
 		1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5EFE249D83760033B97B /* AppDelegate.swift */; };
 		1D7E5F01249D83760033B97B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F00249D83760033B97B /* SceneDelegate.swift */; };
@@ -57,8 +55,6 @@
 
 /* Begin PBXFileReference section */
 		184B5817249EBD0F00E33651 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
-		184B5819249EBD4000E33651 /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
-		184B581B249EBD7D00E33651 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		184B581D249EBEFC00E33651 /* PlantRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantRepresentation.swift; sourceTree = "<group>"; };
 		1D30E186249FB1B400D509A8 /* TimeIntervalPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPicker.swift; sourceTree = "<group>"; };
 		1D7E5EFB249D83760033B97B /* WaterMyPlants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterMyPlants.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,10 +219,6 @@
 			children = (
 				1D7E5F3B249D84CC0033B97B /* CoreData */,
 				184B5817249EBD0F00E33651 /* Bearer.swift */,
-				184B581D249EBEFC00E33651 /* PlantRepresentation.swift */,
-				184B5819249EBD4000E33651 /* HTTPMethods.swift */,
-				184B581B249EBD7D00E33651 /* NetworkError.swift */,
-				8E1413F0249FEFD7006C862E /* UserRepresentation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,10 +226,10 @@
 		1D7E5F3B249D84CC0033B97B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				8E1413F2249FEFFB006C862E /* Plant + Convenience.swift */,
+				8EED60E724A00230007DCC84 /* Representations */,
+				8EED60E624A00224007DCC84 /* Convenience */,
 				1D7E5F07249D83760033B97B /* WaterMyPlants.xcdatamodeld */,
 				1D7E5F3C249D85310033B97B /* CoreDataManager.swift */,
-				8E1413F4249FF016006C862E /* User + Convenience.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -299,6 +291,24 @@
 				8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8EED60E624A00224007DCC84 /* Convenience */ = {
+			isa = PBXGroup;
+			children = (
+				8E1413F2249FEFFB006C862E /* Plant + Convenience.swift */,
+				8E1413F4249FF016006C862E /* User + Convenience.swift */,
+			);
+			path = Convenience;
+			sourceTree = "<group>";
+		};
+		8EED60E724A00230007DCC84 /* Representations */ = {
+			isa = PBXGroup;
+			children = (
+				184B581D249EBEFC00E33651 /* PlantRepresentation.swift */,
+				8E1413F0249FEFD7006C862E /* UserRepresentation.swift */,
+			);
+			path = Representations;
 			sourceTree = "<group>";
 		};
 		EC1EFB5CC173A6282B4F2033 /* Pods */ = {
@@ -484,14 +494,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				184B581C249EBD7D00E33651 /* NetworkError.swift in Sources */,
 				8EEA5D8C249DC7E7000E4420 /* LoginViewController.swift in Sources */,
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,
 				8EDF5B15249FD63000653993 /* NetworkService.swift in Sources */,
 				1DF93F91249E6B03007D15C3 /* VerticalCVCell.swift in Sources */,
 				8E1413F5249FF016006C862E /* User + Convenience.swift in Sources */,
 				1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */,
-				184B581A249EBD4000E33651 /* HTTPMethods.swift in Sources */,
 				8EEA5D8B249DC7E7000E4420 /* OnboardViewController.swift in Sources */,
 				8EEA5D8F249DC809000E4420 /* TextFieldBottomBorder.swift in Sources */,
 				1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */,

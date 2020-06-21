@@ -12,8 +12,18 @@ struct PlantRepresentation: Codable, Equatable {
     var nickname: String
     var species: String
     var h2oFrequency: String
-    var id: Int
+    var identifier: Int
     var userID: String
+    var imageURL: String
+    
+    enum CodingKeys: String, CodingKey {
+        case identifier = "id"
+        case species
+        case h2oFrequency = "h2o_frequency"
+        case userID = "user_id"
+        case nickname
+        case imageURL
+    }
 }
 
 struct PlantRepresentations: Codable {
