@@ -21,7 +21,6 @@
 		1D7E5F19249D83780033B97B /* WaterMyPlantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F18249D83780033B97B /* WaterMyPlantsTests.swift */; };
 		1D7E5F24249D83780033B97B /* WaterMyPlantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F23249D83780033B97B /* WaterMyPlantsUITests.swift */; };
 		1D7E5F3D249D85310033B97B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E5F3C249D85310033B97B /* CoreDataManager.swift */; };
-		1DE0E2C1249FBE42006FB0C0 /* TimeIntervalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0E2C0249FBE42006FB0C0 /* TimeIntervalPicker.swift */; };
 		1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F87249DB82D007D15C3 /* HomeVC.swift */; };
 		1DF93F8A249DB844007D15C3 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F89249DB844007D15C3 /* DetailVC.swift */; };
 		1DF93F8C249DB860007D15C3 /* CreatePlantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */; };
@@ -74,7 +73,6 @@
 		1D7E5F23249D83780033B97B /* WaterMyPlantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterMyPlantsUITests.swift; sourceTree = "<group>"; };
 		1D7E5F25249D83780033B97B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D7E5F3C249D85310033B97B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		1DE0E2C0249FBE42006FB0C0 /* TimeIntervalPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPicker.swift; sourceTree = "<group>"; };
 		1DF93F87249DB82D007D15C3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		1DF93F89249DB844007D15C3 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		1DF93F8B249DB860007D15C3 /* CreatePlantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlantVC.swift; sourceTree = "<group>"; };
@@ -250,18 +248,9 @@
 			path = TableVIewCells;
 			sourceTree = "<group>";
 		};
-		1DE0E2BF249FBE0E006FB0C0 /* Picker */ = {
-			isa = PBXGroup;
-			children = (
-				1DE0E2C0249FBE42006FB0C0 /* TimeIntervalPicker.swift */,
-			);
-			path = Picker;
-			sourceTree = "<group>";
-		};
 		1DF93F8D249E6AB7007D15C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1DE0E2BF249FBE0E006FB0C0 /* Picker */,
 				1DE0E2BE249FBE02006FB0C0 /* TableVIewCells */,
 			);
 			path = Views;
@@ -484,7 +473,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				184B5816249EBCA100E33651 /* User.swift in Sources */,
-				1DE0E2C1249FBE42006FB0C0 /* TimeIntervalPicker.swift in Sources */,
 				184B581C249EBD7D00E33651 /* NetworkError.swift in Sources */,
 				8EEA5D8C249DC7E7000E4420 /* LoginViewController.swift in Sources */,
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,

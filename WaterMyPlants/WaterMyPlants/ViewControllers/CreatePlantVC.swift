@@ -25,6 +25,10 @@ class CreatePlantVC: UIViewController {
     lazy var cloudinaryConfiguration = CLDConfiguration(cloudName: "dehqhte0i", apiKey: "959718959598545", secure: true)
     lazy var cloudinaryController = CLDCloudinary(configuration: cloudinaryConfiguration)
     private var imageURL: String? // this contains the url for the image that was uploaded
+    let numbers = ["1", "2", "3", "4", "5", "6", "7"] // picker view
+    let calendarComponents = ["days", "weeks"] // picker view
+    var selectedTimeInterval: String? // this contains the time interval the user has selected as a string
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -191,6 +195,29 @@ extension CreatePlantVC: UIImagePickerControllerDelegate, UINavigationController
         }
     }
     
+}
+
+extension CreatePlantVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 2 }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 { return self.numbers.count }
+        else { return self.calendarComponents.count }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 { return self.numbers[row] }
+        else { return self.calendarComponents[row] }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        var number = ""
+        var calendarComponent = ""
+        if component == 0 { number = numbers[row] }
+        else { calendarComponent = calendarComponents[row] }
+        self.selectedTimeInterval = number + " " + calendarComponent
+    }
+
 }
 
 /// Used to set a custom height for UIProgressView

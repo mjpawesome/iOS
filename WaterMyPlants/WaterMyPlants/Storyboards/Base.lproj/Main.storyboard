@@ -117,21 +117,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="Mkv-mp-yud">
-                                <rect key="frame" x="20.5" y="520" width="373.5" height="106"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Mkv-mp-yud">
+                                <rect key="frame" x="42.5" y="520" width="329.5" height="106"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water me every:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beA-PV-vFD">
-                                        <rect key="frame" x="0.0" y="43" width="124.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="41" width="140.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Co-Vt-6Cm">
-                                        <rect key="frame" x="188.5" y="0.0" width="185" height="106"/>
+                                        <rect key="frame" x="144.5" y="0.0" width="185" height="106"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5Co-Vt-6Cm" secondAttribute="height" multiplier="185:106" id="Tfq-ql-qL9"/>
                                             <constraint firstAttribute="width" constant="185" id="xWP-h8-xpl"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="A55-Te-ght" id="tEx-c3-4EO"/>
+                                            <outlet property="delegate" destination="A55-Te-ght" id="fTo-Be-U9W"/>
+                                        </connections>
                                     </pickerView>
                                 </subviews>
                             </stackView>
