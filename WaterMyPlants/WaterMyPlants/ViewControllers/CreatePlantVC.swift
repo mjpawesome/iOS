@@ -9,7 +9,7 @@
 import UIKit
 import Cloudinary
 
-class CreatePlantVC: UIViewController {
+class CreatePlantVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var addPhotoButton: UIButton!
@@ -119,6 +119,11 @@ class CreatePlantVC: UIViewController {
         DispatchQueue.main.async {
             self.keyboardIsOpen = true
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard()
+        return true
     }
     
     /// uploads an image and returns a URL of it's location in the imageURL property in the CreatePlantVC
