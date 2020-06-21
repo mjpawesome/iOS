@@ -27,6 +27,7 @@
 		1DF93F8F249E6AE4007D15C3 /* HorizontalCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F8E249E6AE4007D15C3 /* HorizontalCVCell.swift */; };
 		1DF93F91249E6B03007D15C3 /* VerticalCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF93F90249E6B03007D15C3 /* VerticalCVCell.swift */; };
 		8E9E67A5249DA67700E3569D /* ColorScheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */; };
+		8EDF5B15249FD63000653993 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDF5B14249FD63000653993 /* NetworkService.swift */; };
 		8EEA5D8B249DC7E7000E4420 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D89249DC7E7000E4420 /* OnboardViewController.swift */; };
 		8EEA5D8C249DC7E7000E4420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D8A249DC7E7000E4420 /* LoginViewController.swift */; };
 		8EEA5D8F249DC809000E4420 /* TextFieldBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */; };
@@ -79,6 +80,7 @@
 		1DF93F8E249E6AE4007D15C3 /* HorizontalCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCVCell.swift; sourceTree = "<group>"; };
 		1DF93F90249E6B03007D15C3 /* VerticalCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCVCell.swift; sourceTree = "<group>"; };
 		8E9E67A4249DA67700E3569D /* ColorScheme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorScheme.xcassets; sourceTree = "<group>"; };
+		8EDF5B14249FD63000653993 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		8EEA5D89249DC7E7000E4420 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		8EEA5D8A249DC7E7000E4420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldBottomBorder.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		8EEA5D8D249DC800000E4420 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8EDF5B14249FD63000653993 /* NetworkService.swift */,
 				8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */,
 			);
 			path = Helpers;
@@ -476,6 +479,7 @@
 				184B581C249EBD7D00E33651 /* NetworkError.swift in Sources */,
 				8EEA5D8C249DC7E7000E4420 /* LoginViewController.swift in Sources */,
 				1D7E5F09249D83760033B97B /* WaterMyPlants.xcdatamodeld in Sources */,
+				8EDF5B15249FD63000653993 /* NetworkService.swift in Sources */,
 				1DF93F91249E6B03007D15C3 /* VerticalCVCell.swift in Sources */,
 				1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */,
 				184B581A249EBD4000E33651 /* HTTPMethods.swift in Sources */,
