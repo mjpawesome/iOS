@@ -60,8 +60,9 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-//        let newPlant = Plant() <-- create a new plant object
-//        let uuid: Int64 = Int64.random(in: 1...9223372036854775806)
+        let randomID: Int64 = Int64.random(in: 1...9223372036854775806)
+        let newPlant = Plant(id: Int(randomID), species: "", nickname: plantNicknameTextField.text ?? "No Name", h2oFreqency: selectedTimeInterval ?? "No Time Interval", userID: String(randomID), imageURL: imageURL ?? "https://www.google.com/") // FIXME: - <-- this is temporary
+        try! CoreDataManager.shared.save() // FIXME: - <-- this is temporary
         // TODO: save to core data and network
         self.dismiss(animated: false)
     }
