@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pch-4U-HeK">
-                                <rect key="frame" x="160" y="267" width="94" height="21"/>
+                                <rect key="frame" x="160" y="267" width="94" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -112,6 +112,29 @@
                                     <action selector="uploadThisImageButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="bjk-wh-f2B"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Plant Nickname..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gha-II-ExH">
+                                <rect key="frame" x="20" y="478" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="Mkv-mp-yud">
+                                <rect key="frame" x="20.5" y="520" width="373.5" height="106"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water me every:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beA-PV-vFD">
+                                        <rect key="frame" x="0.0" y="43" width="124.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Co-Vt-6Cm">
+                                        <rect key="frame" x="188.5" y="0.0" width="185" height="106"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5Co-Vt-6Cm" secondAttribute="height" multiplier="185:106" id="Tfq-ql-qL9"/>
+                                            <constraint firstAttribute="width" constant="185" id="xWP-h8-xpl"/>
+                                        </constraints>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -122,6 +145,7 @@
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="2Fz-kY-V3W" secondAttribute="trailing" constant="20" id="BDM-kf-KtU"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="wEP-zl-4bo" secondAttribute="trailing" constant="20" id="Bie-Ph-0lZ"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="centerY" secondItem="wEP-zl-4bo" secondAttribute="centerY" id="FPz-65-rAb"/>
+                            <constraint firstItem="Gha-II-ExH" firstAttribute="top" secondItem="2Fz-kY-V3W" secondAttribute="bottom" constant="8" id="JTo-hO-25M"/>
                             <constraint firstItem="2Fz-kY-V3W" firstAttribute="top" secondItem="wEP-zl-4bo" secondAttribute="bottom" constant="8" id="JYf-S7-pMD"/>
                             <constraint firstItem="pch-4U-HeK" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="KCR-3K-tbu"/>
                             <constraint firstItem="wEP-zl-4bo" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="KDi-mX-3gV"/>
@@ -130,14 +154,18 @@
                             <constraint firstItem="sIW-6O-DvN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="P7Z-BB-ChW"/>
                             <constraint firstItem="YYk-n4-aGM" firstAttribute="top" secondItem="Qty-5j-UQm" secondAttribute="bottom" constant="8" id="RhR-6B-Rxj"/>
                             <constraint firstItem="2Fz-kY-V3W" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="UOm-lK-lMJ"/>
+                            <constraint firstItem="Gha-II-ExH" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Uk1-ZY-asW"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="sIW-6O-DvN" secondAttribute="trailing" constant="20" id="VIE-mD-E20"/>
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Ws3-YQ-QBw"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="YYk-n4-aGM" secondAttribute="trailing" constant="20" id="XbB-xK-Aav"/>
+                            <constraint firstItem="Mkv-mp-yud" firstAttribute="top" secondItem="Gha-II-ExH" secondAttribute="bottom" constant="8" id="ciz-EP-qkR"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="leading" secondItem="nZT-EC-GhD" secondAttribute="leadingMargin" id="eD7-MY-f4o"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="Gha-II-ExH" secondAttribute="trailing" constant="20" id="lSU-zv-jHq"/>
                             <constraint firstItem="DKJ-WB-fm4" firstAttribute="centerX" secondItem="2Fz-kY-V3W" secondAttribute="centerX" id="oEA-pG-Kwk"/>
                             <constraint firstItem="wEP-zl-4bo" firstAttribute="top" secondItem="YYk-n4-aGM" secondAttribute="bottom" constant="8" id="ppq-e5-JUe"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="trailing" secondItem="nZT-EC-GhD" secondAttribute="trailingMargin" id="rgY-WV-qHR"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="EqB-jS-7xN" secondAttribute="trailing" constant="100" id="vO1-ik-aSv"/>
+                            <constraint firstItem="Mkv-mp-yud" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="yS3-2M-Arq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24z-iF-4KP"/>
                     </view>
