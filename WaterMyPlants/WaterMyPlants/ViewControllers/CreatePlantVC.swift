@@ -41,6 +41,7 @@ class CreatePlantVC: UIViewController {
         deactivateButton(removeThisImageButton)
         uploadProgressBar.alpha = 0
         uploadProgressPercentLabel.alpha = 0
+        plantNicknameTextField.addBottomBorder()
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
