@@ -173,8 +173,10 @@
                     <connections>
                         <outlet property="addAPhotoLabel" destination="pch-4U-HeK" id="K47-8F-Fiv"/>
                         <outlet property="addPhotoButton" destination="EqB-jS-7xN" id="uUh-pX-5YU"/>
+                        <outlet property="plantNicknameTextField" destination="Gha-II-ExH" id="0Nx-UG-PjH"/>
                         <outlet property="removeThisImageButton" destination="2Fz-kY-V3W" id="fDE-V4-Ge3"/>
                         <outlet property="selectedImage" destination="YYk-n4-aGM" id="Hvi-cJ-ieZ"/>
+                        <outlet property="timeIntervalPicker" destination="5Co-Vt-6Cm" id="KlF-h2-BfO"/>
                         <outlet property="uploadProgressBar" destination="q2n-QH-bHw" id="b7O-UU-Ys9"/>
                         <outlet property="uploadProgressPercentLabel" destination="DKJ-WB-fm4" id="fYo-u5-ygk"/>
                         <outlet property="uploadThisImageButton" destination="wEP-zl-4bo" id="NkA-xg-vG4"/>
