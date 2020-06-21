@@ -1,5 +1,5 @@
 //
-//  PlantController.swift
+//  UserRepresentation.swift
 //  WaterMyPlants
 //
 //  Created by Joe Veverka on 6/21/20.
@@ -7,5 +7,3 @@
 //
 
 import Foundation
-
-
