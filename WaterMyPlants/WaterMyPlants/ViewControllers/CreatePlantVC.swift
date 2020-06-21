@@ -28,11 +28,20 @@ class CreatePlantVC: UIViewController {
     let numbers = ["1", "2", "3", "4", "5", "6", "7"] // picker view
     let calendarComponents = ["days", "weeks"] // picker view
     var selectedTimeInterval: String? // this contains the time interval the user has selected as a string
+    var keyboardHeight: CGFloat?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialViews()
+        createObservers()
+    }
+    
+    deinit {
+        // stop listening to keyboard events
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     /// sets up the view to their initial state
@@ -42,6 +51,8 @@ class CreatePlantVC: UIViewController {
         uploadProgressBar.alpha = 0
         uploadProgressPercentLabel.alpha = 0
         plantNicknameTextField.addBottomBorder()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -98,6 +109,10 @@ class CreatePlantVC: UIViewController {
         deactivateButton(removeThisImageButton)
         deactivateButton(uploadThisImageButton)
         uploadImage()
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     /// uploads an image and returns a URL of it's location in the imageURL property in the CreatePlantVC
@@ -159,15 +174,24 @@ class CreatePlantVC: UIViewController {
         button.alpha = 0
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func createObservers() {
+        // listen for keyboard events
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
-    */
+    
+    @objc func keyboardWillChange(notification: Notification) {
+        print("Keyboard will show: \(notification.name.rawValue)")
+        view.frame.origin.y = self.keyboardHeight ?? -100
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            self.keyboardHeight = keyboardRectangle.height
+        }
+    }
 
 }
 
