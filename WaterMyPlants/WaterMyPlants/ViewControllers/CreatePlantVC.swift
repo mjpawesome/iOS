@@ -29,6 +29,7 @@ class CreatePlantVC: UIViewController {
         setupInitialViews()
     }
     
+    /// sets up the view to their initial state
     private func setupInitialViews() {
         deactivateButton(uploadThisImageButton)
         deactivateButton(removeThisImageButton)
@@ -79,20 +80,20 @@ class CreatePlantVC: UIViewController {
         self.present(actionSheet, animated: true)
     }
     
-    // helper for imagePicker
     func presentImagePicker(controller: UIImagePickerController, sourceType: UIImagePickerController.SourceType) {
         controller.delegate = self
         controller.sourceType = sourceType
         self.present(controller, animated: true)
     }
     
-    
+    /// Deactivates irrelevant buttons and calls to upload image
     @IBAction func uploadThisImageButtonPressed(_ sender: UIButton) {
         deactivateButton(removeThisImageButton)
         deactivateButton(uploadThisImageButton)
         uploadImage()
     }
     
+    /// uploads an image and returns a URL of it's location in the imageURL property in the CreatePlantVC
     private func uploadImage() {
         guard let imageData: Data = selectedImage.image?.jpegData(compressionQuality: 1) else { return }
         cloudinaryController.createUploader().upload(data: imageData, uploadPreset: "y1v3bbv4", progress: { (progress) in
@@ -130,6 +131,7 @@ class CreatePlantVC: UIViewController {
         }
     }
     
+    /// resets the whole uploading an image process
     @IBAction func removeThisImageButtonPressed(_ sender: UIButton) {
         selectedImage.image = nil // reset image
         activateButton(addPhotoButton)
@@ -138,11 +140,13 @@ class CreatePlantVC: UIViewController {
         deactivateButton(uploadThisImageButton)
     }
     
+    /// restores the buttons to visibility and re-enables them to be pressed again
     func activateButton(_ button: UIButton) {
         button.isEnabled = true
         button.alpha = 1
     }
     
+    /// hides the buttons and makes them so they can't be pressed
     func deactivateButton(_ button: UIButton) {
         button.isEnabled = false
         button.alpha = 0

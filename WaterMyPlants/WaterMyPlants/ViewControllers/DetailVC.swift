@@ -19,14 +19,14 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         updateViews()
     }
     
-    
+    /// sets up view to their initial state
     private func setupViews() {
 //        imageView
         imageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-//        backButton
     }
     
-    private func updateViews() {
+    /// called to update any views that may have changes
+    private func updateViews() { // FIXME: - should this VC just use observers here instead?
         
     }
     

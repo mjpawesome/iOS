@@ -10,7 +10,6 @@ import UIKit
 
 class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    
     @IBOutlet weak var horizontalCollectionView: UICollectionView!
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     @IBOutlet weak var plusButton: UIButton!
@@ -28,11 +27,13 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
+    /// sets up views to their intial state
     private func setupInitialViews() {
         setupPlusButton()
         setupNavigationBar()
     }
     
+    /// sets up the plus button to it's initial state
     private func setupPlusButton() {
         // image
         plusButton.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -46,18 +47,22 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         plusButton.layer.masksToBounds = false
     }
     
+    /// sets up the navigation bar to it's initial state
     private func setupNavigationBar() {
         self.navigationController!.navigationBar.largeTitleTextAttributes = [.font: UIFont(name: "HoeflerText-Black", size: 34)!]
     }
     
+    /// locks the user back into the login/ signup screen until they log in again
     @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
     
+    /// segues to the CreatePlant VC
     @IBAction func plusButtonPressed(_ sender: UIButton) {
-        performSpringAnimation(forButton_: sender)
+        performSpringAnimation(forButton_: sender) // FIXME: - this is cut short because the page curl animation takes over. is okay or should be improved?
     }
     
+    /// button will appear bounce when called
     private func performSpringAnimation(forButton_ button: UIButton) {
         UIButton.animate(withDuration: 0.05, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
             button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -99,11 +104,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
     
 }
