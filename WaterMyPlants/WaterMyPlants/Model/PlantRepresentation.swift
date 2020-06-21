@@ -12,7 +12,8 @@ struct PlantRepresentation: Codable, Equatable {
     var nickname: String
     var species: String
     var h2oFrequency: String
-    var plantID: Int
+    var id: Int
+    var userID: String
 }
 
 struct PlantRepresentations: Codable {

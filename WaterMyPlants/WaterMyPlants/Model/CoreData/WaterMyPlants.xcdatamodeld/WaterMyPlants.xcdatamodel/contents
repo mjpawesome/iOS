@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Plant" representedClassName="Plant" syncable="YES" codeGenerationType="class">
-        <attribute name="h2oFrequency" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="h2oFrequency" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String"/>
         <attribute name="species" optional="YES" attributeType="String"/>
-        <attribute name="user_id" optional="YES" attributeType="String"/>
+        <attribute name="user_id" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="plant" inverseEntity="User"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="password" optional="YES" attributeType="String"/>
-        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
-        <attribute name="username" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="password" attributeType="String"/>
+        <attribute name="phoneNumber" attributeType="String"/>
+        <attribute name="username" attributeType="String"/>
+        <relationship name="plant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plant" inverseName="user" inverseEntity="Plant"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Plant" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="Plant" positionX="-54" positionY="-9" width="128" height="28"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="28"/>
     </elements>
 </model>
