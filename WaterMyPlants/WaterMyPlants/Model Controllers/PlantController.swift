@@ -53,7 +53,7 @@ class PlantController {
             let unwrappedReps = reps?.compactMap { $1 }
             //update Todos
             do {
-                try self.updatePlants(with: unwrappedReps ?? [])
+//                try self.updatePlants(with: unwrappedReps ?? [])
                 completion(.success(true))
             } catch {
                 completion(.failure(.otherError))
