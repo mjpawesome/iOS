@@ -75,6 +75,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKJ-WB-fm4">
+                                <rect key="frame" x="186" y="445" width="25" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q2n-QH-bHw" customClass="CustomProgressView" customModule="WaterMyPlants" customModuleProvider="target">
+                                <rect key="frame" x="20" y="416" width="374" height="2"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="progressTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fz-kY-V3W">
                                 <rect key="frame" x="20" y="440" width="374" height="30"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -101,13 +112,10 @@
                                     <action selector="uploadThisImageButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="bjk-wh-f2B"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q2n-QH-bHw">
-                                <rect key="frame" x="20" y="416" width="374" height="2"/>
-                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="DKJ-WB-fm4" firstAttribute="centerY" secondItem="2Fz-kY-V3W" secondAttribute="centerY" id="0yx-Tr-Qn4"/>
                             <constraint firstItem="pch-4U-HeK" firstAttribute="top" secondItem="EqB-jS-7xN" secondAttribute="bottom" constant="-57" id="10n-Ii-Ehf"/>
                             <constraint firstItem="YYk-n4-aGM" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="4E8-WI-WHT"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" constant="100" id="61D-gQ-rgM"/>
@@ -126,6 +134,7 @@
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Ws3-YQ-QBw"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="YYk-n4-aGM" secondAttribute="trailing" constant="20" id="XbB-xK-Aav"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="leading" secondItem="nZT-EC-GhD" secondAttribute="leadingMargin" id="eD7-MY-f4o"/>
+                            <constraint firstItem="DKJ-WB-fm4" firstAttribute="centerX" secondItem="2Fz-kY-V3W" secondAttribute="centerX" id="oEA-pG-Kwk"/>
                             <constraint firstItem="wEP-zl-4bo" firstAttribute="top" secondItem="YYk-n4-aGM" secondAttribute="bottom" constant="8" id="ppq-e5-JUe"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="trailing" secondItem="nZT-EC-GhD" secondAttribute="trailingMargin" id="rgY-WV-qHR"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="EqB-jS-7xN" secondAttribute="trailing" constant="100" id="vO1-ik-aSv"/>
@@ -139,6 +148,7 @@
                         <outlet property="removeThisImageButton" destination="2Fz-kY-V3W" id="fDE-V4-Ge3"/>
                         <outlet property="selectedImage" destination="YYk-n4-aGM" id="Hvi-cJ-ieZ"/>
                         <outlet property="uploadProgressBar" destination="q2n-QH-bHw" id="b7O-UU-Ys9"/>
+                        <outlet property="uploadProgressPercentLabel" destination="DKJ-WB-fm4" id="fYo-u5-ygk"/>
                         <outlet property="uploadThisImageButton" destination="wEP-zl-4bo" id="NkA-xg-vG4"/>
                     </connections>
                 </viewController>
@@ -420,10 +430,10 @@
         <image name="logo" width="500" height="500"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="MyLightBlue">
-            <color red="0.71372549019607845" green="0.77647058823529413" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.71399998664855957" green="0.77600002288818359" blue="0.79199999570846558" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="MyLightGreen">
-            <color red="0.56862745098039214" green="0.64313725490196072" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.5690000057220459" green="0.64300000667572021" blue="0.49799999594688416" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

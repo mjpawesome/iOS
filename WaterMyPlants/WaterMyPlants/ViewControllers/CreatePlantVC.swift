@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cloudinary
 
 class CreatePlantVC: UIViewController {
     
@@ -14,10 +15,14 @@ class CreatePlantVC: UIViewController {
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var addAPhotoLabel: UILabel!
     @IBOutlet weak var uploadThisImageButton: UIButton!
-    @IBOutlet weak var uploadProgressBar: UIProgressView!
+    @IBOutlet weak var uploadProgressBar: CustomProgressView!
+    @IBOutlet weak var uploadProgressPercentLabel: UILabel!
     @IBOutlet weak var removeThisImageButton: UIButton!
     
     public var imagePicker: UIImagePickerController? // save reference to it
+    lazy var cloudinaryConfiguration = CLDConfiguration(cloudName: "dehqhte0i", apiKey: "959718959598545", secure: true)
+    lazy var cloudinaryController = CLDCloudinary(configuration: cloudinaryConfiguration)
+    private var imageURL: String? // this contains the url for the image that was uploaded
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +32,8 @@ class CreatePlantVC: UIViewController {
     private func setupInitialViews() {
         deactivateButton(uploadThisImageButton)
         deactivateButton(removeThisImageButton)
+        uploadProgressBar.alpha = 0
+        uploadProgressPercentLabel.alpha = 0
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -79,11 +86,48 @@ class CreatePlantVC: UIViewController {
         self.present(controller, animated: true)
     }
     
+    
     @IBAction func uploadThisImageButtonPressed(_ sender: UIButton) {
+        deactivateButton(removeThisImageButton)
         deactivateButton(uploadThisImageButton)
-        uploadProgressBar.alpha = 1
-        // TODO: activate and scale progress bar height
-        // TODO: upload image to cloudinary or firebase
+        uploadImage()
+    }
+    
+    private func uploadImage() {
+        guard let imageData: Data = selectedImage.image?.jpegData(compressionQuality: 1) else { return }
+        cloudinaryController.createUploader().upload(data: imageData, uploadPreset: "y1v3bbv4", progress: { (progress) in
+            // handle progress
+            self.uploadProgressBar.alpha = 1
+            self.uploadProgressPercentLabel.alpha = 1
+            self.uploadProgressBar.progress = Float(progress.fractionCompleted)
+            self.uploadProgressPercentLabel.text = "\(Int(progress.fractionCompleted * 100))%"
+        }) { (uploadResult, error) in
+            guard (error == nil) else {
+                // if an error occurs, show it to the user
+                let alert: UIAlertController = UIAlertController(title: "Error",
+                                              message: error?.localizedDescription,
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alert, animated: true) {
+                    // error occured. so reset everything
+                    self.activateButton(self.uploadThisImageButton)
+                    self.activateButton(self.removeThisImageButton)
+                    self.uploadProgressBar.alpha = 0
+                    self.uploadProgressPercentLabel.alpha = 0
+                }
+                return // will not finish the task if there is an error. is this a problem? silly errors?
+            }
+            // the upload has been successful. what now?
+            if let imageURL = uploadResult?.secureUrl {
+                self.uploadProgressPercentLabel.text = "Success!"
+                print("image was uploaded to \(imageURL)")
+                self.imageURL = imageURL
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.uploadProgressBar.alpha = 0
+                    self.uploadProgressPercentLabel.alpha = 0
+                }
+            }
+        }
     }
     
     @IBAction func removeThisImageButtonPressed(_ sender: UIButton) {
@@ -141,4 +185,12 @@ extension CreatePlantVC: UIImagePickerControllerDelegate, UINavigationController
         }
     }
     
+}
+
+/// Used to set a custom height for UIProgressView
+public class CustomProgressView: UIProgressView {
+    var height: CGFloat = 4.0
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: size.width, height: 30) // We can set the required height
+    }
 }
