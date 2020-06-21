@@ -51,7 +51,7 @@ class CreatePlantVC: UIViewController {
         uploadProgressBar.alpha = 0
         uploadProgressPercentLabel.alpha = 0
         plantNicknameTextField.addBottomBorder()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)) // handles tap anywhere to dismiss keyboard
         view.addGestureRecognizer(tap)
     }
     

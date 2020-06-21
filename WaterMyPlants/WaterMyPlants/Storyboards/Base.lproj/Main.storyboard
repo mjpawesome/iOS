@@ -99,7 +99,7 @@
                                     <action selector="removeThisImageButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="nlz-5X-AkS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEP-zl-4bo">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEP-zl-4bo">
                                 <rect key="frame" x="20" y="402" width="374" height="30"/>
                                 <color key="backgroundColor" name="MyLightGreen"/>
                                 <constraints>
@@ -305,7 +305,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="plusButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOv-OX-C15"/>
-                                    <segue destination="A55-Te-ght" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="yWr-Wx-9FB"/>
+                                    <segue destination="A55-Te-ght" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="yWr-Wx-9FB"/>
                                 </connections>
                             </button>
                         </subviews>
