@@ -7,12 +7,30 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var horizontalCollectionView: UICollectionView!
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     @IBOutlet weak var plusButton: UIButton!
+    
+    private lazy var fetchedResultsController: NSFetchedResultsController<Plant> = {
+        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "nickname", ascending: false)]
+        let mainContext = CoreDataManager.shared.mainContext
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: mainContext,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("Error Fetching -> HomeVC in fetchedResultsController: \(error)")
+        }
+        return fetchedResultsController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,16 +96,26 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     // MARK: - Collection views data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        collectionView == horizontalCollectionView ? 10 : 10
+        if collectionView == horizontalCollectionView {
+            return 10
+        } else {
+            return fetchedResultsController.fetchedObjects?.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == horizontalCollectionView {
             let horizontalCell = horizontalCollectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath) as! HorizontalCVCell
+            // TODO: call to load the image
             stylizeCell(horizontalCell)
             return horizontalCell
         } else { // verticalCollectionView
             let  verticalCell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCVCell
+            // TODO: call to load the image
+            let plant = fetchedResultsController.object(at: indexPath)
+            if let plantImage = plant.imageURL {
+                verticalCell.imageView.downloaded(from: plantImage)
+            }
             stylizeCell(verticalCell)
             return verticalCell
         }
@@ -110,4 +138,54 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
     
+}
+
+// MARK: - FRC delegate
+extension HomeVC: NSFetchedResultsControllerDelegate {
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        verticalCollectionView.beginUpdates()
+//    }
+//
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        verticalCollectionView.endUpdates()
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+//                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+//                    atSectionIndex sectionIndex: Int,
+//                    for type: NSFetchedResultsChangeType) {
+//        switch type {
+//        case .insert:
+//            verticalCollectionView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+//        case .delete:
+//            verticalCollectionView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+//        default:
+//            break
+//        }
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+//                    didChange anObject: Any,
+//                    at indexPath: IndexPath?,
+//                    for type: NSFetchedResultsChangeType,
+//                    newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            guard let newIndexPath = newIndexPath else { return }
+//            verticalCollectionView.insertRows(at: [newIndexPath], with: .automatic)
+//        case .update:
+//            guard let indexPath = indexPath else { return }
+//            verticalCollectionView.reloadRows(at: [indexPath], with: .automatic)
+//        case .move:
+//            guard let oldIndexPath = indexPath,
+//                let newIndexPath = newIndexPath else { return }
+//            verticalCollectionView.deleteRows(at: [oldIndexPath], with: .automatic)
+//            verticalCollectionView.insertRows(at: [newIndexPath], with: .automatic)
+//        case .delete:
+//            guard let indexPath = indexPath else { return }
+//            verticalCollectionView.deleteRows(at: [indexPath], with: .automatic)
+//        @unknown default:
+//            break
+//        }
+//    }
 }
