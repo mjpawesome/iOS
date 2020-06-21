@@ -9,7 +9,7 @@
 import UIKit
 import Cloudinary
 
-class CreatePlantVC: UIViewController {
+class CreatePlantVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var addPhotoButton: UIButton!
@@ -51,7 +51,7 @@ class CreatePlantVC: UIViewController {
         uploadProgressBar.alpha = 0
         uploadProgressPercentLabel.alpha = 0
         plantNicknameTextField.addBottomBorder()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)) // handles tap anywhere to dismiss keyboard
         view.addGestureRecognizer(tap)
     }
     
@@ -119,6 +119,11 @@ class CreatePlantVC: UIViewController {
         DispatchQueue.main.async {
             self.keyboardIsOpen = true
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard()
+        return true
     }
     
     /// uploads an image and returns a URL of it's location in the imageURL property in the CreatePlantVC
