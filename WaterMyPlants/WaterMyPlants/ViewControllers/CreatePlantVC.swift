@@ -29,7 +29,7 @@ class CreatePlantVC: UIViewController {
     let calendarComponents = ["days", "weeks"] // picker view
     var selectedTimeInterval: String? // this contains the time interval the user has selected as a string
     var keyboardHeight: CGFloat?
-    
+    var keyboardIsOpen = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,8 +111,14 @@ class CreatePlantVC: UIViewController {
         uploadImage()
     }
     
+    /// moves the keyboard down
     @objc func dismissKeyboard() {
+        keyboardIsOpen = false
         view.endEditing(true)
+        view.frame.origin.y = 0
+        DispatchQueue.main.async {
+            self.keyboardIsOpen = true
+        }
     }
     
     /// uploads an image and returns a URL of it's location in the imageURL property in the CreatePlantVC
@@ -181,9 +187,12 @@ class CreatePlantVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
+    /// moves the keyboard up
     @objc func keyboardWillChange(notification: Notification) {
         print("Keyboard will show: \(notification.name.rawValue)")
-        view.frame.origin.y = self.keyboardHeight ?? -100
+        if keyboardIsOpen == true {
+            view.frame.origin.y = -(self.keyboardHeight ?? 100)
+        }
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
