@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pch-4U-HeK">
-                                <rect key="frame" x="160" y="267" width="94" height="21"/>
+                                <rect key="frame" x="160" y="267" width="94" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -112,6 +112,38 @@
                                     <action selector="uploadThisImageButtonPressed:" destination="A55-Te-ght" eventType="touchUpInside" id="bjk-wh-f2B"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Plant Nickname..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bIG-Tu-j6F">
+                                <rect key="frame" x="20" y="478" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How Often Should This Be Watered?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuJ-4s-MxY">
+                                <rect key="frame" x="20" y="520" width="374" height="18"/>
+                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kgq-k5-4mf">
+                                <rect key="frame" x="86" y="546" width="242" height="119.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Every" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEh-ce-vLq">
+                                        <rect key="frame" x="0.0" y="49.5" width="59" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="59" id="dT6-8r-wFh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcw-Sp-9BE">
+                                        <rect key="frame" x="67" y="0.0" width="175" height="119.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="175" id="lAV-s0-B0D"/>
+                                            <constraint firstAttribute="width" secondItem="gcw-Sp-9BE" secondAttribute="height" multiplier="19:13" id="vTB-9e-nbc"/>
+                                        </constraints>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -127,17 +159,25 @@
                             <constraint firstItem="wEP-zl-4bo" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="KDi-mX-3gV"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="100" id="Kb4-HB-sF6"/>
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="OaS-pc-laH"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="bIG-Tu-j6F" secondAttribute="trailing" constant="20" id="P03-cd-1Pj"/>
                             <constraint firstItem="sIW-6O-DvN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="P7Z-BB-ChW"/>
                             <constraint firstItem="YYk-n4-aGM" firstAttribute="top" secondItem="Qty-5j-UQm" secondAttribute="bottom" constant="8" id="RhR-6B-Rxj"/>
                             <constraint firstItem="2Fz-kY-V3W" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="UOm-lK-lMJ"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="sIW-6O-DvN" secondAttribute="trailing" constant="20" id="VIE-mD-E20"/>
                             <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Ws3-YQ-QBw"/>
+                            <constraint firstItem="Kgq-k5-4mf" firstAttribute="top" secondItem="TuJ-4s-MxY" secondAttribute="bottom" constant="8" id="XWY-19-dPR"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="YYk-n4-aGM" secondAttribute="trailing" constant="20" id="XbB-xK-Aav"/>
+                            <constraint firstItem="TuJ-4s-MxY" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="ZA9-fK-jfp"/>
+                            <constraint firstItem="TuJ-4s-MxY" firstAttribute="top" secondItem="bIG-Tu-j6F" secondAttribute="bottom" constant="8" id="bWL-Sq-H7v"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="leading" secondItem="nZT-EC-GhD" secondAttribute="leadingMargin" id="eD7-MY-f4o"/>
+                            <constraint firstItem="Kgq-k5-4mf" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="efc-x0-0ZC"/>
                             <constraint firstItem="DKJ-WB-fm4" firstAttribute="centerX" secondItem="2Fz-kY-V3W" secondAttribute="centerX" id="oEA-pG-Kwk"/>
                             <constraint firstItem="wEP-zl-4bo" firstAttribute="top" secondItem="YYk-n4-aGM" secondAttribute="bottom" constant="8" id="ppq-e5-JUe"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="TuJ-4s-MxY" secondAttribute="trailing" constant="20" id="q6f-VI-zmh"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="trailing" secondItem="nZT-EC-GhD" secondAttribute="trailingMargin" id="rgY-WV-qHR"/>
+                            <constraint firstItem="bIG-Tu-j6F" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="uOc-Sa-eIU"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="EqB-jS-7xN" secondAttribute="trailing" constant="100" id="vO1-ik-aSv"/>
+                            <constraint firstItem="bIG-Tu-j6F" firstAttribute="top" secondItem="2Fz-kY-V3W" secondAttribute="bottom" constant="8" id="xjD-6B-r6o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24z-iF-4KP"/>
                     </view>
@@ -145,6 +185,8 @@
                     <connections>
                         <outlet property="addAPhotoLabel" destination="pch-4U-HeK" id="K47-8F-Fiv"/>
                         <outlet property="addPhotoButton" destination="EqB-jS-7xN" id="uUh-pX-5YU"/>
+                        <outlet property="calendarIntervalPicker" destination="gcw-Sp-9BE" id="xGT-Cn-9vg"/>
+                        <outlet property="plantNicknameTextfield" destination="bIG-Tu-j6F" id="axR-xz-SQl"/>
                         <outlet property="removeThisImageButton" destination="2Fz-kY-V3W" id="fDE-V4-Ge3"/>
                         <outlet property="selectedImage" destination="YYk-n4-aGM" id="Hvi-cJ-ieZ"/>
                         <outlet property="uploadProgressBar" destination="q2n-QH-bHw" id="b7O-UU-Ys9"/>

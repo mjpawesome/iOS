@@ -18,6 +18,10 @@ class CreatePlantVC: UIViewController {
     @IBOutlet weak var uploadProgressBar: CustomProgressView!
     @IBOutlet weak var uploadProgressPercentLabel: UILabel!
     @IBOutlet weak var removeThisImageButton: UIButton!
+    @IBOutlet weak var plantNicknameTextfield: UITextField!
+    @IBOutlet weak var numberPicker: UIPickerView!
+    @IBOutlet weak var calendarIntervalPicker: UIPickerView! // days / weeks / months
+    
     
     public var imagePicker: UIImagePickerController? // save reference to it
     lazy var cloudinaryConfiguration = CLDConfiguration(cloudName: "dehqhte0i", apiKey: "959718959598545", secure: true)
