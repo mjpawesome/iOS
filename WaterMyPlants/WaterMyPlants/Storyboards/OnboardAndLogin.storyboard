@@ -149,20 +149,11 @@ Account</string>
                                                     <constraint firstAttribute="height" constant="115" id="uqY-Jg-hGj"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RlK-OG-3Ol">
-                                                <rect key="frame" x="16" y="169" width="176" height="30"/>
-                                                <state key="normal" title="Already have an account?"/>
-                                                <connections>
-                                                    <segue destination="5zw-VD-8Xj" kind="show" id="neX-8e-ynV"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="MyLightBlue"/>
                                         <constraints>
-                                            <constraint firstItem="RlK-OG-3Ol" firstAttribute="leading" secondItem="Gxa-I9-bWh" secondAttribute="leading" constant="16" id="3V9-Y6-N00"/>
                                             <constraint firstItem="bL9-LV-YXU" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="top" constant="24" id="HAY-uJ-QNL"/>
                                             <constraint firstItem="BCG-vN-Tvk" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="top" constant="50" id="TbB-XO-U3s"/>
-                                            <constraint firstAttribute="bottom" secondItem="RlK-OG-3Ol" secondAttribute="bottom" constant="16" id="Vt2-mi-pnm"/>
                                             <constraint firstAttribute="trailing" secondItem="BCG-vN-Tvk" secondAttribute="trailing" constant="40" id="YyD-lw-YCw"/>
                                             <constraint firstAttribute="bottom" secondItem="bL9-LV-YXU" secondAttribute="bottom" constant="26" id="Z5W-aR-Y49"/>
                                             <constraint firstItem="BCG-vN-Tvk" firstAttribute="leading" secondItem="bL9-LV-YXU" secondAttribute="trailing" constant="9" id="cUn-hK-Gql"/>
@@ -191,6 +182,17 @@ Account</string>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Fb-sv-82U">
+                                                <rect key="frame" x="112" y="8" width="135" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <segments>
+                                                    <segment title="Sign Up"/>
+                                                    <segment title="Sign In"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="signUpSignInSegmentedAction:" destination="GjY-jk-uBg" eventType="valueChanged" id="IeD-Xc-XSe"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" name="MyLightGrey"/>
                                         <constraints>
@@ -261,10 +263,13 @@ Account</string>
                     </view>
                     <navigationItem key="navigationItem" id="xmX-dS-lGl"/>
                     <connections>
+                        <outlet property="createAccountLabel" destination="bL9-LV-YXU" id="W3k-vo-SGv"/>
                         <outlet property="emailTextField" destination="Q3h-Yp-zlV" id="mLB-Rw-LB8"/>
                         <outlet property="greyView1" destination="Gxa-I9-bWh" id="Cfj-47-SoK"/>
                         <outlet property="greyView2" destination="o3Y-xL-T0e" id="iDL-pd-PJN"/>
                         <outlet property="passwordTextField" destination="pAG-Ge-oBb" id="XPh-zo-Cf8"/>
+                        <outlet property="signUpSignInLabel" destination="Wp1-UH-CRY" id="hec-gH-T51"/>
+                        <outlet property="signUpSignInSegmentedControl" destination="1Fb-sv-82U" id="LJw-H6-Sgn"/>
                         <outlet property="usernameTextField" destination="2qY-VG-6n7" id="XGW-wF-X2P"/>
                     </connections>
                 </viewController>
@@ -294,10 +299,10 @@ Account</string>
     <resources>
         <image name="logo" width="500" height="500"/>
         <namedColor name="MyLightBlue">
-            <color red="0.71372549019607845" green="0.77647058823529413" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.71399998664855957" green="0.77600002288818359" blue="0.79199999570846558" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="MyLightGrey">
-            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.9100000262260437" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
