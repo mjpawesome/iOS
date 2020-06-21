@@ -40,10 +40,13 @@ extension Plant {
         plantRepresentation: PlantRepresentation,
         context: NSManagedObjectContext = CoreDataManager.shared.mainContext,
         userRepresentation: UserRepresentation) {
+
+        //used to establish relationship
+        guard let user = User(userRep: userRepresentation, context: context),
+            let userContext = user.managedObjectContext
+            else { return nil }
         
-        guard let user = User(userRep: userRepresentation, context: context) else { return nil }
-        
-        self.init(context: context)
+        self.init(context: userContext)
         id = Int16(plantRepresentation.identifier)
         species = plantRepresentation.species
         nickname = plantRepresentation.nickname
