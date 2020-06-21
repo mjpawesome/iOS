@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum NetworkError: Error {
     case noIdentifier
@@ -52,7 +53,7 @@ class PlantController {
             let unwrappedReps = reps?.compactMap { $1 }
             //update Todos
             do {
-                try self.updateTodos(with: unwrappedReps ?? [])
+                try self.updatePlants(with: unwrappedReps ?? [])
                 completion(.success(true))
             } catch {
                 completion(.failure(.otherError))
@@ -61,5 +62,66 @@ class PlantController {
             
         }
         
+    }
+    
+//    func updatePlants(with representations: [PlantRepresentation]) throws {
+//        let identifierToFetch = representations.compactMap { $0.identifier }
+//        let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifierToFetch, representations))
+//        var plantsToCreate = representationsByID
+//        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+//        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifierToFetch)
+//
+//        let context = CoreDataManager.shared.container.newBackgroundContext()
+//        var error: Error?
+//        if AuthService.activeUser != nil {
+//            context.performAndWait {
+//                let existingPlants = try context.fetch(fetchRequest)
+//                for plant in existingPlants {
+//                    guard let identifier = plant.identifier,
+//                        let representation = representationsByID[identifier] else { continue }
+//                    self.updatePlantRep(plant: plants, with: representation)
+//                    plantsToCreate.removeValue(forKey: identifier)
+//                }
+//            }; catch {
+//                if let error = error {
+//                    print("Error updating Plants: \(error)")
+//                }
+//            }
+//            for representation in plantsToCreate.values {
+//                guard let userRep = AuthService.activeUser else { continue }
+//                Plant(plantRepresentation: representation, context: context, userRepresentation: userRep)
+//            }
+//            if let error = error { throw error }
+//            try CoreDataManager.shared.save(context: context)
+//        }
+//
+//    }
+////
+//    func syncPlantsWithFirebase(identifiersOnServer: Int, context: NSManagedObjectContext) {
+//           guard let identifier = AuthService.activeUser?.identifier else { return }
+//           let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+//           fetchRequest.predicate = NSPredicate(format: "identifier == %@", identifier as CVarArg)
+//
+//           do {
+//               let existingPlants = try context.fetch(fetchRequest)
+//               for plant in existingPlants {
+//               let plantID = plant.id
+//                   if !identifiersOnServer.contains(plantID) {
+//                       context.delete(plant)
+//                   }
+//               }
+//           } catch {
+//               print("Error fetching all Todos in \(#function)")
+//           }
+//
+//       }
+    
+    private func updatePlantRep(plant: Plant, with representation: PlantRepresentation) {
+        plant.id = Int16(representation.identifier)
+        plant.nickname = representation.nickname
+        plant.species = representation.species
+        plant.userID = representation.userID
+        plant.h2oFrequency = representation.h2oFrequency
+        plant.imageURL = representation.imageURL
     }
 }

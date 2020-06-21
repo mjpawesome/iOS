@@ -22,14 +22,14 @@ class AuthService {
     ///
     /// Static so it's always accessible and always the same user (until another user is logged in)
     static var activeUser: UserRepresentation?
-
+    
     // MARK: - Init -
     init(dataLoader: NetworkLoader = URLSession.shared) {
         self.dataLoader = dataLoader
     }
-
+    
     // MARK: - Methods -
-
+    
     /// Register a User on the Heroku API
     /// - Parameters:
     ///   - username: Minimum 4 characters
@@ -37,6 +37,7 @@ class AuthService {
     ///   - completion: Signals when the method is complete (returns nothing)
     func registerUser(with username: String,
                       and password: String,
+                      phoneNumber: String,
                       completion: @escaping () -> Void) {
         let requestURL = baseURL.appendingPathComponent("/register")
         guard var request = networkService.createRequest(
@@ -44,8 +45,8 @@ class AuthService {
             method: .post,
             headerType: .contentType,
             headerValue: .json
-        ) else { return }
-        var registerUser = UserRepresentation(username: username, password: password)
+            ) else { return }
+        var registerUser = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber)
         let encodedUser = networkService.encode(from: registerUser, request: &request)
         guard let requestWithUser = encodedUser.request else {
             print("requestWithUser failed, error encoding user?")
@@ -73,7 +74,7 @@ class AuthService {
             completion()
         })
     }
-
+    
     /// Login to the heroku API
     /// - Parameters:
     ///   - username: The registered user's username
@@ -81,8 +82,10 @@ class AuthService {
     ///   - completion: Signals when the method is complete (returns nothing)
     func loginUser(with username: String,
                    password: String,
-                   completion: @escaping () -> Void) {
-
+                   phoneNumber: String,
+        identifier: Int16,
+        completion: @escaping () -> Void) {
+        
         let loginURL = baseURL.appendingPathComponent("login")
         guard var request = networkService.createRequest(
             url: loginURL,
@@ -95,7 +98,7 @@ class AuthService {
                 return
         }
         //create a user to be encoded and sent to the server for login
-        let preLoginUser = UserRepresentation(username: username, password: password)
+        let preLoginUser = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber)
         let encodedUser = networkService.encode(from: preLoginUser, request: &request)
         guard let requestWithUser = encodedUser.request else {
             print("requestWithUser failed, error encoding user?")
@@ -121,7 +124,7 @@ class AuthService {
                 guard let loginUser = self.networkService.decode(
                     to: UserRepresentation.self,
                     data: data
-                ) else { return }
+                    ) else { return }
                 //assign the static activeUser
                 AuthService.activeUser = loginUser
                 completion()
@@ -133,7 +136,7 @@ class AuthService {
             completion()
         }
     }
-
+    
     /// Log out the active user
     func logoutUser() {
         AuthService.activeUser = nil
