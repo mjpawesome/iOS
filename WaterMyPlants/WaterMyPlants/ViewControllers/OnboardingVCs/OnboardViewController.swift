@@ -107,7 +107,6 @@ enum LoginType {
             
             Auth.auth().createUser(withEmail: phoneNumber, password: password) { (result, err) in
                 
-                
                 // Check for errors
                 if err != nil {
                     print("Error Authenticating User")
@@ -117,11 +116,14 @@ enum LoginType {
                     // User was created successfully, now store the first name and last name
                     let db = Firestore.firestore()
                     
-                    db.collection("users").addDocument(data: ["username":userName, "password":password, "uid": result!.user.uid ]) { (error) in
+                    guard let username = self.usernameTextField.text,
+                        let password = self.passwordTextField.text else { return }
+                    
+                    db.collection("users").addDocument(data: [username:userName, password:password, "uid": result!.user.uid ]) { (error) in
                         
                         if error != nil {
                             // Show error message
-                            self.showError("Error saving user data")
+                            print("Error creating user: \(err)")
                         }
                     }
                     
@@ -135,10 +137,32 @@ enum LoginType {
         
     }
     
+    //MARK: - Class Funcs
+    func validateFields() -> String? {
+        
+        // Check that all fields are filled in
+        if usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            
+            return "Please fill in all fields."
+        }
+        
+        // Check if the password is secure
+        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if Utilities.isPasswordValid(cleanedPassword) == false {
+            // Password isn't secure enough
+            return "Please make sure your password is at least 8 characters, contains a special character and a number."
+        }
+        
+        return nil
+    }
     
     func transitionToHome() {
         
-        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeVC
+        let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeVC
         
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()
