@@ -14,6 +14,9 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var plantNicknameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var injectedImage: UIImage?
+    var injectedPlant: Plant?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -22,13 +25,14 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     /// sets up view to their initial state
     private func setupViews() {
-//        imageView
         imageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
     }
     
     /// called to update any views that may have changes
     private func updateViews() { // FIXME: - should this VC just use observers here instead?
-        
+        imageView.image = injectedImage
+        guard let plant = injectedPlant else { return }
+        plantNicknameLabel.text = plant.nickname
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

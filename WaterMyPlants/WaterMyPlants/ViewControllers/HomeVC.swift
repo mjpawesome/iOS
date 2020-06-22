@@ -129,10 +129,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             return verticalCell
         }
     }
-        /// Used to style the cells if there are many tweaks done to the cell. Otherwise this method may not be neccasary.
-        func stylizeCell(_ cell: UICollectionViewCell) {
-            cell.layer.cornerRadius = 12
-        }
+    /// Used to style the cells if there are many tweaks done to the cell. Otherwise this method may not be neccasary.
+    func stylizeCell(_ cell: UICollectionViewCell) {
+        cell.layer.cornerRadius = 12
+    }
     
     /// Customizes sizing for collectionViews
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -148,11 +148,14 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         if segue.identifier == "VerticalShowDetail" { // FIXME: - horizontal Collection view shares same seg name.. should be unique
             guard let indexPath = verticalCollectionView.indexPathsForSelectedItems?.first,
                 let detailVC = segue.destination as? DetailVC else { return }
-            let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
-            detailVC.plantNicknameLabel?.text = plant?.nickname ?? "No name"
-            if let plantImage = plant?.imageURL {
-                detailVC.imageView.downloaded(from: plantImage)
+            // inject image
+            let verticalCell = verticalCollectionView.cellForItem(at: indexPath) as? VerticalCVCell
+            if let verticalCellImage = verticalCell?.imageView.image {
+                detailVC.injectedImage = verticalCellImage
             }
+            // inject plant object
+            let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
+            detailVC.injectedPlant = plant
         }
     }
     
@@ -251,5 +254,5 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             self.blockOperations.removeAll(keepingCapacity: false)
         })
     }
-
+    
 }
