@@ -16,7 +16,7 @@ class AuthService {
     // MARK: - Properties -
     private let networkService = NetworkService()
     private let dataLoader: NetworkLoader
-    private let baseURL = URL(string: "https://bw-wunderlist2.firebaseio.com/")!
+    private let baseURL = URL(string: "https://water-my-plants-buildweek.herokuapp.com/")!
     //
     ///The currently logged in user
     ///
@@ -39,7 +39,7 @@ class AuthService {
                       and password: String,
                       phoneNumber: String,
                       completion: @escaping () -> Void) {
-        let requestURL = baseURL.appendingPathComponent("/register")
+        let requestURL = baseURL.appendingPathComponent("api/auth/register")
         guard var request = networkService.createRequest(
             url: requestURL,
             method: .post,
@@ -86,7 +86,7 @@ class AuthService {
         identifier: Int16,
         completion: @escaping () -> Void) {
         
-        let loginURL = baseURL.appendingPathComponent("login")
+        let loginURL = baseURL.appendingPathComponent("api/auth/login")
         guard var request = networkService.createRequest(
             url: loginURL,
             method: .post,

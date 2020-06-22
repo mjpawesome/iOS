@@ -27,7 +27,9 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     var imageURL: String? // this contains the url for the image that was uploaded
     let numbers = ["1", "2", "3", "4", "5", "6", "7"] // picker view
     let calendarComponents = ["days", "weeks"] // picker view
-    var selectedTimeInterval: String? // this contains the time interval the user has selected as a string
+    var number: Int = 1 // pickerViewDefault
+    var multiplier: Int = 1 // pickerViewDefault
+    var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
     var keyboardHeight: CGFloat?
     var keyboardIsOpen = true
     
@@ -61,11 +63,22 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         guard let imageURL = self.imageURL else { return }
-        let randomID: Int16 = Int16.random(in: 1...32766)
-        let newPlant = Plant(id: Int(randomID), species: "species", nickname: plantNicknameTextField.text ?? "No Name", h2oFreqency: selectedTimeInterval ?? "No Time Interval", userID: String(randomID), imageURL: imageURL ) // FIXME: - <-- this is temporary
+        let randomID: Int16 = Int16.random(in: 1...32766) // FIXME: - update the convenience init to default to this. remove this from here.
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d yyyy"
+        let date = dateFormatter.string(from: Date())
+        let days = dayCountFromPicker ?? 1 // default catches when the user doesn't change the picker
+        let h20Frequency = "\(date), \(days)" // date holds the due date, days hold the the repeat frequency
+        
+        let newPlant = Plant(id: Int(randomID), species: "species", nickname: plantNicknameTextField.text ?? "No Name", h2oFreqency: h20Frequency, userID: String(randomID), imageURL: imageURL ) // FIXME: - <-- this is temporary
         try! CoreDataManager.shared.save() // FIXME: - <-- this is temporary
         // TODO: save to core data and network
         self.dismiss(animated: false)
+    }
+    
+    private func setInitialH20date(dayCountFromPicker: Int) -> String {
+        "\(Date()), \(dayCountFromPicker)"
     }
     
     @IBAction func addPhotoButtonPressed(_ sender: UIButton) {
@@ -255,17 +268,16 @@ extension CreatePlantVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        var number = ""
-        var calendarComponent = ""
-        if component == 0 { number = numbers[row] }
-        else { calendarComponent = calendarComponents[row] }
-        self.selectedTimeInterval = number + " " + calendarComponent
+        if component == 0 { number = Int(numbers[row])! } // grab number
+        if component == 1 { multiplier = calendarComponents[row] == "days" ? 1 : 7 } // multiplier should be 7 if weeks was selected
+        print("\(number) * \(multiplier) = \(number * multiplier)") // test
+        self.dayCountFromPicker = number * multiplier // save day count
     }
 
 }
 
 /// Used to set a custom height for UIProgressView
-public class CustomProgressView: UIProgressView {
+public class CustomProgressView: UIProgressView { // FIXME: - doesn't work
     var height: CGFloat = 4.0
     public override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(width: size.width, height: 30) // We can set the required height
