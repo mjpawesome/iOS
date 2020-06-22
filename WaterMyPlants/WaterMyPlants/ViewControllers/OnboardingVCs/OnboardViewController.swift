@@ -85,11 +85,35 @@ enum LoginType {
     }
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true) {
-            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        let authService = AuthService()
+        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            password.isEmpty == false,
+            let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            email.isEmpty == false else { return }
+
+        switch selectedLoginType {
+        case .signUp:
+            //FIXME: Not currently getting phone number from signup screen.
+            let phoneNumber = "1234567890"
+            authService.registerUser(with: email, and: password, phoneNumber: phoneNumber) {
+                self.dismiss(animated: true) {
+                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                    print("Successful Registration)")
+                }
+            }
+
+        case .signIn:
+            authService.loginUser(with: email, password: password) {
+                self.dismiss(animated: true) {
+                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                    print("Successful Sign-in")
+                }
+
+            }
         }
     }
-    
+
+
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
