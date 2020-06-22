@@ -37,6 +37,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         super.viewDidLoad()
         sendUserToLoginIfNecessary()
         setupInitialViews()
+        print(fetchedResultsController.fetchedObjects?.first?.nickname)
     }
     
     deinit {
@@ -121,10 +122,9 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         } else { // verticalCollectionView
             let  verticalCell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCVCell
             // TODO: call to load the image
-            let plant = fetchedResultsController.object(at: indexPath)
-            if let plantImage = plant.imageURL {
-                verticalCell.imageView.downloaded(from: plantImage)
-            }
+            let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
+            if let plantImage = plant?.imageURL { verticalCell.imageView.downloaded(from: plantImage) }
+            if let plantNickname = plant?.nickname { verticalCell.nicknameLabel.text = plantNickname }
             stylizeCell(verticalCell)
             return verticalCell
         }
@@ -145,12 +145,12 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetail" { // FIXME: - horizontal Collection view shares same seg name.. should be unique
+        if segue.identifier == "VerticalShowDetail" { // FIXME: - horizontal Collection view shares same seg name.. should be unique
             guard let indexPath = verticalCollectionView.indexPathsForSelectedItems?.first,
                 let detailVC = segue.destination as? DetailVC else { return }
-            let plant = fetchedResultsController.object(at: indexPath)
-            detailVC.plantNicknameLabel.text = plant.nickname ?? "No name"
-            if let plantImage = plant.imageURL {
+            let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
+            detailVC.plantNicknameLabel?.text = plant?.nickname ?? "No name"
+            if let plantImage = plant?.imageURL {
                 detailVC.imageView.downloaded(from: plantImage)
             }
         }

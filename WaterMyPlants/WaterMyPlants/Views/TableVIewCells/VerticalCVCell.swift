@@ -11,5 +11,6 @@ import UIKit
 class VerticalCVCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nicknameLabel: UILabel!
     
 }

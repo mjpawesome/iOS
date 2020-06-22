@@ -243,7 +243,7 @@
                                         <size key="customSize" width="97" height="127"/>
                                         <connections>
                                             <outlet property="imageView" destination="UtN-F6-vAp" id="5zQ-Ql-TK9"/>
-                                            <segue destination="hMk-j5-qQr" kind="show" identifier="ShowDetail" id="eFl-de-Czq"/>
+                                            <segue destination="hMk-j5-qQr" kind="show" identifier="HorizontalShowDetail" id="eFl-de-Czq"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -272,10 +272,18 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="QWN-W1-JLp">
                                                     <rect key="frame" x="0.0" y="0.0" width="166" height="194"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzG-KB-vab">
+                                                    <rect key="frame" x="8" y="163" width="54" height="23"/>
+                                                    <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="23"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="QWN-W1-JLp" secondAttribute="bottom" id="DFs-Ns-dih"/>
+                                                <constraint firstItem="pzG-KB-vab" firstAttribute="leading" secondItem="pKE-4J-c0p" secondAttribute="leading" constant="8" id="EsW-ph-aX7"/>
                                                 <constraint firstItem="QWN-W1-JLp" firstAttribute="leading" secondItem="pKE-4J-c0p" secondAttribute="leading" id="MXJ-PD-DhU"/>
+                                                <constraint firstAttribute="bottom" secondItem="pzG-KB-vab" secondAttribute="bottom" constant="8" id="SnI-Lx-qgI"/>
                                                 <constraint firstAttribute="trailing" secondItem="QWN-W1-JLp" secondAttribute="trailing" id="nKh-vH-T1w"/>
                                                 <constraint firstItem="QWN-W1-JLp" firstAttribute="top" secondItem="pKE-4J-c0p" secondAttribute="top" id="sfJ-O7-bKc"/>
                                             </constraints>
@@ -283,7 +291,8 @@
                                         <size key="customSize" width="166" height="194"/>
                                         <connections>
                                             <outlet property="imageView" destination="QWN-W1-JLp" id="bHY-hd-1nF"/>
-                                            <segue destination="hMk-j5-qQr" kind="show" identifier="ShowDetail" id="HCt-FL-R6w"/>
+                                            <outlet property="nicknameLabel" destination="pzG-KB-vab" id="TlX-J2-wwV"/>
+                                            <segue destination="hMk-j5-qQr" kind="show" identifier="VerticalShowDetail" id="HCt-FL-R6w"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -459,7 +468,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eFl-de-Czq"/>
+        <segue reference="HCt-FL-R6w"/>
         <segue reference="N6g-8k-Bb6"/>
     </inferredMetricsTieBreakers>
     <resources>
