@@ -24,16 +24,16 @@ extension User {
         self.id = id
         
     }
-    
-    @discardableResult convenience init?(
-        userRep: UserRepresentation,
-        context: NSManagedObjectContext = CoreDataManager.shared.mainContext) {
-        
-        self.init(username: userRep.username,
-                  password: userRep.password,
-                  phoneNumber: userRep.phoneNumber,
-                  id: Int16(userRep.identifier),
-                  context: context)
-        
-    }
+//    
+//    @discardableResult convenience init?(
+//        userRep: UserRepresentation,
+//        context: NSManagedObjectContext = CoreDataManager.shared.mainContext) {
+//        
+//        self.init(username: userRep.username,
+//                  password: userRep.password,
+//                  phoneNumber: userRep.phoneNumber,
+//                  id: Int16(userRep.identifier),
+//                  context: context)
+//        
+//    }
 }
