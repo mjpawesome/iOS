@@ -36,7 +36,9 @@ enum LoginType {
                 signUpSignInLabel.fadeIn()
                 createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
+                emailTextField.fadeIn()
                 emailTextField.isHidden = false
+                
             case .signIn:
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign Up"
@@ -45,6 +47,7 @@ enum LoginType {
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
                 emailTextField.fadeOut()
+                
             }
         }
     }
@@ -67,13 +70,15 @@ enum LoginType {
     @IBAction func signUpSignInSegmentedAction(_ sender: UISegmentedControl) {
         switch signUpSignInSegmentedControl.selectedSegmentIndex {
         case 0:
-            selectedLoginType = .signIn
-            passwordTextField.textContentType = .password
-            emailTextField.isHidden = false
-        default:
             selectedLoginType = .signUp
+            passwordTextField.textContentType = .password
+ 
+        case 1:
+            selectedLoginType = .signIn
             passwordTextField.textContentType = .newPassword
-            emailTextField.isHidden = true
+            
+        default:
+            break
         }
     }
     

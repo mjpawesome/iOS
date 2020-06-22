@@ -108,7 +108,7 @@ class WaterMyPlantsUITests: XCTestCase {
     private var testUserPW = "password"
     private var detailTextEntry = "Test detail entry for UI Testing."
     private var titleTextEntry = "Test title entry for UI Testing."
-
+    
     func signInHelper() {
         let signInButton = app.segmentedControls.buttons["Sign In"]
         XCTAssert(signInButton.isHittable)
@@ -136,10 +136,10 @@ class WaterMyPlantsUITests: XCTestCase {
            XCTAssert(signInButton.isHittable)
            signInButton.tap()
 
-           phoneNumberTextField.tap()
-           XCTAssert(phoneNumberTextField.isHittable)
-           phoneNumberTextField.typeText(testUserPhoneNumber)
-           XCTAssertTrue(phoneNumberTextField.value as? String == testUserPhoneNumber)
+           userNameTextField.tap()
+           XCTAssert(userNameTextField.isHittable)
+           userNameTextField.typeText(testUserName)
+           XCTAssertTrue(userNameTextField.value as? String == testUserName)
 
            passwordTextField.tap()
            passwordTextField.typeText(testUserPW)
