@@ -10,8 +10,6 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-
-
 //Helper enum
 enum LoginType {
     case signUp

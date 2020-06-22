@@ -488,7 +488,7 @@ Account</string>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="izi-ES-xez">
+                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="izi-ES-xez">
                                                 <rect key="frame" x="8" y="50" width="382" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
@@ -500,9 +500,8 @@ Account</string>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0RV-Aw-OJf">
-                                                <rect key="frame" x="112" y="8" width="135" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0RV-Aw-OJf">
+                                                <rect key="frame" x="131" y="8" width="136" height="32"/>
                                                 <segments>
                                                     <segment title="Sign Up"/>
                                                     <segment title="Sign In"/>
@@ -514,6 +513,7 @@ Account</string>
                                         </subviews>
                                         <color key="backgroundColor" name="MyLightGrey"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="0RV-Aw-OJf" secondAttribute="trailing" constant="131" id="2Pi-yW-trO"/>
                                             <constraint firstAttribute="trailing" secondItem="jSZ-Nt-roS" secondAttribute="trailing" constant="8" id="5WN-uC-vAz"/>
                                             <constraint firstAttribute="trailing" secondItem="jSZ-Nt-roS" secondAttribute="trailing" constant="8" id="Eri-WP-edM"/>
                                             <constraint firstItem="jSZ-Nt-roS" firstAttribute="leading" secondItem="O4K-MC-deQ" secondAttribute="leading" constant="8" id="KlW-lz-e3c"/>
@@ -522,10 +522,12 @@ Account</string>
                                             <constraint firstItem="jSZ-Nt-roS" firstAttribute="leading" secondItem="O4K-MC-deQ" secondAttribute="leading" constant="8" id="cG4-SC-8d0"/>
                                             <constraint firstItem="jSZ-Nt-roS" firstAttribute="top" secondItem="aZE-Ia-Xhd" secondAttribute="bottom" constant="40" id="fQs-HB-uUS"/>
                                             <constraint firstItem="izi-ES-xez" firstAttribute="trailing" secondItem="aZE-Ia-Xhd" secondAttribute="trailing" id="j2C-g0-stI"/>
+                                            <constraint firstItem="0RV-Aw-OJf" firstAttribute="leading" secondItem="O4K-MC-deQ" secondAttribute="leading" constant="131" id="jee-px-VaN"/>
                                             <constraint firstItem="aZE-Ia-Xhd" firstAttribute="top" secondItem="izi-ES-xez" secondAttribute="bottom" constant="40" id="kRb-Bu-Vcz"/>
                                             <constraint firstItem="izi-ES-xez" firstAttribute="leading" secondItem="aZE-Ia-Xhd" secondAttribute="leading" id="les-d3-znH"/>
                                             <constraint firstItem="izi-ES-xez" firstAttribute="top" secondItem="O4K-MC-deQ" secondAttribute="top" constant="50" id="pEO-OT-e2z"/>
                                             <constraint firstItem="aZE-Ia-Xhd" firstAttribute="leading" secondItem="O4K-MC-deQ" secondAttribute="leading" constant="8" id="rg3-ls-rEj"/>
+                                            <constraint firstItem="0RV-Aw-OJf" firstAttribute="top" secondItem="O4K-MC-deQ" secondAttribute="top" constant="8" id="vWi-Kj-kk0"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXM-ME-7x3">
@@ -612,7 +614,7 @@ Account</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T91-mu-Bed" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-678" y="139"/>
+            <point key="canvasLocation" x="-467" y="139"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

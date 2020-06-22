@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import Firebase
 
+// Helpers
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
@@ -18,8 +19,10 @@ enum NetworkError: Error {
     case failedSignUp, failedLogIn, noData, badData
     case notSignedIn, failedFetch, failedPost
 }
-
 typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
+
+
+// ==================
 
 class PlantController {
     
@@ -36,7 +39,7 @@ class PlantController {
         decoder.dateDecodingStrategy = .iso8601
         return decoder
     }()
-    private let baseURL = URL(string: "https://watermyplants-dee57.firebaseio.com/")!
+    private let baseURL = URL(string: "https://watermyplantsbw.firebaseio.com/")!
     var plantRepresentations: [PlantRepresentation] = []
     
     let networkService = NetworkService()
