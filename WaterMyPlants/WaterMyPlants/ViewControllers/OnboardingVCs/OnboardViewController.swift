@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
+
+
 
 //Helper enum
 enum LoginType {
@@ -23,28 +27,33 @@ enum LoginType {
     @IBOutlet weak var signUpSignInSegmentedControl: UISegmentedControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var greyView1: UIView!
     @IBOutlet weak var greyView2: UIView!
     
     //MARK: -Properties
     var selectedLoginType: LoginType = .signIn {
         didSet {
+            
             switch selectedLoginType {
+                
             case .signUp:
+                
                 signUpSignInLabel.text = "Sign In"
                 signUpSignInLabel.fadeIn()
                 createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
-                emailTextField.isHidden = false
+                phoneNumberTextField.isHidden = false
+                
             case .signIn:
+                
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign Up"
                 signUpSignInLabel.fadeIn()
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
-                emailTextField.fadeOut()
+                phoneNumberTextField.fadeOut()
             }
         }
     }
@@ -52,40 +61,95 @@ enum LoginType {
     //MARK: -View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Styling
         usernameTextField.addBottomBorder()
         passwordTextField.addBottomBorder()
-        emailTextField.addBottomBorder()
+        phoneNumberTextField.addBottomBorder()
         greyView1.layer.cornerRadius = 15.0
         greyView2.layer.cornerRadius = 15.0
+        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         signUpSignInLabel.fadeIn()
         createAccountLabel.fadeIn()
         
     }
+    
     @IBAction func signUpSignInSegmentedAction(_ sender: UISegmentedControl) {
         switch signUpSignInSegmentedControl.selectedSegmentIndex {
+            
         case 0:
+            
             selectedLoginType = .signIn
             passwordTextField.textContentType = .password
-            emailTextField.isHidden = false
+            phoneNumberTextField.isHidden = false
+            
         default:
+            
             selectedLoginType = .signUp
             passwordTextField.textContentType = .newPassword
-            emailTextField.isHidden = true
+            phoneNumberTextField.isHidden = true
         }
     }
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true) {
+            
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            
+            let userName = self.usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let phoneNumber = self.phoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let password = self.passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            Auth.auth().createUser(withEmail: phoneNumber, password: password) { (result, err) in
+                
+                
+                // Check for errors
+                if err != nil {
+                    print("Error Authenticating User")
+                }
+                else {
+                    
+                    // User was created successfully, now store the first name and last name
+                    let db = Firestore.firestore()
+                    
+                    db.collection("users").addDocument(data: ["username":userName, "password":password, "uid": result!.user.uid ]) { (error) in
+                        
+                        if error != nil {
+                            // Show error message
+                            self.showError("Error saving user data")
+                        }
+                    }
+                    
+                    // Transition to the home screen
+                    self.transitionToHome()
+                }
+                
+            }
+            
         }
+        
     }
     
+    
+    func transitionToHome() {
+        
+        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeVC
+        
+        view.window?.rootViewController = homeViewController
+        view.window?.makeKeyAndVisible()
+        
+    }
+    
+    
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
     }
 }
 
@@ -108,7 +172,7 @@ extension UIView {
         UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.alpha = 1.0
         }, completion: completion)  }
-
+    
     func fadeOut(
         _ duration: TimeInterval = 1.0,
         delay: TimeInterval = 0.0,

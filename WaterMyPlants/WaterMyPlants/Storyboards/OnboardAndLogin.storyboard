@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LIv-Md-cij">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -13,28 +12,28 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardVC" id="5zw-VD-8Xj" customClass="LoginViewController" customModule="WaterMyPlants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IkH-oF-MU4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWC-H4-YIL">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UaW-Oa-7Uu">
-                                        <rect key="frame" x="8" y="8" width="359" height="188"/>
+                                        <rect key="frame" x="8" y="8" width="584" height="121"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="AOr-Zp-rTS">
                                                 <rect key="frame" x="228" y="30" width="110" height="115"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCQ-WC-O9a">
-                                                <rect key="frame" x="16" y="150" width="161" height="30"/>
+                                                <rect key="frame" x="16" y="83" width="161" height="30"/>
                                                 <state key="normal" title="Don't have an account?"/>
                                                 <connections>
                                                     <action selector="dontHaveAccountButtonPressed:" destination="5zw-VD-8Xj" eventType="touchUpInside" id="Rfq-ln-EPx"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRp-jI-EJz">
-                                                <rect key="frame" x="8" y="65" width="161.5" height="58"/>
+                                                <rect key="frame" x="8" y="-16" width="161.5" height="72"/>
                                                 <string key="text">Welcome
 Back</string>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="36"/>
@@ -52,7 +51,7 @@ Back</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ZV-WO-XcZ">
-                                        <rect key="frame" x="8" y="204" width="359" height="272"/>
+                                        <rect key="frame" x="8" y="137" width="584" height="272"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8AA-km-kST">
                                                 <rect key="frame" x="8" y="179" width="343" height="34"/>
@@ -72,7 +71,7 @@ Back</string>
                                         <color key="backgroundColor" name="MyLightGrey"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTw-T9-la6">
-                                        <rect key="frame" x="21" y="484" width="171" height="129"/>
+                                        <rect key="frame" x="246" y="417" width="171" height="129"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="171" id="rdN-GA-Gft"/>
                                         </constraints>
@@ -81,7 +80,7 @@ Back</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypi-49-i9p">
-                                        <rect key="frame" x="282" y="548" width="46" height="30"/>
+                                        <rect key="frame" x="507" y="481" width="46" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="loginButtonPressed:" destination="5zw-VD-8Xj" eventType="touchUpInside" id="jcO-f6-OrM"/>
@@ -125,17 +124,17 @@ Back</string>
             <objects>
                 <viewController id="GjY-jk-uBg" customClass="OnboardViewController" customModule="WaterMyPlants" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gLm-z7-4Qw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpV-pl-lnR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxa-I9-bWh">
-                                        <rect key="frame" x="8" y="8" width="359" height="215"/>
+                                        <rect key="frame" x="8" y="8" width="584" height="215"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bL9-LV-YXU">
-                                                <rect key="frame" x="16" y="24" width="184" height="165"/>
+                                                <rect key="frame" x="16" y="24" width="409" height="165"/>
                                                 <string key="text">Create
 Account</string>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="36"/>
@@ -143,7 +142,7 @@ Account</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="BCG-vN-Tvk">
-                                                <rect key="frame" x="209" y="50" width="110" height="115"/>
+                                                <rect key="frame" x="434" y="50" width="110" height="115"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="110" id="o4j-8O-xdI"/>
                                                     <constraint firstAttribute="height" constant="115" id="uqY-Jg-hGj"/>
@@ -162,22 +161,22 @@ Account</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3Y-xL-T0e">
-                                        <rect key="frame" x="8" y="231" width="359" height="280"/>
+                                        <rect key="frame" x="8" y="231" width="584" height="213"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pAG-Ge-oBb">
-                                                <rect key="frame" x="8" y="196" width="343" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pAG-Ge-oBb">
+                                                <rect key="frame" x="8" y="196" width="568" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2qY-VG-6n7">
-                                                <rect key="frame" x="8" y="50" width="343" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2qY-VG-6n7">
+                                                <rect key="frame" x="8" y="50" width="568" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3h-Yp-zlV">
-                                                <rect key="frame" x="8" y="124" width="343" height="32"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3h-Yp-zlV">
+                                                <rect key="frame" x="8" y="124" width="568" height="32"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -211,7 +210,7 @@ Account</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp1-UH-CRY">
-                                        <rect key="frame" x="17" y="519" width="121.5" height="123"/>
+                                        <rect key="frame" x="17" y="452" width="121.5" height="123"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="123" id="792-el-7iE"/>
                                         </constraints>
@@ -220,7 +219,7 @@ Account</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zis-TJ-rS0">
-                                        <rect key="frame" x="292" y="578" width="43" height="29"/>
+                                        <rect key="frame" x="517" y="511" width="43" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -264,10 +263,10 @@ Account</string>
                     <navigationItem key="navigationItem" id="xmX-dS-lGl"/>
                     <connections>
                         <outlet property="createAccountLabel" destination="bL9-LV-YXU" id="W3k-vo-SGv"/>
-                        <outlet property="emailTextField" destination="Q3h-Yp-zlV" id="mLB-Rw-LB8"/>
                         <outlet property="greyView1" destination="Gxa-I9-bWh" id="Cfj-47-SoK"/>
                         <outlet property="greyView2" destination="o3Y-xL-T0e" id="iDL-pd-PJN"/>
                         <outlet property="passwordTextField" destination="pAG-Ge-oBb" id="XPh-zo-Cf8"/>
+                        <outlet property="phoneNumberTextField" destination="Q3h-Yp-zlV" id="mLB-Rw-LB8"/>
                         <outlet property="signUpSignInLabel" destination="Wp1-UH-CRY" id="hec-gH-T51"/>
                         <outlet property="signUpSignInSegmentedControl" destination="1Fb-sv-82U" id="LJw-H6-Sgn"/>
                         <outlet property="usernameTextField" destination="2qY-VG-6n7" id="XGW-wF-X2P"/>
@@ -284,6 +283,7 @@ Account</string>
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="klx-to-kjb">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
