@@ -37,7 +37,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         super.viewDidLoad()
         sendUserToLoginIfNecessary()
         setupInitialViews()
-        print(fetchedResultsController.fetchedObjects?.first?.nickname)
+        print(fetchedResultsController.fetchedObjects?.first?.species) // this print statement can be used to check which properties of the core data object are saving
     }
     
     deinit {
