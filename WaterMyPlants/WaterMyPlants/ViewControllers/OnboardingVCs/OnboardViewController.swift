@@ -32,8 +32,10 @@ enum LoginType {
         didSet {
             switch selectedLoginType {
             case .signUp:
+                signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign Up"
                 signUpSignInLabel.fadeIn()
+                createAccountLabel.fadeOut()
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
                 emailTextField.fadeIn()
