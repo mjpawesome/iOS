@@ -17,6 +17,11 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var injectedImage: UIImage?
     var injectedPlant: Plant?
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d yyyy"
+        return dateFormatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +32,28 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     /// sets up view to their initial state
     private func setupViews() {
         imageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        imageView.image = injectedImage
+        guard let plant = injectedPlant else { return }
+        plantNicknameLabel.text = plant.nickname
     }
     
     /// called to update any views that may have changes
     private func updateViews() { // FIXME: - should this VC just use observers here instead?
-        imageView.image = injectedImage
         guard let plant = injectedPlant else { return }
-        plantNicknameLabel.text = plant.nickname
+        togglePushToWaterButton(plant: plant)
+    }
+    
+    private func togglePushToWaterButton(plant: Plant) {
+        let parsedFrequencyString = plant.h2oFrequency?.components(separatedBy: ", ") // parse string
+        let dateString = parsedFrequencyString?.first // date is first
+        let date = dateFormatter.date(from: dateString!)!
+        if date <= Date() {
+            pushToWaterButton.title = "✓ Push to Water"
+            pushToWaterButton.isEnabled = true
+        } else {
+            pushToWaterButton.title = ""
+            pushToWaterButton.isEnabled = false
+        }
     }
     
     @IBAction func pushToWaterButtonPressed(_ sender: UIBarButtonItem) {
@@ -41,11 +61,8 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let parsedFrequencyString = plant.h2oFrequency?.components(separatedBy: ", ") // parse string
         let dateString = parsedFrequencyString?.first // date is first
         let daysString = parsedFrequencyString?.last // days are last
-        let daysInt = Int(daysString!)
-        // format dateString to date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d yyyy"
-        let date = dateFormatter.date(from: dateString!)
+        let daysInt = Int(daysString!) // convert to int
+        let date = dateFormatter.date(from: dateString!)// format dateString to date
         print("Old Date: \(dateString!)")
         let nextDate = Calendar.current.date(byAdding: .day, value: daysInt!, to: date!) // calculate nextDate
         let nextDateString = dateFormatter.string(from: nextDate!)
@@ -54,9 +71,9 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // save
         plant.h2oFrequency = h20Frequency
         try! CoreDataManager.shared.save()
+        self.updateViews()
+        pushToWaterButton.title = "Done!"
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
