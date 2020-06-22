@@ -102,10 +102,9 @@ enum LoginType {
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
             
             let userName = self.usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let phoneNumber = self.phoneNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = self.passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
-            Auth.auth().createUser(withEmail: phoneNumber, password: password) { (result, err) in
+            Auth.auth().createUser(withEmail: userName, password: password) { (result, err) in
                 
                 // Check for errors
                 if err != nil {
@@ -113,17 +112,14 @@ enum LoginType {
                 }
                 else {
                     
-                    // User was created successfully, now store the first name and last name
+                    // User was created successfully, now store the phonenumber and password
                     let db = Firestore.firestore()
                     
-                    guard let username = self.usernameTextField.text,
-                        let password = self.passwordTextField.text else { return }
-                    
-                    db.collection("users").addDocument(data: [username:userName, password:password, "uid": result!.user.uid ]) { (error) in
+                    db.collection("users").addDocument(data: ["username":userName, "password":password, "uid": result!.user.uid ]) { (error) in
                         
                         if error != nil {
                             // Show error message
-                            print("Error creating user: \(err)")
+                            print("Error creating user: \(String(describing: err?.localizedDescription))")
                         }
                     }
                     

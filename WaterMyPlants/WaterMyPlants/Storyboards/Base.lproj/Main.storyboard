@@ -194,14 +194,6 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="-558.48214285714278"/>
         </scene>
-        <!--OnboardAndLogin-->
-        <scene sceneID="Il7-dK-yNH">
-            <objects>
-                <viewControllerPlaceholder storyboardName="OnboardAndLogin" id="SU8-Q3-80t" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zmb-3f-mp2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1615" y="-266"/>
-        </scene>
         <!--HomeVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -344,7 +336,6 @@
                             <color key="tintColor" name="MyLightBlue"/>
                             <connections>
                                 <action selector="logoutButtonPressed:" destination="BYZ-38-t0r" id="Jhm-nz-hbr"/>
-                                <segue destination="SU8-Q3-80t" kind="presentation" identifier="LogoutSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="xky-6z-h4R"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -352,7 +343,6 @@
                         <outlet property="horizontalCollectionView" destination="Dt7-fv-LDj" id="JHk-wR-gJ6"/>
                         <outlet property="plusButton" destination="Xjd-UY-mgg" id="uFB-mB-THv"/>
                         <outlet property="verticalCollectionView" destination="f1R-vH-1rN" id="2N5-9Z-TaQ"/>
-                        <segue destination="SU8-Q3-80t" kind="presentation" identifier="OnboardingSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="N6g-8k-Bb6"/>
                         <segue destination="A55-Te-ght" kind="presentation" identifier="HomeToCreatePlantVC" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Jjn-dI-frH"/>
                     </connections>
                 </viewController>
@@ -627,7 +617,6 @@ Account</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="HCt-FL-R6w"/>
-        <segue reference="N6g-8k-Bb6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.viewfinder" catalog="system" width="128" height="114"/>
