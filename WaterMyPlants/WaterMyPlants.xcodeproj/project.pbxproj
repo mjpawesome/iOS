@@ -222,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				1D7E5F3B249D84CC0033B97B /* CoreData */,
-				184B5817249EBD0F00E33651 /* Bearer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -295,6 +294,7 @@
 				8EDF5B14249FD63000653993 /* NetworkService.swift */,
 				8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */,
 				1D7DB67F24A0129B00D3544F /* UIImageView+ImageDownloader.swift */,
+				184B5817249EBD0F00E33651 /* Bearer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
