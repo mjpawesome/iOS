@@ -33,6 +33,7 @@ extension Plant {
         self.nickname = nickname
         self.h2oFrequency = h2oFreqency
         self.userID = userID
+        self.imageURL = imageURL
         self.id = Int16(id)
     }
     
