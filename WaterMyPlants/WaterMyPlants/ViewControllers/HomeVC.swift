@@ -158,7 +158,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             detailVC.injectedPlant = plant
         }
     }
-    
 }
 
 // MARK: - FRC delegate

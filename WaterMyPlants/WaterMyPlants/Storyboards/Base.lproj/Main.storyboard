@@ -45,6 +45,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qty-5j-UQm">
                                 <rect key="frame" x="20" y="44" width="132" height="22"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CreateVC.CancelButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="132" id="Uon-4v-Qft"/>
                                 </constraints>
@@ -58,6 +59,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIW-6O-DvN">
                                 <rect key="frame" x="276" y="44" width="118" height="22"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CreateVC.DoneCreatingPlantButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="118" id="s2T-QB-7HM"/>
                                 </constraints>
@@ -89,6 +91,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fz-kY-V3W">
                                 <rect key="frame" x="20" y="440" width="374" height="30"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CreatePlantVC.RemoveImageButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="m3x-Vh-RN1"/>
                                 </constraints>
@@ -102,6 +105,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEP-zl-4bo">
                                 <rect key="frame" x="20" y="402" width="374" height="30"/>
                                 <color key="backgroundColor" name="MyLightGreen"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CreatePlantVC.UploadImageButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="tA7-pZ-dfP"/>
                                 </constraints>
@@ -231,6 +235,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="UtN-F6-vAp">
                                                     <rect key="frame" x="0.0" y="0.0" width="97" height="127"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="WaterTodayScene.TopCollectionViewImage"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -271,10 +276,12 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QWN-W1-JLp">
                                                     <rect key="frame" x="0.0" y="0.0" width="166" height="194"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="WaterTodayScene.BottomCollectionViewImage"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzG-KB-vab">
-                                                    <rect key="frame" x="8" y="164" width="60" height="22"/>
-                                                    <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="22"/>
+                                                    <rect key="frame" x="8" y="163" width="54" height="23"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="WaterTodayScene.BottomCollectionViewImage"/>
+                                                    <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="23"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
