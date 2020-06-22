@@ -15,6 +15,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     @IBOutlet weak var plusButton: UIButton!
     
+    var blockOperations = [BlockOperation]()
     private lazy var fetchedResultsController: NSFetchedResultsController<Plant> = {
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "nickname", ascending: false)]
@@ -36,6 +37,14 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         super.viewDidLoad()
         sendUserToLoginIfNecessary()
         setupInitialViews()
+    }
+    
+    deinit {
+        // Cancel all block operations when VC deallocates
+        for operation: BlockOperation in blockOperations {
+            operation.cancel()
+        }
+        blockOperations.removeAll(keepingCapacity: false)
     }
     
     /// Checks if user is logged in. If the aren't, they are sent to login
@@ -142,50 +151,96 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
 
 // MARK: - FRC delegate
 extension HomeVC: NSFetchedResultsControllerDelegate {
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        verticalCollectionView.beginUpdates()
-//    }
-//
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        verticalCollectionView.endUpdates()
-//    }
-//
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-//                    didChange sectionInfo: NSFetchedResultsSectionInfo,
-//                    atSectionIndex sectionIndex: Int,
-//                    for type: NSFetchedResultsChangeType) {
-//        switch type {
-//        case .insert:
-//            verticalCollectionView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-//        case .delete:
-//            verticalCollectionView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-//        default:
-//            break
-//        }
-//    }
-//
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-//                    didChange anObject: Any,
-//                    at indexPath: IndexPath?,
-//                    for type: NSFetchedResultsChangeType,
-//                    newIndexPath: IndexPath?) {
-//        switch type {
-//        case .insert:
-//            guard let newIndexPath = newIndexPath else { return }
-//            verticalCollectionView.insertRows(at: [newIndexPath], with: .automatic)
-//        case .update:
-//            guard let indexPath = indexPath else { return }
-//            verticalCollectionView.reloadRows(at: [indexPath], with: .automatic)
-//        case .move:
-//            guard let oldIndexPath = indexPath,
-//                let newIndexPath = newIndexPath else { return }
-//            verticalCollectionView.deleteRows(at: [oldIndexPath], with: .automatic)
-//            verticalCollectionView.insertRows(at: [newIndexPath], with: .automatic)
-//        case .delete:
-//            guard let indexPath = indexPath else { return }
-//            verticalCollectionView.deleteRows(at: [indexPath], with: .automatic)
-//        @unknown default:
-//            break
-//        }
-//    }
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        blockOperations.removeAll(keepingCapacity: false)
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        if type == NSFetchedResultsChangeType.insert {
+            print("Insert Object: \(String(describing: newIndexPath))")
+            blockOperations.append(
+                BlockOperation(block: { [weak self] in
+                    if let self = self {
+                        self.verticalCollectionView!.insertItems(at: [newIndexPath!])
+                    }
+                })
+            )
+        }
+        else if type == NSFetchedResultsChangeType.update {
+            print("Update Object: \(String(describing: indexPath))")
+            blockOperations.append(
+                BlockOperation(block: { [weak self] in
+                    if let self = self {
+                        self.verticalCollectionView!.reloadItems(at: [indexPath!])
+                    }
+                })
+            )
+        }
+        else if type == NSFetchedResultsChangeType.move {
+            print("Move Object: \(String(describing: indexPath))")
+            
+            blockOperations.append(
+                BlockOperation(block: { [weak self] in
+                    if let self = self {
+                        self.verticalCollectionView!.moveItem(at: indexPath!, to: newIndexPath!)
+                    }
+                })
+            )
+        }
+        else if type == NSFetchedResultsChangeType.delete {
+            print("Delete Object: \(String(describing: indexPath))")
+            
+            blockOperations.append(
+                BlockOperation(block: { [weak self] in
+                    if let self = self {
+                        self.verticalCollectionView!.deleteItems(at: [indexPath!])
+                    }
+                })
+            )
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        if type == NSFetchedResultsChangeType.insert {
+            print("Insert Section: \(sectionIndex)")
+            blockOperations.append(
+                BlockOperation(block: { [weak self] in
+                    if let self = self {
+                        self.verticalCollectionView!.insertSections(NSIndexSet(index: sectionIndex) as IndexSet)
+                    }
+                })
+            )
+        }
+        else if type == NSFetchedResultsChangeType.update {
+            print("Update Section: \(sectionIndex)")
+            blockOperations.append(
+                BlockOperation(block: { [weak self] in
+                    if let self = self {
+                        self.verticalCollectionView!.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet)
+                    }
+                })
+            )
+        }
+        else if type == NSFetchedResultsChangeType.delete {
+            print("Delete Section: \(sectionIndex)")
+            blockOperations.append(
+                BlockOperation(block: { [weak self] in
+                    if let self = self {
+                        self.verticalCollectionView!.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet)
+                    }
+                })
+            )
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        verticalCollectionView!.performBatchUpdates({ () -> Void in
+            for operation: BlockOperation in self.blockOperations {
+                operation.start()
+            }
+        }, completion: { (finished) -> Void in
+            self.blockOperations.removeAll(keepingCapacity: false)
+        })
+    }
+
 }
