@@ -11,6 +11,7 @@ import UIKit
 class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var plantNicknameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {

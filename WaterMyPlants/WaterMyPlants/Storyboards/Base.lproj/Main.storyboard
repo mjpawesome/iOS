@@ -243,7 +243,7 @@
                                         <size key="customSize" width="97" height="127"/>
                                         <connections>
                                             <outlet property="imageView" destination="UtN-F6-vAp" id="5zQ-Ql-TK9"/>
-                                            <segue destination="hMk-j5-qQr" kind="show" id="eFl-de-Czq"/>
+                                            <segue destination="hMk-j5-qQr" kind="show" identifier="ShowDetail" id="eFl-de-Czq"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -283,7 +283,7 @@
                                         <size key="customSize" width="166" height="194"/>
                                         <connections>
                                             <outlet property="imageView" destination="QWN-W1-JLp" id="bHY-hd-1nF"/>
-                                            <segue destination="hMk-j5-qQr" kind="show" id="HCt-FL-R6w"/>
+                                            <segue destination="hMk-j5-qQr" kind="show" identifier="ShowDetail" id="HCt-FL-R6w"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -430,6 +430,7 @@
                     <navigationItem key="navigationItem" id="G8f-7R-fox"/>
                     <connections>
                         <outlet property="imageView" destination="J4U-Uo-48L" id="wxe-cC-Dhx"/>
+                        <outlet property="plantNicknameLabel" destination="Abr-TT-0eE" id="2Oe-Xt-Zp0"/>
                         <outlet property="tableView" destination="3Pg-Oj-eic" id="gob-0y-4Fb"/>
                     </connections>
                 </viewController>
@@ -458,7 +459,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HCt-FL-R6w"/>
+        <segue reference="eFl-de-Czq"/>
         <segue reference="N6g-8k-Bb6"/>
     </inferredMetricsTieBreakers>
     <resources>

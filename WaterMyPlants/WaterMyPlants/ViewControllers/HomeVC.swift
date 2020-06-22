@@ -145,6 +145,15 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetail" { // FIXME: - horizontal Collection view shares same seg name.. should be unique
+            guard let indexPath = verticalCollectionView.indexPathsForSelectedItems?.first,
+                let detailVC = segue.destination as? DetailVC else { return }
+            let plant = fetchedResultsController.object(at: indexPath)
+            detailVC.plantNicknameLabel.text = plant.nickname ?? "No name"
+            if let plantImage = plant.imageURL {
+                detailVC.imageView.downloaded(from: plantImage)
+            }
+        }
     }
     
 }
