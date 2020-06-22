@@ -443,10 +443,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="75e-LF-9w7"/>
                     </view>
-                    <navigationItem key="navigationItem" id="G8f-7R-fox"/>
+                    <navigationItem key="navigationItem" id="G8f-7R-fox">
+                        <barButtonItem key="rightBarButtonItem" title="✓ Push To Water" id="AMS-lI-Y1x">
+                            <connections>
+                                <action selector="pushToWaterButtonPressed:" destination="hMk-j5-qQr" id="WjQ-er-QjX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="J4U-Uo-48L" id="wxe-cC-Dhx"/>
                         <outlet property="plantNicknameLabel" destination="Abr-TT-0eE" id="2Oe-Xt-Zp0"/>
+                        <outlet property="pushToWaterButton" destination="AMS-lI-Y1x" id="G7c-Ev-04I"/>
                         <outlet property="tableView" destination="3Pg-Oj-eic" id="gob-0y-4Fb"/>
                     </connections>
                 </viewController>
