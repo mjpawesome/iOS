@@ -24,7 +24,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     public var imagePicker: UIImagePickerController? // save reference to it
     lazy var cloudinaryConfiguration = CLDConfiguration(cloudName: "dehqhte0i", apiKey: "959718959598545", secure: true)
     lazy var cloudinaryController = CLDCloudinary(configuration: cloudinaryConfiguration)
-    private var imageURL: String? // this contains the url for the image that was uploaded
+    var imageURL: String? // this contains the url for the image that was uploaded
     let numbers = ["1", "2", "3", "4", "5", "6", "7"] // picker view
     let calendarComponents = ["days", "weeks"] // picker view
     var selectedTimeInterval: String? // this contains the time interval the user has selected as a string
