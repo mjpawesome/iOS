@@ -46,7 +46,7 @@ class AuthService {
             headerType: .contentType,
             headerValue: .json
             ) else { return }
-        var registerUser = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber)
+        var registerUser = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber, identifier: nil)
         let encodedUser = networkService.encode(from: registerUser, request: &request)
         guard let requestWithUser = encodedUser.request else {
             print("requestWithUser failed, error encoding user?")
@@ -82,8 +82,6 @@ class AuthService {
     ///   - completion: Signals when the method is complete (returns nothing)
     func loginUser(with username: String,
                    password: String,
-                   phoneNumber: String,
-        identifier: Int16,
         completion: @escaping () -> Void) {
         
         let loginURL = baseURL.appendingPathComponent("api/auth/login")
@@ -98,7 +96,8 @@ class AuthService {
                 return
         }
         //create a user to be encoded and sent to the server for login
-        let preLoginUser = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber)
+
+        let preLoginUser = UserRepresentation(username: username, password: password, phoneNumber: nil, identifier: nil)
         let encodedUser = networkService.encode(from: preLoginUser, request: &request)
         guard let requestWithUser = encodedUser.request else {
             print("requestWithUser failed, error encoding user?")
