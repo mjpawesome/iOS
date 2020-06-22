@@ -32,19 +32,19 @@ enum LoginType {
         didSet {
             switch selectedLoginType {
             case .signUp:
-                signUpSignInLabel.text = "Sign In"
+                signUpSignInLabel.text = "Sign Up"
                 signUpSignInLabel.fadeIn()
-                createAccountLabel.text = "Welcome Back"
+                createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
                 emailTextField.fadeIn()
                 emailTextField.isHidden = false
                 
             case .signIn:
                 signUpSignInLabel.fadeOut()
-                signUpSignInLabel.text = "Sign Up"
+                signUpSignInLabel.text = "Sign In"
                 signUpSignInLabel.fadeIn()
                 createAccountLabel.fadeOut()
-                createAccountLabel.text = "Create Account"
+                createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
                 emailTextField.fadeOut()
                 
@@ -71,11 +71,11 @@ enum LoginType {
         switch signUpSignInSegmentedControl.selectedSegmentIndex {
         case 0:
             selectedLoginType = .signUp
-            passwordTextField.textContentType = .password
+            passwordTextField.textContentType = .newPassword
  
         case 1:
             selectedLoginType = .signIn
-            passwordTextField.textContentType = .newPassword
+            passwordTextField.textContentType = .password
             
         default:
             break
