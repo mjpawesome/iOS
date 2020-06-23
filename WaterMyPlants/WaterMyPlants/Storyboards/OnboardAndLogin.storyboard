@@ -178,7 +178,7 @@ Account</string>
                                                 <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3h-Yp-zlV">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3h-Yp-zlV">
                                                 <rect key="frame" x="8" y="124" width="343" height="32"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="OnboardVC.PhoneNumberTextField"/>
@@ -277,10 +277,10 @@ Account</string>
                     <navigationItem key="navigationItem" id="xmX-dS-lGl"/>
                     <connections>
                         <outlet property="createAccountLabel" destination="bL9-LV-YXU" id="W3k-vo-SGv"/>
-                        <outlet property="emailTextField" destination="Q3h-Yp-zlV" id="eHc-nG-meg"/>
                         <outlet property="greyView1" destination="Gxa-I9-bWh" id="Cfj-47-SoK"/>
                         <outlet property="greyView2" destination="o3Y-xL-T0e" id="iDL-pd-PJN"/>
                         <outlet property="passwordTextField" destination="pAG-Ge-oBb" id="XPh-zo-Cf8"/>
+                        <outlet property="phoneNumberTextField" destination="Q3h-Yp-zlV" id="PJm-7S-se8"/>
                         <outlet property="signInButton" destination="Zis-TJ-rS0" id="8A3-Du-zQa"/>
                         <outlet property="signUpButton" destination="0q6-uO-f5I" id="1os-DX-f4b"/>
                         <outlet property="signUpSignInLabel" destination="Wp1-UH-CRY" id="hec-gH-T51"/>
