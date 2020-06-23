@@ -21,6 +21,13 @@ struct UserRepresentation: Codable {
     
     var plants: [PlantRepresentation]?
     
+//    init(username: String, password: String, phoneNumber: String, identifier: Int) {
+//        self.username = username
+//        self.password = password
+//        self.phoneNumber = phoneNumber
+//        self.identifier = Int.random(in: 1...1000)
+//    }
+    
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case username

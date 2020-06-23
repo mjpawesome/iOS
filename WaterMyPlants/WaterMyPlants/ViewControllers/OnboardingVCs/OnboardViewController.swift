@@ -23,43 +23,54 @@ enum LoginType {
     @IBOutlet weak var signUpSignInSegmentedControl: UISegmentedControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var greyView1: UIView!
     @IBOutlet weak var greyView2: UIView!
     
     //MARK: -Properties
+    
+    var plantController: PlantController?
+    
     var selectedLoginType: LoginType = .signIn {
+        
         didSet {
+            
             switch selectedLoginType {
+                
             case .signUp:
+                
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign Up"
                 signUpSignInLabel.fadeIn()
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
-                emailTextField.fadeIn()
-                emailTextField.isHidden = false
+                phoneNumberTextField.fadeIn()
+                phoneNumberTextField.isHidden = false
                 
             case .signIn:
+                
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign In"
                 signUpSignInLabel.fadeIn()
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
-                emailTextField.fadeOut()
+                phoneNumberTextField.fadeOut()
                 
             }
+            
         }
+        
     }
     
     //MARK: -View Lifecycle
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         usernameTextField.addBottomBorder()
         passwordTextField.addBottomBorder()
-        emailTextField.addBottomBorder()
+        phoneNumberTextField.addBottomBorder()
         greyView1.layer.cornerRadius = 15.0
         greyView2.layer.cornerRadius = 15.0
     }
@@ -88,15 +99,15 @@ enum LoginType {
         let authService = AuthService()
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             password.isEmpty == false,
-            let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            email.isEmpty == false else { return }
-        
+            let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            phoneNumber.isEmpty == false else { return }
+
         switch selectedLoginType {
         case .signUp:
             //FIXME: Not currently getting phone number from signup screen.
             let phoneNumber = "1234567890"
-            authService.registerUser(with: email, and: password, phoneNumber: phoneNumber) {
-                
+            authService.registerUser(with: phoneNumber, and: password, phoneNumber: phoneNumber) {
+
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
@@ -104,17 +115,17 @@ enum LoginType {
                     }
                 }
             }
-            
+
         case .signIn:
-            authService.loginUser(with: email, password: password) {
-                
+            authService.loginUser(with: phoneNumber, password: password) {
+
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
                         print("Successful Sign-in")
                     }
                 }
-                
+
             }
         }
     }
