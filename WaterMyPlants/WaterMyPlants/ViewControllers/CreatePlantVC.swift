@@ -33,7 +33,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
     var keyboardHeight: CGFloat?
     var keyboardIsOpen = true
-    var plantController: PlantController() // network controller
+    var plantController = PlantController() // network controller
     var user = AuthService.activeUser
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
