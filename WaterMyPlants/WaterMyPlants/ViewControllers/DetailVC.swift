@@ -16,6 +16,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var waterThisPlantButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet var editMenuPopover: UIView!
     
     var injectedImage: UIImage?
     var injectedPlant: Plant?
@@ -25,6 +26,7 @@ class DetailVC: UIViewController {
         return dateFormatter
     }()
     var tableViewCellContent = ["Watering Schedule" : "Error", "Next Watering Date" : "Error"]
+    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,16 @@ class DetailVC: UIViewController {
         descriptionLabel.text = plant.species ?? "" // species is being treated as a description
         setupTableView(plant: plant)
         setupWaterThisPlantButton()
+        setupPopover()
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    private func setupPopover() {
+        editMenuPopover.layer.cornerRadius = 15
+        editMenuPopover.layer.masksToBounds = true
+        editMenuPopover.backgroundColor = .systemFill
+        editMenuPopover.alpha = 0
     }
     
     private func setupTableView(plant: Plant) {
@@ -104,6 +116,37 @@ class DetailVC: UIViewController {
     }
     
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        // blur effect
+        
+        if editMenuPopover.alpha == 1 { //close if already open
+            UIView.animate(withDuration: 0.5) {
+                // popover
+                self.editMenuPopover.alpha = 0
+                self.editMenuPopover.removeFromSuperview()
+                // blur
+                self.blurEffectView.alpha = 0
+                self.blurEffectView.removeFromSuperview()
+                // editButton
+                self.editButton.title = "Edit"
+            }
+        } else {
+            self.view.addSubview(editMenuPopover)
+            editMenuPopover.alpha = 0
+            // fade in
+            UIView.animate(withDuration: 0.5) {
+                // blur
+                self.view.addSubview(self.blurEffectView)
+                self.blurEffectView.alpha = 1
+                // popover
+                self.editMenuPopover.alpha = 1
+                self.editMenuPopover.superview?.bringSubviewToFront(self.editMenuPopover)
+                // editButton
+                self.editButton.title = "Close"
+            }
+            // set location
+//            editMenuPopover.center.x = self.view.center.x
+            editMenuPopover.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 20)
+        }
     }
     
     @IBAction func waterThisPlantButtonPressed(_ sender: UIButton) {

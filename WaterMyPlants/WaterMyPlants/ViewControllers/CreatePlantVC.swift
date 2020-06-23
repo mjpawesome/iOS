@@ -19,6 +19,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var uploadProgressPercentLabel: UILabel!
     @IBOutlet weak var removeThisImageButton: UIButton!
     @IBOutlet weak var plantNicknameTextField: UITextField!
+    @IBOutlet weak var plantDescriptionLabel: UITextField!
     @IBOutlet weak var timeIntervalPicker: UIPickerView!
     
     public var imagePicker: UIImagePickerController? // save reference to it
@@ -32,9 +33,13 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
     var keyboardHeight: CGFloat?
     var keyboardIsOpen = true
-    var plantController: PlantController?
-    var plant: PlantRepresentation?
+    var plantController: PlantController() // network controller
     var user = AuthService.activeUser
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d yyyy"
+        return dateFormatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +61,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
         uploadProgressBar.alpha = 0
         uploadProgressPercentLabel.alpha = 0
         plantNicknameTextField.addBottomBorder()
+        plantDescriptionLabel.addBottomBorder()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)) // handles tap anywhere to dismiss keyboard
         view.addGestureRecognizer(tap)
     }
@@ -65,46 +71,26 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        
-        guard var plant = plant else { return }
-        
         guard let imageURL = self.imageURL,
             let nickname = plantNicknameTextField.text,
             !nickname.isEmpty else { return }
-        
-        let species = plant.species
-        let identifier = plant.identifier
-        let userID = plant.userID
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d yyyy"
+        // format h20freq
         let date = dateFormatter.string(from: Date())
-        let days = dayCountFromPicker ?? 1
-        let h2oFrequency = "\(date), \(days)"
-        
-        plant = PlantRepresentation(nickname: nickname, species: species, h2oFrequency: h2oFrequency, identifier: identifier, userID: userID, imageURL: imageURL)
-        plantController?.sendPlantToServer(plant: plant)
-        
-        do {
-            
-            try CoreDataManager.shared.save()
-            dismiss(animated: true, completion: nil)
-            
-        } catch {
-            
-            NSLog("Error saving managed object context: \(error)")
-            
-        }
-        
-        DispatchQueue.main.async {
-            
-            self.dismiss(animated: true) {
-                
-                print("Plant = Full Send)")
-                
-            }
-        }
-        
+        let days = dayCountFromPicker ?? 1 // default catches when the user doesn't change the picker
+        let h2oFrequency = "\(date), \(days)" // date holds the due date, days hold the the repeat frequency
+        // description (using species as description)
+        let description = plantDescriptionLabel.text ?? ""
+        // create plant object
+        let newPlant = Plant(species: description,
+                             nickname: nickname,
+                             h2oFreqency: h2oFrequency,
+                             userID: "2", // TODO: implement userID
+                             imageURL: imageURL)
+        // save to coreData
+        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
+        // send to server
+//        plantController?.sendPlantToServer(plant: newPlant) // FIXME: - <-- should be sending managed object Plant
+        self.dismiss(animated: false)
     }
     
     private func setInitialH20date(dayCountFromPicker: Int) -> String {
