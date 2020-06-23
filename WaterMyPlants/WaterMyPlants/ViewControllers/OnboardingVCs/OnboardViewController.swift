@@ -97,17 +97,17 @@ enum LoginType {
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
         let authService = AuthService()
-        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            password.isEmpty == false,
-            let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            phoneNumber.isEmpty == false else { return }
 
         switch selectedLoginType {
-        case .signUp:
-            //FIXME: Not currently getting phone number from signup screen.
+        case .signIn:
+            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                password.isEmpty == false,
+                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                username.isEmpty == false
+                else { return }
             let phoneNumber = "1234567890"
-            authService.registerUser(with: phoneNumber, and: password, phoneNumber: phoneNumber) {
-
+            authService.registerUser(username: username, password: password, phoneNumber: phoneNumber) {
+                
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
@@ -115,10 +115,15 @@ enum LoginType {
                     }
                 }
             }
-
-        case .signIn:
-            authService.loginUser(with: phoneNumber, password: password) {
-
+            
+        case .signUp:
+            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                password.isEmpty == false,
+                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                username.isEmpty == false
+                else { return }
+            authService.loginUser(username: username, password: password) {
+                
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
