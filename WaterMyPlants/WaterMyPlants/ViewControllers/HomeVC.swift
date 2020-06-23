@@ -23,7 +23,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     var blockOperations = [BlockOperation]()
     private lazy var fetchedResultsController: NSFetchedResultsController<Plant> = {
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "nickname", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "nickname", ascending: true)]
         let mainContext = CoreDataManager.shared.mainContext
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: mainContext,
@@ -43,6 +43,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         sendUserToLoginIfNecessary()
         setupInitialViews()
         print(fetchedResultsController.fetchedObjects?.first?.h2oFrequency) // this print statement can be used to check which properties of the core data object are saving
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        horizontalCollectionView.reloadData()
     }
     
     deinit {
@@ -121,16 +125,19 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == horizontalCollectionView {
             let horizontalCell = horizontalCollectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath) as! HorizontalCVCell
-            let plant = filterAndSortDuePlants()?[indexPath.row]
-            if let plantImage = plant?.imageURL { horizontalCell.imageView.downloaded(from: plantImage) }
-            if let plantNickname = plant?.nickname { horizontalCell.nicknameLabel.text = plantNickname }
+            let plant = filterAndSortDuePlants()?[indexPath.row] // grab plant
+            // badge
+            horizontalCell.badgeLabel.text = assignBadgeText(plant: plant!)
+            horizontalCell.badgeLabel.isHidden = horizontalCell.badgeLabel.text == "" ? true : false
+            if let plantImage = plant?.imageURL { horizontalCell.imageView.downloaded(from: plantImage) } // image
+            if let plantNickname = plant?.nickname { horizontalCell.nicknameLabel.text = plantNickname } // name
             stylizeCell(horizontalCell)
             return horizontalCell
         } else { // verticalCollectionView
             let  verticalCell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCVCell
-            let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
-            if let plantImage = plant?.imageURL { verticalCell.imageView.downloaded(from: plantImage) }
-            if let plantNickname = plant?.nickname { verticalCell.nicknameLabel.text = plantNickname }
+            let plant = fetchedResultsController.fetchedObjects?[indexPath.row] // grab plant
+            if let plantImage = plant?.imageURL { verticalCell.imageView.downloaded(from: plantImage) } // image
+            if let plantNickname = plant?.nickname { verticalCell.nicknameLabel.text = plantNickname } // name
             stylizeCell(verticalCell)
             return verticalCell
         }
@@ -138,6 +145,29 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     /// Used to style the cells if there are many tweaks done to the cell. Otherwise this method may not be neccasary.
     func stylizeCell(_ cell: UICollectionViewCell) {
         cell.layer.cornerRadius = 12
+    }
+    
+    private func assignBadgeText(plant: Plant) -> String { // FIXME: - this is saying things like "1 days ago" instead of "1 day ago". Why??
+        // grab seconds between now and plant watering dueDate
+        let date = dateFormatter.date(from: (plant.h2oFrequency?.components(separatedBy: ", ").first)!)
+        let secondsAgo = Int(Date().timeIntervalSince(date!))
+        // components
+        let minute = 60
+        let hour = 60 * minute
+        let day = 24 * hour
+        let week = 7 * day
+        // return
+        if secondsAgo < day {
+            return ""
+        } else if secondsAgo == day {
+            return "1 day late"
+        } else if secondsAgo < week {
+            return "\(secondsAgo / day) days late"
+        } else if secondsAgo == week {
+            return "1 week late"
+        } else {
+            return "\(secondsAgo / week) weeks late"
+        }
     }
     
     private func filterAndSortDuePlants() -> [Plant]? {
