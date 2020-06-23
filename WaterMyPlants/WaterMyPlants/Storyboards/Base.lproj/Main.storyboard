@@ -480,6 +480,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="descriptionLabel" destination="dIJ-b5-feC" id="zNR-KA-2zT"/>
                         <outlet property="imageView" destination="J4U-Uo-48L" id="wxe-cC-Dhx"/>
                         <outlet property="plantNicknameLabel" destination="Abr-TT-0eE" id="2Oe-Xt-Zp0"/>
                         <outlet property="pushToWaterButton" destination="AMS-lI-Y1x" id="G7c-Ev-04I"/>
