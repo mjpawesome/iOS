@@ -84,7 +84,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
         let newPlant = Plant(species: description,
                              nickname: nickname,
                              h2oFreqency: h2oFrequency,
-                             userID: "\(user?.identifier)",
+                             userID: "\(user?.identifier)", // FIXME: - this value is reading as nil. Investigate this to get the right value
                              imageURL: imageURL)
         print("\(user?.identifier)")
         // save to coreData
