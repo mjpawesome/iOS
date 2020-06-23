@@ -27,11 +27,11 @@ extension URLSession: NetworkLoader {
 class NetworkService {
     ///used to switch between live and Mock Data
     var dataLoader: NetworkLoader
-
+    
     init(dataLoader: NetworkLoader = URLSession.shared) {
         self.dataLoader = dataLoader
     }
-
+    
     ///Used to set a`URLRequest`'s HTTP Method
     enum HttpMethod: String {
         case get = "GET"
@@ -40,7 +40,7 @@ class NetworkService {
         case put = "PUT"
         case delete = "DELETE"
     }
-
+    
     /**
      used when the endpoint requires a header-type (i.e. "content-type") be specified in the header
      */
@@ -48,14 +48,14 @@ class NetworkService {
         case contentType = "Content-Type"
         case auth = "Authentication"
     }
-
+    
     /**
      the value of the header-type (i.e. "application/json")
      */
     enum HttpHeaderValue: String {
         case json = "application/json"
     }
-
+    
     /**
      - parameter request: should return nil if there's an error or a valid request object if there isn't
      - parameter error: should return nil if the request succeeded and a valid error if it didn't
@@ -64,13 +64,13 @@ class NetworkService {
         let request: URLRequest?
         let error: Error?
     }
-
+    
     static var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return dateFormatter
     }
-
+    
     /**
      Create a request given a URL and requestMethod (get, post, create, etc...)
      */
@@ -92,7 +92,7 @@ class NetworkService {
         }
         return request
     }
-
+    
     /**
      Encode from a Swift object to JSON for transmitting to an endpoint and returns an EncodingStatus
      object which should either contain an error and nil request or request and nil error
@@ -117,7 +117,7 @@ class NetworkService {
         }
         return EncodingStatus(request: request, error: nil)
     }
-
+    
     func decode<DecodableType: Decodable>(
         to type: DecodableType.Type,
         data: Data,

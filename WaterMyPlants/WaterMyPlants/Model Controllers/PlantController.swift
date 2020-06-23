@@ -23,7 +23,7 @@ enum HTTPMethod: String {
     case post = "POST"
 }
 enum NetworkError: Error {
-    case failedSignUp, failedLogIn, noData, badData
+    case failedSignUp, failedLogIn, noData, badData, noID
     case notSignedIn, failedFetch, failedPost
 }
 
@@ -54,6 +54,7 @@ class PlantController {
     private let networkService = NetworkService()
     static var bearer: Bearer?
     var plants: [PlantRepresentation] = []
+    var bearer: Bearer?
     
     private lazy var jsonEncoder: JSONEncoder = {
         let encoder = JSONEncoder()
@@ -167,6 +168,43 @@ class PlantController {
             
             print("Error encoding user: \(error.localizedDescription)")
             completion(.failure(.failedLogIn))
+        }
+    }
+    
+    func sendPlantToServer(plant: PlantRepresentation, completion: @escaping CompletionHandler = { _ in }) {
+        guard case let .loggedIn(bearer) = LoginStatus.isLoggedIn else {
+            return completion(.failure(.notSignedIn))
+        }
+        
+        var request = plantHandler(with: allPlantsURL, with: bearer, requestType: .post)
+        
+        do {
+            let newPlant = try jsonEncoder.encode(plant)
+            print(String(data: newPlant, encoding: .utf8))
+            request.httpBody = newPlant
+            
+            URLSession.shared.dataTask(with: request) { _, response, error in
+                
+                if let error = error {
+                    print("Failed to post with error : \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse,
+                    response.statusCode == 200 else {
+                        print("Posting recieved bad response.")
+                        return completion(.failure(.failedSignUp))
+                }
+                
+                self.plants.append(plant)
+                completion(.success(true))
+            }
+            
+        .resume()
+            
+        } catch {
+            print("Error encoding plant: \(error.localizedDescription)")
+            completion(.failure(.failedPost))
         }
     }
     

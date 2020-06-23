@@ -49,8 +49,7 @@ enum LoginType {
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
                 phoneNumberTextField.isHidden = false
-                emailTextField.fadeIn()
-                emailTextField.isHidden = false
+                
                 signUpButton.isHidden = false
                 signInButton.isHidden = true
                 
@@ -62,7 +61,7 @@ enum LoginType {
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
-                emailTextField.fadeOut()
+                
                 signInButton.isHidden = false
                 signUpButton.isHidden = true
                 

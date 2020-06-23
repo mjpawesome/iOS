@@ -32,6 +32,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
     var keyboardHeight: CGFloat?
     var keyboardIsOpen = true
+    var plantController: PlantController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,10 +71,15 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
         let date = dateFormatter.string(from: Date())
         let days = dayCountFromPicker ?? 1 // default catches when the user doesn't change the picker
         let h20Frequency = "\(date), \(days)" // date holds the due date, days hold the the repeat frequency
+        let newPlant = Plant(id: Int(randomID), species: "species", nickname: plantNicknameTextField.text ?? "No Name", h2oFreqency: h20Frequency, userID: String(randomID), imageURL: imageURL, context: CoreDataManager.shared.mainContext)
         
-        let newPlant = Plant(id: Int(randomID), species: "species", nickname: plantNicknameTextField.text ?? "No Name", h2oFreqency: h20Frequency, userID: String(randomID), imageURL: imageURL ) // FIXME: - <-- this is temporary
-        try! CoreDataManager.shared.save() // FIXME: - <-- this is temporary
-        // TODO: save to core data and network
+        
+        
+        
+        plantController?.sendPlantToServer(plant: newPlant)
+        
+        
+
         self.dismiss(animated: false)
     }
     
