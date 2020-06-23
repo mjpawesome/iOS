@@ -15,6 +15,11 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     @IBOutlet weak var plusButton: UIButton!
     
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d yyyy"
+        return dateFormatter
+    }()
     var blockOperations = [BlockOperation]()
     private lazy var fetchedResultsController: NSFetchedResultsController<Plant> = {
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
@@ -28,7 +33,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         do {
             try fetchedResultsController.performFetch()
         } catch {
-            print("Error Fetching -> HomeVC in fetchedResultsController: \(error)")
+            print("Error Fetching -> HomeVC in VerticalCVFetchedResultsController: \(error)")
         }
         return fetchedResultsController
     }()
@@ -107,7 +112,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     // MARK: - Collection views data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == horizontalCollectionView {
-            return 10
+            return filterAndSortDuePlants()?.count ?? 0
         } else {
             return fetchedResultsController.fetchedObjects?.count ?? 0
         }
@@ -116,12 +121,13 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == horizontalCollectionView {
             let horizontalCell = horizontalCollectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCell", for: indexPath) as! HorizontalCVCell
-            // TODO: call to load the image
+            let plant = filterAndSortDuePlants()?[indexPath.row]
+            if let plantImage = plant?.imageURL { horizontalCell.imageView.downloaded(from: plantImage) }
+            if let plantNickname = plant?.nickname { horizontalCell.nicknameLabel.text = plantNickname }
             stylizeCell(horizontalCell)
             return horizontalCell
         } else { // verticalCollectionView
             let  verticalCell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCVCell
-            // TODO: call to load the image
             let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
             if let plantImage = plant?.imageURL { verticalCell.imageView.downloaded(from: plantImage) }
             if let plantNickname = plant?.nickname { verticalCell.nicknameLabel.text = plantNickname }
@@ -132,6 +138,17 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     /// Used to style the cells if there are many tweaks done to the cell. Otherwise this method may not be neccasary.
     func stylizeCell(_ cell: UICollectionViewCell) {
         cell.layer.cornerRadius = 12
+    }
+    
+    private func filterAndSortDuePlants() -> [Plant]? {
+        guard let fetchedObjects = fetchedResultsController.fetchedObjects as [Plant]? else { return nil }
+        let filteredPlants = fetchedObjects.filter {
+            dateFormatter.date(from: ($0.h2oFrequency?.components(separatedBy: ", ").first!)!)! <= Date()
+        }
+        let sortedPlants = filteredPlants.sorted {
+            dateFormatter.date(from: ($0.h2oFrequency?.components(separatedBy: ", ").first!)!)! < dateFormatter.date(from: ($1.h2oFrequency?.components(separatedBy: ", ").first!)!)!
+        }
+        return sortedPlants
     }
     
     /// Customizes sizing for collectionViews
@@ -157,6 +174,18 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
             detailVC.injectedPlant = plant
         }
+        if segue.identifier == "HorizontalShowDetail" {
+            guard let indexPath = horizontalCollectionView.indexPathsForSelectedItems?.first,
+                let detailVC = segue.destination as? DetailVC else { return }
+            // inject image
+            let horizontalCell = horizontalCollectionView.cellForItem(at: indexPath) as? HorizontalCVCell
+            if let horizontalCellImage = horizontalCell?.imageView.image {
+                detailVC.injectedImage = horizontalCellImage
+            }
+            // inject plant object
+            let plant = filterAndSortDuePlants()?[indexPath.row]
+            detailVC.injectedPlant = plant
+        }
     }
 }
 
@@ -172,7 +201,9 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             blockOperations.append(
                 BlockOperation(block: { [weak self] in
                     if let self = self {
-                        self.verticalCollectionView!.insertItems(at: [newIndexPath!])
+//                        controller == self.verticalCollectionView ?
+                            self.verticalCollectionView!.insertItems(at: [newIndexPath!])
+//                           : self.horizontalCollectionView!.insertItems(at: [newIndexPath!])
                     }
                 })
             )
@@ -182,7 +213,9 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             blockOperations.append(
                 BlockOperation(block: { [weak self] in
                     if let self = self {
-                        self.verticalCollectionView!.reloadItems(at: [indexPath!])
+//                        controller == self.verticalCollectionView ?
+                            self.verticalCollectionView!.reloadItems(at: [indexPath!])
+//                           : self.horizontalCollectionView!.reloadItems(at: [indexPath!])
                     }
                 })
             )
@@ -193,7 +226,9 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             blockOperations.append(
                 BlockOperation(block: { [weak self] in
                     if let self = self {
-                        self.verticalCollectionView!.moveItem(at: indexPath!, to: newIndexPath!)
+//                        controller == self.verticalCollectionView ?
+                            self.verticalCollectionView!.moveItem(at: indexPath!, to: newIndexPath!)
+//                           : self.horizontalCollectionView!.moveItem(at: indexPath!, to: newIndexPath!)
                     }
                 })
             )
@@ -204,7 +239,9 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             blockOperations.append(
                 BlockOperation(block: { [weak self] in
                     if let self = self {
-                        self.verticalCollectionView!.deleteItems(at: [indexPath!])
+//                        controller == self.verticalCollectionView ?
+                            self.verticalCollectionView!.deleteItems(at: [indexPath!])
+//                          :  self.horizontalCollectionView!.deleteItems(at: [indexPath!])
                     }
                 })
             )
@@ -217,7 +254,9 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             blockOperations.append(
                 BlockOperation(block: { [weak self] in
                     if let self = self {
-                        self.verticalCollectionView!.insertSections(NSIndexSet(index: sectionIndex) as IndexSet)
+//                        controller == self.verticalCollectionView ?
+                            self.verticalCollectionView!.insertSections(NSIndexSet(index: sectionIndex) as IndexSet)
+//                           : self.horizontalCollectionView!.insertSections(NSIndexSet(index: sectionIndex) as IndexSet)
                     }
                 })
             )
@@ -227,7 +266,9 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             blockOperations.append(
                 BlockOperation(block: { [weak self] in
                     if let self = self {
-                        self.verticalCollectionView!.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet)
+//                        controller == self.verticalCollectionView ?
+                            self.verticalCollectionView!.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet)
+//                           : self.horizontalCollectionView!.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet)
                     }
                 })
             )
@@ -237,7 +278,9 @@ extension HomeVC: NSFetchedResultsControllerDelegate {
             blockOperations.append(
                 BlockOperation(block: { [weak self] in
                     if let self = self {
-                        self.verticalCollectionView!.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet)
+//                        controller == self.verticalCollectionView ?
+                            self.verticalCollectionView!.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet)
+//                            : self.horizontalCollectionView!.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet)
                     }
                 })
             )

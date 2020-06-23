@@ -233,13 +233,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="97" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="UtN-F6-vAp">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UtN-F6-vAp">
                                                     <rect key="frame" x="0.0" y="0.0" width="97" height="127"/>
                                                     <accessibility key="accessibilityConfiguration" identifier="WaterTodayScene.TopCollectionViewImage"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZC-de-MIC">
+                                                    <rect key="frame" x="8" y="105" width="39" height="14"/>
+                                                    <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="UtN-F6-vAp" secondAttribute="bottom" id="350-pa-rmI"/>
+                                                <constraint firstItem="0ZC-de-MIC" firstAttribute="leading" secondItem="GY8-Lo-Yxl" secondAttribute="leading" constant="8" id="4aI-dr-jBm"/>
+                                                <constraint firstAttribute="bottom" secondItem="0ZC-de-MIC" secondAttribute="bottom" constant="8" id="6tN-Ku-hy4"/>
                                                 <constraint firstAttribute="trailing" secondItem="UtN-F6-vAp" secondAttribute="trailing" id="BXo-bj-6My"/>
                                                 <constraint firstItem="UtN-F6-vAp" firstAttribute="top" secondItem="GY8-Lo-Yxl" secondAttribute="top" id="SVB-NJ-srs"/>
                                                 <constraint firstItem="UtN-F6-vAp" firstAttribute="leading" secondItem="GY8-Lo-Yxl" secondAttribute="leading" id="nic-4d-pfK"/>
@@ -248,6 +256,7 @@
                                         <size key="customSize" width="97" height="127"/>
                                         <connections>
                                             <outlet property="imageView" destination="UtN-F6-vAp" id="5zQ-Ql-TK9"/>
+                                            <outlet property="nicknameLabel" destination="0ZC-de-MIC" id="khJ-sZ-td3"/>
                                             <segue destination="hMk-j5-qQr" kind="show" identifier="HorizontalShowDetail" id="eFl-de-Czq"/>
                                         </connections>
                                     </collectionViewCell>
@@ -482,7 +491,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HCt-FL-R6w"/>
+        <segue reference="eFl-de-Czq"/>
         <segue reference="N6g-8k-Bb6"/>
     </inferredMetricsTieBreakers>
     <resources>

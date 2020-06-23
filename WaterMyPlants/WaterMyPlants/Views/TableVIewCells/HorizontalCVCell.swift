@@ -11,6 +11,7 @@ import UIKit
 class HorizontalCVCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nicknameLabel: UILabel!
     // TODO: add a badge for "1 day late" if the plant watering is missed or overdue
 
 }
