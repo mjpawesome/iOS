@@ -8,12 +8,13 @@
 
 import UIKit
 
-class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailVC: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var plantNicknameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pushToWaterButton: UIBarButtonItem!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     var injectedImage: UIImage?
     var injectedPlant: Plant?
@@ -22,6 +23,7 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         dateFormatter.dateFormat = "MMM d yyyy"
         return dateFormatter
     }()
+    var tableViewCellContent = ["Watering Schedule" : "Error", "Next Watering Date" : "Error"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,34 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         imageView.image = injectedImage // image
         guard let plant = injectedPlant else { return }
         plantNicknameLabel.text = plant.nickname // name
+        descriptionLabel.text = plant.species ?? "" // species is being treated as a description
+        setupTableView(plant: plant)
+    }
+    
+    private func setupTableView(plant: Plant) {
+        let wateringFrequencyParsing = plant.h2oFrequency?.components(separatedBy: ", ")
+        let days = wateringFrequencyParsing?.last
+        let nextWateringDate = wateringFrequencyParsing?.first
+        
+        self.tableViewCellContent["Watering Schedule"] = formatWateringScheduleString(days!)
+        self.tableViewCellContent["Next Watering Date"] = nextWateringDate
+    }
+    
+    private func formatWateringScheduleString(_ days: String) -> String {
+        let daysInt = Int(days)!
+        if daysInt == 1 {
+            return "Every Day"
+        } else if daysInt < 7 {
+            return "Every \(days) Days"
+        } else if daysInt == 7 {
+            return "Every Week"
+        } else {
+            return "Every \(daysInt / 7) Weeks"
+        }
+    }
+    
+    private func calculateNextWateringDate() {
+        
     }
         
     /// called to update any views that may have changes
@@ -74,14 +104,20 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.updateViews()
         pushToWaterButton.title = "Done!"
     }
-    
+
+}
+
+// MARK: - TableView dataSource & delegate methods
+extension DetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        tableViewCellContent.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
+        cell.textLabel?.text = Array(tableViewCellContent.keys)[indexPath.row]
+        cell.detailTextLabel?.text = Array(tableViewCellContent.values)[indexPath.row]
         return cell
     }
-
+    
 }
