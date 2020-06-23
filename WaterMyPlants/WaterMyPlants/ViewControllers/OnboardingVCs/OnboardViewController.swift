@@ -86,16 +86,16 @@ enum LoginType {
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
         let authService = AuthService()
-        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            password.isEmpty == false,
-            let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            email.isEmpty == false else { return }
-        
+// FIXME: Switchin on login type not working.  
         switch selectedLoginType {
         case .signUp:
-            //FIXME: Not currently getting phone number from signup screen.
+            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                password.isEmpty == false,
+                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                username.isEmpty == false
+                else { return }
             let phoneNumber = "1234567890"
-            authService.registerUser(with: email, and: password, phoneNumber: phoneNumber) {
+            authService.registerUser(username: username, password: password, phoneNumber: phoneNumber) {
                 
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
@@ -106,12 +106,17 @@ enum LoginType {
             }
             
         case .signIn:
-            authService.loginUser(with: email, password: password) {
+            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                password.isEmpty == false,
+                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                username.isEmpty == false
+                else { return }
+            authService.loginUser(username: username, password: password) {
                 
                 DispatchQueue.main.async {
+                    print("Successful Sign-in")
                     self.dismiss(animated: true) {
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        print("Successful Sign-in")
                     }
                 }
                 

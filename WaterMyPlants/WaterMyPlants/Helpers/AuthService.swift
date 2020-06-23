@@ -35,8 +35,8 @@ class AuthService {
     ///   - username: Minimum 4 characters
     ///   - password: Minimum 6 characters
     ///   - completion: Signals when the method is complete (returns nothing)
-    func registerUser(with username: String,
-                      and password: String,
+    func registerUser(username: String,
+                      password: String,
                       phoneNumber: String,
                       completion: @escaping () -> Void) {
         let requestURL = baseURL.appendingPathComponent("api/auth/register")
@@ -80,7 +80,7 @@ class AuthService {
     ///   - username: The registered user's username
     ///   - password: The registered user's
     ///   - completion: Signals when the method is complete (returns nothing)
-    func loginUser(with username: String,
+    func loginUser(username: String,
                    password: String,
         completion: @escaping () -> Void) {
         
