@@ -32,11 +32,11 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     /// sets up view to their initial state
     private func setupViews() {
         imageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        imageView.image = injectedImage
+        imageView.image = injectedImage // image
         guard let plant = injectedPlant else { return }
-        plantNicknameLabel.text = plant.nickname
+        plantNicknameLabel.text = plant.nickname // name
     }
-    
+        
     /// called to update any views that may have changes
     private func updateViews() { // FIXME: - should this VC just use observers here instead?
         guard let plant = injectedPlant else { return }
@@ -64,7 +64,7 @@ class DetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let daysInt = Int(daysString!) // convert to int
         let date = dateFormatter.date(from: dateString!)// format dateString to date
         print("Old Date: \(dateString!)")
-        let nextDate = Calendar.current.date(byAdding: .day, value: -daysInt!, to: date!) // calculate nextDate
+        let nextDate = Calendar.current.date(byAdding: .day, value: daysInt!, to: date!) // calculate nextDate
         let nextDateString = dateFormatter.string(from: nextDate!)
         print("New Date : \(nextDateString)")
         let h20Frequency = "\(nextDateString), \(daysString!)" // reformat string to be stored in coreData & network
