@@ -20,7 +20,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YYk-n4-aGM">
                                 <rect key="frame" x="20" y="74" width="374" height="320"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="320" id="kmn-Am-Vd0"/>
+                                    <constraint firstAttribute="height" constant="320" id="HjR-5p-YyU"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqB-jS-7xN">
@@ -84,7 +84,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q2n-QH-bHw" customClass="CustomProgressView" customModule="WaterMyPlants" customModuleProvider="target">
-                                <rect key="frame" x="20" y="416" width="374" height="2"/>
+                                <rect key="frame" x="20" y="418" width="374" height="2"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="progressTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
@@ -93,7 +93,7 @@
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" identifier="CreatePlantVC.RemoveImageButton"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="m3x-Vh-RN1"/>
+                                    <constraint firstAttribute="height" constant="30" id="mRy-eN-L8X"/>
                                 </constraints>
                                 <state key="normal" title="Remove This Image">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,11 +103,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEP-zl-4bo">
-                                <rect key="frame" x="20" y="402" width="374" height="30"/>
+                                <rect key="frame" x="20" y="402" width="374" height="34"/>
                                 <color key="backgroundColor" name="MyLightGreen"/>
                                 <accessibility key="accessibilityConfiguration" identifier="CreatePlantVC.UploadImageButton"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="tA7-pZ-dfP"/>
+                                    <constraint firstAttribute="height" constant="34" id="hLV-0B-eDp"/>
                                 </constraints>
                                 <state key="normal" title="Upload This Image">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -118,23 +118,37 @@
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Plant Nickname..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gha-II-ExH">
                                 <rect key="frame" x="20" y="478" width="374" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="5RW-H2-SBv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="A55-Te-ght" id="30P-wI-bzf"/>
                                 </connections>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z1S-8d-cTw">
+                                <rect key="frame" x="20" y="520" width="374" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Mco-Ds-Sxr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="A55-Te-ght" id="sQ0-L7-csv"/>
+                                </connections>
+                            </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Mkv-mp-yud">
-                                <rect key="frame" x="42.5" y="520" width="329.5" height="106"/>
+                                <rect key="frame" x="42.5" y="562" width="329" height="106"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water me every:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beA-PV-vFD">
-                                        <rect key="frame" x="0.0" y="41" width="140.5" height="24"/>
+                                        <rect key="frame" x="0.0" y="41" width="140" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Co-Vt-6Cm">
-                                        <rect key="frame" x="144.5" y="0.0" width="185" height="106"/>
+                                        <rect key="frame" x="144" y="0.0" width="185" height="106"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5Co-Vt-6Cm" secondAttribute="height" multiplier="185:106" id="Tfq-ql-qL9"/>
                                             <constraint firstAttribute="width" constant="185" id="xWP-h8-xpl"/>
@@ -145,40 +159,45 @@
                                         </connections>
                                     </pickerView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Mkv-mp-yud" secondAttribute="height" multiplier="329:106" id="Sjn-e5-byq"/>
+                                    <constraint firstAttribute="height" constant="106" id="rkY-6G-rX7"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="DKJ-WB-fm4" firstAttribute="centerY" secondItem="2Fz-kY-V3W" secondAttribute="centerY" id="0yx-Tr-Qn4"/>
                             <constraint firstItem="pch-4U-HeK" firstAttribute="top" secondItem="EqB-jS-7xN" secondAttribute="bottom" constant="-57" id="10n-Ii-Ehf"/>
-                            <constraint firstItem="Mkv-mp-yud" firstAttribute="top" secondItem="6pT-7k-YNx" secondAttribute="bottom" constant="8" id="2xs-fD-Jec"/>
                             <constraint firstItem="YYk-n4-aGM" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="4E8-WI-WHT"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" constant="100" id="61D-gQ-rgM"/>
-                            <constraint firstItem="6pT-7k-YNx" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="6sW-Fy-R9Y"/>
+                            <constraint firstItem="Mkv-mp-yud" firstAttribute="top" secondItem="Z1S-8d-cTw" secondAttribute="bottom" constant="8" id="Aaz-j2-5SI"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="2Fz-kY-V3W" secondAttribute="trailing" constant="20" id="BDM-kf-KtU"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="wEP-zl-4bo" secondAttribute="trailing" constant="20" id="Bie-Ph-0lZ"/>
+                            <constraint firstItem="Gha-II-ExH" firstAttribute="top" secondItem="2Fz-kY-V3W" secondAttribute="bottom" constant="8" id="DOj-Dx-egY"/>
+                            <constraint firstItem="Qty-5j-UQm" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="E0Z-TD-vP4"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="centerY" secondItem="wEP-zl-4bo" secondAttribute="centerY" id="FPz-65-rAb"/>
-                            <constraint firstItem="Gha-II-ExH" firstAttribute="top" secondItem="2Fz-kY-V3W" secondAttribute="bottom" constant="8" id="JTo-hO-25M"/>
-                            <constraint firstItem="2Fz-kY-V3W" firstAttribute="top" secondItem="wEP-zl-4bo" secondAttribute="bottom" constant="8" id="JYf-S7-pMD"/>
+                            <constraint firstItem="2Fz-kY-V3W" firstAttribute="top" secondItem="wEP-zl-4bo" secondAttribute="bottom" constant="4" id="HS2-zU-IBx"/>
                             <constraint firstItem="pch-4U-HeK" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="KCR-3K-tbu"/>
                             <constraint firstItem="wEP-zl-4bo" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="KDi-mX-3gV"/>
                             <constraint firstItem="EqB-jS-7xN" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="100" id="Kb4-HB-sF6"/>
-                            <constraint firstItem="Qty-5j-UQm" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="OaS-pc-laH"/>
                             <constraint firstItem="sIW-6O-DvN" firstAttribute="top" secondItem="24z-iF-4KP" secondAttribute="top" id="P7Z-BB-ChW"/>
-                            <constraint firstItem="YYk-n4-aGM" firstAttribute="top" secondItem="Qty-5j-UQm" secondAttribute="bottom" constant="8" id="RhR-6B-Rxj"/>
+                            <constraint firstItem="wEP-zl-4bo" firstAttribute="top" secondItem="YYk-n4-aGM" secondAttribute="bottom" constant="8" id="R7y-Cu-ySo"/>
                             <constraint firstItem="2Fz-kY-V3W" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="UOm-lK-lMJ"/>
                             <constraint firstItem="Gha-II-ExH" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Uk1-ZY-asW"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="sIW-6O-DvN" secondAttribute="trailing" constant="20" id="VIE-mD-E20"/>
-                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="6pT-7k-YNx" secondAttribute="trailing" constant="20" id="Vn3-fU-qbv"/>
-                            <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="Ws3-YQ-QBw"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="YYk-n4-aGM" secondAttribute="trailing" constant="20" id="XbB-xK-Aav"/>
+                            <constraint firstItem="Mkv-mp-yud" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="Zo9-s1-UKy"/>
+                            <constraint firstItem="Qty-5j-UQm" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="dMb-ZX-KOC"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="leading" secondItem="nZT-EC-GhD" secondAttribute="leadingMargin" id="eD7-MY-f4o"/>
                             <constraint firstItem="Mkv-mp-yud" firstAttribute="centerX" secondItem="nZT-EC-GhD" secondAttribute="centerX" id="izX-sN-LHs"/>
+                            <constraint firstItem="Z1S-8d-cTw" firstAttribute="leading" secondItem="24z-iF-4KP" secondAttribute="leading" constant="20" id="k61-74-K5V"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="Gha-II-ExH" secondAttribute="trailing" constant="20" id="lSU-zv-jHq"/>
+                            <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="Z1S-8d-cTw" secondAttribute="trailing" constant="20" id="le8-us-KPs"/>
                             <constraint firstItem="DKJ-WB-fm4" firstAttribute="centerX" secondItem="2Fz-kY-V3W" secondAttribute="centerX" id="oEA-pG-Kwk"/>
-                            <constraint firstItem="6pT-7k-YNx" firstAttribute="top" secondItem="Gha-II-ExH" secondAttribute="bottom" constant="8" id="pUq-6P-jq2"/>
-                            <constraint firstItem="wEP-zl-4bo" firstAttribute="top" secondItem="YYk-n4-aGM" secondAttribute="bottom" constant="8" id="ppq-e5-JUe"/>
                             <constraint firstItem="q2n-QH-bHw" firstAttribute="trailing" secondItem="nZT-EC-GhD" secondAttribute="trailingMargin" id="rgY-WV-qHR"/>
+                            <constraint firstItem="YYk-n4-aGM" firstAttribute="top" secondItem="Qty-5j-UQm" secondAttribute="bottom" constant="8" id="sgT-cF-3xd"/>
+                            <constraint firstItem="Z1S-8d-cTw" firstAttribute="top" secondItem="Gha-II-ExH" secondAttribute="bottom" constant="8" id="uTK-Xp-81V"/>
                             <constraint firstItem="24z-iF-4KP" firstAttribute="trailing" secondItem="EqB-jS-7xN" secondAttribute="trailing" constant="100" id="vO1-ik-aSv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="24z-iF-4KP"/>
@@ -187,7 +206,7 @@
                     <connections>
                         <outlet property="addAPhotoLabel" destination="pch-4U-HeK" id="K47-8F-Fiv"/>
                         <outlet property="addPhotoButton" destination="EqB-jS-7xN" id="uUh-pX-5YU"/>
-                        <outlet property="plantDescriptionLabel" destination="6pT-7k-YNx" id="Z0L-0y-7jM"/>
+                        <outlet property="plantDescriptionTextField" destination="Z1S-8d-cTw" id="SBe-Hd-TPb"/>
                         <outlet property="plantNicknameTextField" destination="Gha-II-ExH" id="0Nx-UG-PjH"/>
                         <outlet property="removeThisImageButton" destination="2Fz-kY-V3W" id="fDE-V4-Ge3"/>
                         <outlet property="selectedImage" destination="YYk-n4-aGM" id="Hvi-cJ-ieZ"/>

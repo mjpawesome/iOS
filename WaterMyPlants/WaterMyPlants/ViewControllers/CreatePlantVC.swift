@@ -19,7 +19,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var uploadProgressPercentLabel: UILabel!
     @IBOutlet weak var removeThisImageButton: UIButton!
     @IBOutlet weak var plantNicknameTextField: UITextField!
-    @IBOutlet weak var plantDescriptionLabel: UITextField!
+    @IBOutlet weak var plantDescriptionTextField: UITextField!
     @IBOutlet weak var timeIntervalPicker: UIPickerView!
     
     public var imagePicker: UIImagePickerController? // save reference to it
@@ -61,7 +61,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
         uploadProgressBar.alpha = 0
         uploadProgressPercentLabel.alpha = 0
         plantNicknameTextField.addBottomBorder()
-        plantDescriptionLabel.addBottomBorder()
+        plantDescriptionTextField.addBottomBorder()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)) // handles tap anywhere to dismiss keyboard
         view.addGestureRecognizer(tap)
     }
@@ -79,13 +79,14 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
         let days = dayCountFromPicker ?? 1 // default catches when the user doesn't change the picker
         let h2oFrequency = "\(date), \(days)" // date holds the due date, days hold the the repeat frequency
         // description (using species as description)
-        let description = plantDescriptionLabel.text ?? ""
+        let description = plantDescriptionTextField.text ?? ""
         // create plant object
         let newPlant = Plant(species: description,
                              nickname: nickname,
                              h2oFreqency: h2oFrequency,
-                             userID: "2", // TODO: implement userID
+                             userID: "\(user?.identifier)",
                              imageURL: imageURL)
+        print("\(user?.identifier)")
         // save to coreData
         try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
         // send to server
