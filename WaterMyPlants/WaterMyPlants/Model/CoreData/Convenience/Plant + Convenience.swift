@@ -26,7 +26,7 @@ extension Plant {
         )
     }
     
-    @discardableResult convenience init(id: Int = Int.random(in: 1...100),
+    @discardableResult convenience init(id: Int = Int.random(in: 1...32766),
                                         species: String,
                                         nickname: String,
                                         h2oFreqency: String,
