@@ -86,9 +86,9 @@ enum LoginType {
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
         let authService = AuthService()
-
+// FIXME: Switchin on login type not working.  
         switch selectedLoginType {
-        case .signIn:
+        case .signUp:
             guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                 password.isEmpty == false,
                 let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -105,7 +105,7 @@ enum LoginType {
                 }
             }
             
-        case .signUp:
+        case .signIn:
             guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                 password.isEmpty == false,
                 let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -114,9 +114,9 @@ enum LoginType {
             authService.loginUser(username: username, password: password) {
                 
                 DispatchQueue.main.async {
+                    print("Successful Sign-in")
                     self.dismiss(animated: true) {
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        print("Successful Sign-in")
                     }
                 }
                 
