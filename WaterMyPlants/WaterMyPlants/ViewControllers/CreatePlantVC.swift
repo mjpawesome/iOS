@@ -33,6 +33,8 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     var keyboardHeight: CGFloat?
     var keyboardIsOpen = true
     var plantController: PlantController?
+    var plant: PlantRepresentation?
+    var user = AuthService.activeUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,24 +65,46 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        guard let imageURL = self.imageURL else { return }
-        let randomID: Int16 = Int16.random(in: 1...32766) // FIXME: - update the convenience init to default to this. remove this from here.
+        
+        guard var plant = plant else { return }
+        
+        guard let imageURL = self.imageURL,
+            let nickname = plantNicknameTextField.text,
+            !nickname.isEmpty else { return }
+        
+        let species = plant.species
+        let identifier = plant.identifier
+        let userID = plant.userID
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d yyyy"
         let date = dateFormatter.string(from: Date())
-        let days = dayCountFromPicker ?? 1 // default catches when the user doesn't change the picker
-        let h20Frequency = "\(date), \(days)" // date holds the due date, days hold the the repeat frequency
-        let newPlant = Plant(id: Int(randomID), species: "species", nickname: plantNicknameTextField.text ?? "No Name", h2oFreqency: h20Frequency, userID: String(randomID), imageURL: imageURL, context: CoreDataManager.shared.mainContext)
+        let days = dayCountFromPicker ?? 1
+        let h2oFrequency = "\(date), \(days)"
         
+        plant = PlantRepresentation(nickname: nickname, species: species, h2oFrequency: h2oFrequency, identifier: identifier, userID: userID, imageURL: imageURL)
+        plantController?.sendPlantToServer(plant: plant)
         
+        do {
+            
+            try CoreDataManager.shared.save()
+            dismiss(animated: true, completion: nil)
+            
+        } catch {
+            
+            NSLog("Error saving managed object context: \(error)")
+            
+        }
         
+        DispatchQueue.main.async {
+            
+            self.dismiss(animated: true) {
+                
+                print("Plant = Full Send)")
+                
+            }
+        }
         
-        plantController?.sendPlantToServer(plant: newPlant)
-        
-        
-
-        self.dismiss(animated: false)
     }
     
     private func setInitialH20date(dayCountFromPicker: Int) -> String {
@@ -163,8 +187,8 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
             guard (error == nil) else {
                 // if an error occurs, show it to the user
                 let alert: UIAlertController = UIAlertController(title: "Error",
-                                              message: error?.localizedDescription,
-                                              preferredStyle: .alert)
+                                                                 message: error?.localizedDescription,
+                                                                 preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alert, animated: true) {
                     // error occured. so reset everything
@@ -230,7 +254,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
             self.keyboardHeight = keyboardRectangle.height
         }
     }
-
+    
 }
 
 extension CreatePlantVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -279,7 +303,7 @@ extension CreatePlantVC: UIPickerViewDelegate, UIPickerViewDataSource {
         print("\(number) * \(multiplier) = \(number * multiplier)") // test
         self.dayCountFromPicker = number * multiplier // save day count
     }
-
+    
 }
 
 /// Used to set a custom height for UIProgressView

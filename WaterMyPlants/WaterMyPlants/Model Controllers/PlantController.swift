@@ -172,88 +172,31 @@ class PlantController {
     }
     
     func sendPlantToServer(plant: PlantRepresentation, completion: @escaping CompletionHandler = { _ in }) {
-        guard case let .loggedIn(bearer) = LoginStatus.isLoggedIn else {
-            return completion(.failure(.notSignedIn))
-        }
         
-        var request = plantHandler(with: allPlantsURL, with: bearer, requestType: .post)
         
-        do {
-            let newPlant = try jsonEncoder.encode(plant)
-            print(String(data: newPlant, encoding: .utf8))
-            request.httpBody = newPlant
-            
-            URLSession.shared.dataTask(with: request) { _, response, error in
-                
-                if let error = error {
-                    print("Failed to post with error : \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let response = response as? HTTPURLResponse,
-                    response.statusCode == 200 else {
-                        print("Posting recieved bad response.")
-                        return completion(.failure(.failedSignUp))
-                }
-                
-                self.plants.append(plant)
-                completion(.success(true))
+        let identity = plant.identifier
+        let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants").appendingPathExtension("json")
+        guard var request = networkService.createRequest(url: requestURL, method: .put) else { return }
+        networkService.encode(from: plant, request: &request)
+        networkService.dataLoader.loadData(using: request) { _, _, error in
+            if let error = error {
+                NSLog("Error sending plant to server \(plant): \(error)")
+                completion(.failure(.failedPost))
+                return
             }
-            
-        .resume()
-            
-        } catch {
-            print("Error encoding plant: \(error.localizedDescription)")
-            completion(.failure(.failedPost))
-        }
-    }
-    
-    func createNewPlant(plant: PlantRepresentation, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        
-        guard case let .loggedIn(bearer) = LoginStatus.isLoggedIn
-            
-            else {
-                
-                return completion(.failure(.notSignedIn))
+            completion(.success(true))
         }
         
-        var request = plantHandler(with: allPlantsURL, with: bearer, requestType: .post)
         
-        do {
-            
-            let newPlant = try jsonEncoder.encode(plant)
-            
-            print(String(data: newPlant, encoding: .utf8)!)
-            request.httpBody = newPlant
-            
-            URLSession.shared.dataTask(with: request) { _, response, error in
-                
-                if let error = error {
-                    
-                    print("Failed post with error: \(error.localizedDescription)")
-                    return completion(.failure(.failedSignUp))
-                    
-                }
-                
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    
-                    print("Posting recieved bad response.")
-                    return completion(.failure(.failedSignUp))
-                    
-                }
-                
-                self.plants.append(plant)
-                completion(.success(true))
-                
+        
+        networkService.dataLoader.loadData(using: request) { _, _, error in
+            if let error = error {
+                NSLog("Error sending plant to server \(plant): \(error)")
+                completion(.failure(.failedPost))
+                return
             }
-                
-            .resume()
-            
-        } catch {
-            
-            print("Error encoding gig: \(error.localizedDescription)")
-            completion(.failure(.failedPost))
-            
+            completion(.success(true))
+            print("You added a plant buddy")
         }
         
     }

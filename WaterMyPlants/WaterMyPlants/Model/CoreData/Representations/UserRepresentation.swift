@@ -9,7 +9,7 @@
 import Foundation
 
 struct UserRepresentation: Codable {
-    let username: String
+    let username: String?
     //optional to avoid storing in CoreData/on server
     //password will sometimes be transmitted to the server, and sometimes not.
     let password: String?
