@@ -277,6 +277,7 @@ Account</string>
                     <navigationItem key="navigationItem" id="xmX-dS-lGl"/>
                     <connections>
                         <outlet property="createAccountLabel" destination="bL9-LV-YXU" id="W3k-vo-SGv"/>
+                        <outlet property="emailTextField" destination="Q3h-Yp-zlV" id="eHc-nG-meg"/>
                         <outlet property="greyView1" destination="Gxa-I9-bWh" id="Cfj-47-SoK"/>
                         <outlet property="greyView2" destination="o3Y-xL-T0e" id="iDL-pd-PJN"/>
                         <outlet property="passwordTextField" destination="pAG-Ge-oBb" id="XPh-zo-Cf8"/>
