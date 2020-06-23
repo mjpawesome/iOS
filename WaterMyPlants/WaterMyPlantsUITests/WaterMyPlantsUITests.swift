@@ -161,6 +161,29 @@ class WaterMyPlantsUITests: XCTestCase {
             }
         }
     }
+    
+//    func testCreatePlant() {
+//        signInHelper()
+//        XCTAssert(addToDoButton.isHittable)
+//        addToDoButton.tap()
+//
+//        XCTAssert(addTitleTextField.isHittable)
+//        addTitleTextField.tap()
+//        addTitleTextField.typeText(titleTextEntry)
+//        XCTAssertTrue(addTitleTextField.value as? String == titleTextEntry)
+//
+//        XCTAssert(addDetailTextView.isHittable)
+//        addDetailTextView.tap()
+//        addDetailTextView.typeText(detailTextEntry)
+//        XCTAssertTrue(addDetailTextView.value as? String == detailTextEntry)
+//
+//        let point = CGPoint(x: 100, y: 30)
+//        app.tapCoordinate(at: point)
+//
+//        XCTAssert(saveToDoButton.isHittable)
+//        saveToDoButton.tap()
+//    }
+
 }
 
 extension XCUIApplication {
