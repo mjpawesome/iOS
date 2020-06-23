@@ -23,7 +23,7 @@ enum LoginType {
     @IBOutlet weak var signUpSignInSegmentedControl: UISegmentedControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
+  @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var greyView1: UIView!
     @IBOutlet weak var greyView2: UIView!
     
@@ -48,9 +48,9 @@ enum LoginType {
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
-                emailTextField.isHidden = false
-                emailTextField.fadeIn()
-                emailTextField.isHidden = false
+                phoneNumberTextField.isHidden = false
+                phoneNumberTextField.fadeIn()
+                phoneNumberTextField.isHidden = false
                 signUpButton.isHidden = false
                 signInButton.isHidden = true
                 
@@ -62,7 +62,7 @@ enum LoginType {
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
-                emailTextField.fadeOut()
+                phoneNumberTextField.fadeOut()
                 signInButton.isHidden = false
                 signUpButton.isHidden = true
                 
@@ -78,7 +78,7 @@ enum LoginType {
         super.viewDidLoad()
         usernameTextField.addBottomBorder()
         passwordTextField.addBottomBorder()
-        emailTextField.addBottomBorder()
+        phoneNumberTextField.addBottomBorder()
         greyView1.layer.cornerRadius = 15.0
         greyView2.layer.cornerRadius = 15.0
         signInButton.isHidden = true
