@@ -12,13 +12,18 @@ import CoreData
 extension Plant {
     //MARK: -Properties
     var plantRepresentation: PlantRepresentation? {
-        
         guard let species = species,
             let imageURL = imageURL,
             let nickname = nickname,
             let h2oFrequency = h2oFrequency,
             let userID = userID else { return nil }
-        return PlantRepresentation(nickname: nickname, species: species, h2oFrequency: h2oFrequency, identifier: Int(Int16(id)), userID: userID, imageURL: imageURL)
+        return PlantRepresentation(nickname: nickname,
+                                   species: species,
+                                   h2oFrequency: h2oFrequency,
+                                   identifier: Int(Int16(id)),
+                                   userID: userID,
+                                   imageURL: imageURL
+        )
     }
     
     @discardableResult convenience init(id: Int = Int.random(in: 1...100),
