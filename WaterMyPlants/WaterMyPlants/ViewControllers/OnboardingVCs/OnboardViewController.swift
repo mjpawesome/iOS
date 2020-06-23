@@ -27,6 +27,9 @@ enum LoginType {
     @IBOutlet weak var greyView1: UIView!
     @IBOutlet weak var greyView2: UIView!
     
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
+    
     //MARK: -Properties
     
     var plantController: PlantController?
@@ -45,8 +48,11 @@ enum LoginType {
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
-                phoneNumberTextField.fadeIn()
                 phoneNumberTextField.isHidden = false
+                emailTextField.fadeIn()
+                emailTextField.isHidden = false
+                signUpButton.isHidden = false
+                signInButton.isHidden = true
                 
             case .signIn:
                 
@@ -56,7 +62,9 @@ enum LoginType {
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
-                phoneNumberTextField.fadeOut()
+                emailTextField.fadeOut()
+                signInButton.isHidden = false
+                signUpButton.isHidden = true
                 
             }
             
@@ -73,6 +81,7 @@ enum LoginType {
         phoneNumberTextField.addBottomBorder()
         greyView1.layer.cornerRadius = 15.0
         greyView2.layer.cornerRadius = 15.0
+        signInButton.isHidden = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -95,47 +104,49 @@ enum LoginType {
         }
     }
     
-    @IBAction func signUpButtonPressed(_ sender: UIButton) {
+    @IBAction func signUp(_ sender: UIButton) {
         let authService = AuthService()
+        
+        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            password.isEmpty == false,
+            let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            username.isEmpty == false
+            else { return }
 
-        switch selectedLoginType {
-        case .signIn:
-            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                password.isEmpty == false,
-                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                username.isEmpty == false
-                else { return }
-            let phoneNumber = "1234567890"
-            authService.registerUser(username: username, password: password, phoneNumber: phoneNumber) {
-                
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true) {
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        print("Successful Registration)")
-                    }
-                }
-            }
+        let phoneNumber = "1234567890"
+        authService.registerUser(username: username, password: password, phoneNumber: phoneNumber) {
             
-        case .signUp:
-            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                password.isEmpty == false,
-                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                username.isEmpty == false
-                else { return }
-            authService.loginUser(username: username, password: password) {
-                
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true) {
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        print("Successful Sign-in")
-                    }
-                }
+            DispatchQueue.main.async {
+                self.dismiss(animated: true) {
+                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                    print("Successful Registration)")
 
+                }
             }
         }
     }
     
-    
+    @IBAction func signIn(_ sender: UIButton) {
+        let authService = AuthService()
+        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            password.isEmpty == false,
+            let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            username.isEmpty == false
+            else { return }
+
+        authService.loginUser(username: username, password: password) {
+
+            DispatchQueue.main.async {
+                print("Successful Sign-in")
+                self.dismiss(animated: true) {
+                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                }
+
+            }
+        }
+
+    }
+
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -223,12 +223,19 @@ Account</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zis-TJ-rS0">
-                                        <rect key="frame" x="292" y="578" width="43" height="29"/>
+                                        <rect key="frame" x="288" y="577" width="47" height="30"/>
                                         <accessibility key="accessibilityConfiguration" identifier="OnboardVC.SignInButton"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Button"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Sign In"/>
                                         <connections>
-                                            <action selector="signUpButtonPressed:" destination="GjY-jk-uBg" eventType="touchUpInside" id="dOH-T6-CbV"/>
+                                            <action selector="signIn:" destination="GjY-jk-uBg" eventType="touchUpInside" id="dcU-69-KIA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0q6-uO-f5I">
+                                        <rect key="frame" x="288" y="577" width="54" height="30"/>
+                                        <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="signUp:" destination="GjY-jk-uBg" eventType="touchUpInside" id="Kjd-Sd-Z1Y"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -237,9 +244,11 @@ Account</string>
                                     <constraint firstAttribute="bottom" secondItem="Zis-TJ-rS0" secondAttribute="bottom" constant="60" id="9TN-Wa-7Ef"/>
                                     <constraint firstItem="o3Y-xL-T0e" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="bottom" constant="8" id="9tu-80-qg8"/>
                                     <constraint firstAttribute="trailing" secondItem="o3Y-xL-T0e" secondAttribute="trailing" constant="8" id="BJZ-l8-D2s"/>
+                                    <constraint firstAttribute="trailing" secondItem="0q6-uO-f5I" secondAttribute="trailing" constant="33" id="BUH-c7-jBj"/>
                                     <constraint firstItem="o3Y-xL-T0e" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="bottom" constant="8" id="Dau-J1-j9x"/>
                                     <constraint firstItem="Gxa-I9-bWh" firstAttribute="top" secondItem="zpV-pl-lnR" secondAttribute="top" constant="8" id="Hgy-cE-zDc"/>
                                     <constraint firstItem="Wp1-UH-CRY" firstAttribute="top" secondItem="o3Y-xL-T0e" secondAttribute="bottom" constant="8" id="JBg-gL-jfb"/>
+                                    <constraint firstAttribute="bottom" secondItem="0q6-uO-f5I" secondAttribute="bottom" constant="60" id="LlG-Xo-QNg"/>
                                     <constraint firstItem="Wp1-UH-CRY" firstAttribute="top" secondItem="o3Y-xL-T0e" secondAttribute="bottom" constant="8" id="RKc-d4-6I1"/>
                                     <constraint firstItem="o3Y-xL-T0e" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="bottom" constant="8" id="Rus-jB-B7q"/>
                                     <constraint firstItem="o3Y-xL-T0e" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="bottom" constant="8" id="byJ-Bc-LIm"/>
@@ -271,7 +280,8 @@ Account</string>
                         <outlet property="greyView1" destination="Gxa-I9-bWh" id="Cfj-47-SoK"/>
                         <outlet property="greyView2" destination="o3Y-xL-T0e" id="iDL-pd-PJN"/>
                         <outlet property="passwordTextField" destination="pAG-Ge-oBb" id="XPh-zo-Cf8"/>
-                        <outlet property="phoneNumberTextField" destination="Q3h-Yp-zlV" id="mLB-Rw-LB8"/>
+                        <outlet property="signInButton" destination="Zis-TJ-rS0" id="8A3-Du-zQa"/>
+                        <outlet property="signUpButton" destination="0q6-uO-f5I" id="1os-DX-f4b"/>
                         <outlet property="signUpSignInLabel" destination="Wp1-UH-CRY" id="hec-gH-T51"/>
                         <outlet property="signUpSignInSegmentedControl" destination="1Fb-sv-82U" id="LJw-H6-Sgn"/>
                         <outlet property="usernameTextField" destination="2qY-VG-6n7" id="XGW-wF-X2P"/>
