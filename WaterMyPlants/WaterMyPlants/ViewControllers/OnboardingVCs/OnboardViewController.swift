@@ -32,7 +32,7 @@ enum LoginType {
     
     //MARK: -Properties
     
-    var plantController: PlantController?
+    var plantController = PlantController()
     
     var selectedLoginType: LoginType = .signIn {
         
@@ -105,8 +105,6 @@ enum LoginType {
     }
     
     @IBAction func signUp(_ sender: UIButton) {
-        let authService = AuthService()
-        
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             password.isEmpty == false,
             let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -114,30 +112,32 @@ enum LoginType {
             else { return }
 
         let phoneNumber = "1234567890"
-        authService.registerUser(username: username, password: password, phoneNumber: phoneNumber) {
-            
+        let userRep = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber, identifier: nil)
+        
+        plantController.signUp(for: userRep) { (error) in
+            print(error)
+
             DispatchQueue.main.async {
                 self.dismiss(animated: true) {
                     UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                    print("Successful Registration)")
-
                 }
             }
         }
     }
     
     @IBAction func signIn(_ sender: UIButton) {
-        let authService = AuthService()
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             password.isEmpty == false,
             let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             username.isEmpty == false
             else { return }
 
-        authService.loginUser(username: username, password: password) {
+        let phoneNumber = "1234567890"
+        let userRep = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber, identifier: nil)
 
+        plantController.logIn(for: userRep) { (error) in
             DispatchQueue.main.async {
-                print("Successful Sign-in")
+                print(error)
                 self.dismiss(animated: true) {
                     UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 }

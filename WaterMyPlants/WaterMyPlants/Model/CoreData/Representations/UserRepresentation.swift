@@ -8,25 +8,16 @@
 
 import Foundation
 
+struct UserDetails: Codable {
+    let user: UserRepresentation
+}
+
 struct UserRepresentation: Codable {
-    let username: String?
-    //optional to avoid storing in CoreData/on server
-    //password will sometimes be transmitted to the server, and sometimes not.
+    let username: String
     let password: String?
     let phoneNumber: String?
     let identifier: Int?
-    //token will always be assigned by the login method and only
-    //sent to the server for methods requiring an authenticated user
-    var token: String?
-    
-    var plants: [PlantRepresentation]?
-    
-//    init(username: String, password: String, phoneNumber: String, identifier: Int) {
-//        self.username = username
-//        self.password = password
-//        self.phoneNumber = phoneNumber
-//        self.identifier = Int.random(in: 1...1000)
-//    }
+    var token: String? = nil
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
