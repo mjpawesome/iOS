@@ -94,30 +94,13 @@ enum LoginType {
     
     @IBAction func signUp(_ sender: UIButton) {
         let authService = AuthService()
-<<<<<<< Updated upstream
-// FIXME: Switchin on login type not working.  
-        switch selectedLoginType {
-        case .signUp:
-            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                password.isEmpty == false,
-                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                username.isEmpty == false
-                else { return }
-            let phoneNumber = "1234567890"
-            authService.registerUser(username: username, password: password, phoneNumber: phoneNumber) {
-                
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true) {
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        print("Successful Registration)")
-                    }
-=======
         
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             password.isEmpty == false,
             let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             username.isEmpty == false
             else { return }
+
         let phoneNumber = "1234567890"
         authService.registerUser(username: username, password: password, phoneNumber: phoneNumber) {
             
@@ -125,11 +108,12 @@ enum LoginType {
                 self.dismiss(animated: true) {
                     UserDefaults.standard.set(true, forKey: "isLoggedIn")
                     print("Successful Registration)")
->>>>>>> Stashed changes
+
                 }
             }
         }
     }
+    
     @IBAction func signIn(_ sender: UIButton) {
         let authService = AuthService()
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -137,36 +121,20 @@ enum LoginType {
             let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             username.isEmpty == false
             else { return }
+
         authService.loginUser(username: username, password: password) {
-            
-<<<<<<< Updated upstream
-        case .signIn:
-            guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                password.isEmpty == false,
-                let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                username.isEmpty == false
-                else { return }
-            authService.loginUser(username: username, password: password) {
-                
-                DispatchQueue.main.async {
-                    print("Successful Sign-in")
-                    self.dismiss(animated: true) {
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                    }
-=======
+
             DispatchQueue.main.async {
+                print("Successful Sign-in")
                 self.dismiss(animated: true) {
                     UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                    print("Successful Sign-in")
->>>>>>> Stashed changes
                 }
+
             }
-            
         }
+
     }
-    
-    
-    
+
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

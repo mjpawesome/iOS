@@ -229,7 +229,6 @@ Account</string>
                                         <state key="normal" title="Sign In"/>
                                         <connections>
                                             <action selector="signIn:" destination="GjY-jk-uBg" eventType="touchUpInside" id="dcU-69-KIA"/>
-                                            <action selector="signUpButtonPressed:" destination="GjY-jk-uBg" eventType="touchUpInside" id="dOH-T6-CbV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0q6-uO-f5I">
