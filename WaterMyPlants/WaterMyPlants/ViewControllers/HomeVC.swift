@@ -166,18 +166,32 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         let hour = 60 * minute
         let day = 24 * hour
         let week = 7 * day
+        let dayInSeconds = 60*60*24
+
         // return
-        if secondsAgo < day {
+        if secondsAgo < dayInSeconds {
             return ""
-        } else if secondsAgo == day {
+        } else if secondsAgo >= dayInSeconds && secondsAgo <= (2 * dayInSeconds) - 1  {
             return "1 day late"
-        } else if secondsAgo < week {
+        } else if secondsAgo >= 2 * dayInSeconds && secondsAgo < 7 * dayInSeconds {
             return "\(secondsAgo / day) days late"
-        } else if secondsAgo == week {
+        } else if secondsAgo >= 7 * dayInSeconds && secondsAgo < 14 * dayInSeconds - 1 {
             return "1 week late"
         } else {
             return "\(secondsAgo / week) weeks late"
         }
+
+//        if secondsAgo < day {
+//            return ""
+//        } else if secondsAgo == day {
+//            return "1 day late"
+//        } else if secondsAgo < week {
+//            return "\(secondsAgo / day) days late"
+//        } else if secondsAgo == week {
+//            return "1 week late"
+//        } else {
+//            return "\(secondsAgo / week) weeks late"
+//        }
     }
     
     private func filterAndSortDuePlants() -> [Plant]? {
