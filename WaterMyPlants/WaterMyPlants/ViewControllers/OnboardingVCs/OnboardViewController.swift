@@ -121,20 +121,42 @@ class OnboardViewController: UIViewController {
             break
         }
     }
-    
+
+    // FIXME: - Passing dummy phonenumber....
+
     @IBAction func signUp(_ sender: UIButton) {
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             password.isEmpty == false,
             let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            username.isEmpty == false
+            username.isEmpty == false,
+            let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            phoneNumber.isEmpty == false
             else { return }
 
-        let phoneNumber = "1234567890"
         let userRep = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber, identifier: nil)
         
-        plantController.signUp(for: userRep) { (error) in
-            print(error)
-
+        plantController.signUp(for: userRep) { (result) in
+            if result == .success(true) {
+                print(result)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true) {
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                    }
+                }
+            } else {
+                let title =  "Registration Failed"
+                let message = "Please try again later."
+                print(result)
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let alertActionFailure = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(alertActionFailure)
+                    self.present(alertController, animated: true) {
+                        self.usernameTextField.text = ""
+                        self.passwordTextField.text = ""
+                    }
+                }
+            }
         }
     }
     
@@ -149,6 +171,7 @@ class OnboardViewController: UIViewController {
 
         plantController.logIn(for: userRep) { (result) in
             if result == .success(true) {
+                print(result)
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
                         UserDefaults.standard.set(true, forKey: "isLoggedIn")
@@ -156,7 +179,7 @@ class OnboardViewController: UIViewController {
                 }
             } else {
                 let title =  "Sign-In Failed"
-                let message = "Please try again later"
+                let message = "Please try again later."
                 print(result)
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
