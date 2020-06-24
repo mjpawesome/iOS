@@ -606,7 +606,6 @@
                             </state>
                             <connections>
                                 <action selector="editMenuDeleteButtonPressed:" destination="hMk-j5-qQr" eventType="touchUpInside" id="UQa-GZ-5tr"/>
-                                <action selector="editMenuSaveButtonPressed:" destination="hMk-j5-qQr" eventType="touchUpInside" id="ckY-pr-0fe"/>
                             </connections>
                         </button>
                     </subviews>
