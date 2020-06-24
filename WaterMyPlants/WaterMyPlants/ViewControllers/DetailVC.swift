@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import Cloudinary
 
 class DetailVC: UIViewController {
     
@@ -38,6 +39,8 @@ class DetailVC: UIViewController {
     var number: Int = 1 // pickerViewDefault
     var multiplier: Int = 1 // pickerViewDefault
     var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
+//    lazy var cloudinaryConfiguration = CLDConfiguration(cloudName: "dehqhte0i", apiKey: "959718959598545", secure: true)
+//    lazy var cloudinaryController = CLDCloudinary(configuration: cloudinaryConfiguration)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -251,7 +254,49 @@ class DetailVC: UIViewController {
     
     @IBAction func editMenuDeleteButtonPressed(_ sender: UIButton) {
         performSpringAnimation(forButton_: editMenuDeleteButton)
+        presentDeleteWarningAlert()
+    }
+    
+    private func presentDeleteWarningAlert() {
+        // Create the alert
+        let deleteWarningAlert = UIAlertController(title: "Are you sure you want to delete this plant?",
+                                                   message: nil,
+                                                   preferredStyle: .alert)
+        // Create actions
+        let confimAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
+            self.deleteThisPlant()
+        }
+        let cancelAction = UIAlertAction(title: "Go Back", style: .cancel, handler: nil)
+        // Add the actions to the alert
+        deleteWarningAlert.addAction(confimAction)
+        deleteWarningAlert.addAction(cancelAction)
+        // Present the alert
+        self.present(deleteWarningAlert, animated: true)
+    }
+    
+    private func deleteThisPlant() {
+        guard let plant = self.injectedPlant,
+            let imageURL = plant.imageURL else { return }
         // MARK: - delete from CoreData & delete from server
+        // plantController.delete <--- should handle both coreData and network deletion
+        CoreDataManager.shared.mainContext.delete(plant)
+        // plant is deleted. now animate back to the homeVC
+        //            self.editMenuDeleteButton.setTitle("Deleted!", for: .normal)
+        self.tableView.reloadData()
+        self.editMenuPopover.removeFromSuperview()
+        self.dismiss(animated: true, completion: nil)
+        self.editButton.title = "Plant Was Deleted. Please Return."
+        deletePhoto(url: imageURL)
+    }
+    
+    private func deletePhoto(url: String) {
+        // TODO: - doesn't work. FUTURE goal would be to delete this from cloudinary
+//        let photoName = String(describing: url.split(separator: "/").last!.split(separator: ".").first!)
+//        print(photoName)
+//        cloudinaryController.createManagementApi().destroy(photoName, params: destroyParams) { (result, error) in
+//            print(result?.result)
+//        }
+//        cloudinaryController.createManagementApi().destroy(photoName) // FIXME: - this doesn't seem to be working
     }
     
 }
