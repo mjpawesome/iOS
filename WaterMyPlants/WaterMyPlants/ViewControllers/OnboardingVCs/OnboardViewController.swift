@@ -32,7 +32,6 @@ class OnboardViewController: UIViewController {
     //MARK: - Properties
     
     var plantController = PlantController()
-    
     var selectedLoginType: LoginType = .signIn {
         
         didSet {
@@ -40,7 +39,6 @@ class OnboardViewController: UIViewController {
             switch selectedLoginType {
                 
             case .signUp:
-                
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign Up"
                 signUpSignInLabel.fadeIn()
@@ -54,7 +52,6 @@ class OnboardViewController: UIViewController {
                 signInButton.isHidden = true
                 
             case .signIn:
-                
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign In"
                 signUpSignInLabel.fadeIn()
@@ -66,14 +63,11 @@ class OnboardViewController: UIViewController {
                 signUpButton.isHidden = true
                 
             }
-            
         }
-        
     }
-    
-    //MARK: -View Lifecycle
+
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         usernameTextField.addBottomBorder()
         passwordTextField.addBottomBorder()
@@ -107,10 +101,10 @@ class OnboardViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-           super.viewWillDisappear(animated)
-           //Unsubscribe from all our notifications
-           unsubscribeFromAllNotifications()
-       }
+        super.viewWillDisappear(animated)
+        //Unsubscribe from all our notifications
+        unsubscribeFromAllNotifications()
+    }
 
     
     @IBAction func signUpSignInSegmentedAction(_ sender: UISegmentedControl) {
@@ -141,11 +135,6 @@ class OnboardViewController: UIViewController {
         plantController.signUp(for: userRep) { (error) in
             print(error)
 
-            DispatchQueue.main.async {
-                self.dismiss(animated: true) {
-                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                }
-            }
         }
     }
     
@@ -155,22 +144,34 @@ class OnboardViewController: UIViewController {
             let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             username.isEmpty == false
             else { return }
-
         let phoneNumber = "1234567890"
         let userRep = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber, identifier: nil)
 
-        plantController.logIn(for: userRep) { (error) in
-            DispatchQueue.main.async {
-                print(error)
-                self.dismiss(animated: true) {
-                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        plantController.logIn(for: userRep) { (result) in
+            if result == .success(true) {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true) {
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                    }
                 }
-
+            } else {
+                let title =  "Sign-In Failed"
+                let message = "Please try again later"
+                print(result)
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let alertActionFailure = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(alertActionFailure)
+                    self.present(alertController, animated: true) {
+                        self.usernameTextField.text = ""
+                        self.passwordTextField.text = ""
+                    }
+                }
             }
         }
-
     }
 }
+
 
 extension OnboardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -226,28 +227,28 @@ extension OnboardViewController {
     }
 
     @objc func keyboardWillShowOrHide(notification: NSNotification) {
-         // Get required info out of the notification
-            if let scrollView = loginScrollView,
-             let userInfo = notification.userInfo,
-             let endValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey],
-             let durationValue = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey],
-             let curveValue = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] {
+        // Get required info out of the notification
+        if let scrollView = loginScrollView,
+            let userInfo = notification.userInfo,
+            let endValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey],
+            let durationValue = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey],
+            let curveValue = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] {
 
-             // Transform the keyboard's frame into our view's coordinate system
-             let endRect = view.convert((endValue as AnyObject).cgRectValue, from: view.window)
+            // Transform the keyboard's frame into our view's coordinate system
+            let endRect = view.convert((endValue as AnyObject).cgRectValue, from: view.window)
 
-             // Find out how much the keyboard overlaps our scroll view
-             let keyboardOverlap = scrollView.frame.maxY - endRect.origin.y
+            // Find out how much the keyboard overlaps our scroll view
+            let keyboardOverlap = scrollView.frame.maxY - endRect.origin.y
 
-             // Set the scroll view's content inset & scroll indicator to avoid the keyboard
-             scrollView.contentInset.bottom = keyboardOverlap
-             scrollView.verticalScrollIndicatorInsets.bottom = keyboardOverlap
+            // Set the scroll view's content inset & scroll indicator to avoid the keyboard
+            scrollView.contentInset.bottom = keyboardOverlap
+            scrollView.verticalScrollIndicatorInsets.bottom = keyboardOverlap
 
-             let duration = (durationValue as AnyObject).doubleValue
-             let options = UIView.AnimationOptions(rawValue: UInt((curveValue as AnyObject).integerValue << 16))
-             UIView.animate(withDuration: duration!, delay: 0, options: options, animations: {
-                 self.view.layoutIfNeeded()
-             }, completion: nil)
-         }
-     }
+            let duration = (durationValue as AnyObject).doubleValue
+            let options = UIView.AnimationOptions(rawValue: UInt((curveValue as AnyObject).integerValue << 16))
+            UIView.animate(withDuration: duration!, delay: 0, options: options, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
 }
