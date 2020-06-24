@@ -131,6 +131,7 @@ class WaterMyPlantsUITests: XCTestCase {
         startButton.tap()
     }
     
+    // Make sure you are logged out of the app before beginning
     func testUserSignIn() throws {
            let signInButton = app.segmentedControls.buttons["Sign In"]
            XCTAssert(signInButton.isHittable)
