@@ -37,10 +37,12 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
         return fetchedResultsController
     }()
+    var plantController = PlantController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sendUserToLoginIfNecessary()
+        fetchNewTasksFromServer()
         setupInitialViews()
         print(fetchedResultsController.fetchedObjects?.first?.h2oFrequency) // this print statement can be used to check which properties of the core data object are saving
     }
@@ -62,6 +64,15 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         if !UserDefaults.standard.bool(forKey: "isLoggedIn") {
             performSegue(withIdentifier: "OnboardingSegue", sender: self)
         }
+    }
+ 
+    /// Calls the method in the plantController that will start syncing any new tasks and updates the FRC and views
+    private func fetchNewTasksFromServer() {
+//        plantController.fetchPlants { (result) in
+//            DispatchQueue.main.async {
+//                self.horizontalCollectionView.reloadData()
+//            }
+//        }
     }
     
     /// sets up views to their intial state
@@ -91,7 +102,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     /// locks the user back into the login/ signup screen until they log in again
     @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
     
     /// segues to the CreatePlant VC
@@ -215,6 +225,9 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             // inject plant object
             let plant = filterAndSortDuePlants()?[indexPath.row]
             detailVC.injectedPlant = plant
+        }
+        if segue.identifier == "LogoutSegue" {
+            UserDefaults.standard.set(false, forKey: "isLoggedIn")
         }
     }
 }
