@@ -132,7 +132,7 @@ class PlantController {
                     
                 }
                 
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200
+                guard let response = response as? HTTPURLResponse, response.statusCode == 201
                     
                     else {
                         
