@@ -521,7 +521,11 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="dIJ-b5-feC" id="zNR-KA-2zT"/>
                         <outlet property="editButton" destination="AMS-lI-Y1x" id="71g-DC-0HD"/>
+                        <outlet property="editMenuDescriptionLabel" destination="NTN-pg-aeI" id="Xip-Tj-059"/>
+                        <outlet property="editMenuPickerView" destination="keD-mI-AO0" id="Ejv-Zc-dtb"/>
+                        <outlet property="editMenuPlantNameTextfield" destination="0hB-En-riG" id="pk2-fK-ZT3"/>
                         <outlet property="editMenuPopover" destination="KCY-MQ-fTE" id="Y0I-Af-Oqp"/>
+                        <outlet property="editMenuSaveButton" destination="OWh-9o-ALq" id="gb8-e9-mQv"/>
                         <outlet property="imageView" destination="J4U-Uo-48L" id="wxe-cC-Dhx"/>
                         <outlet property="plantNicknameLabel" destination="Abr-TT-0eE" id="2Oe-Xt-Zp0"/>
                         <outlet property="tableView" destination="3Pg-Oj-eic" id="gob-0y-4Fb"/>
@@ -533,7 +537,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="286" height="282"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsB-wj-n9J">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit What?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsB-wj-n9J">
                             <rect key="frame" x="16" y="16" width="254" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="tVo-fH-Gz3"/>
@@ -559,6 +563,9 @@
                             <state key="normal" title="Save">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="editMenuSaveButtonPressed:" destination="hMk-j5-qQr" eventType="touchUpInside" id="ghz-iZ-e3N"/>
+                            </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NTN-pg-aeI">
                             <rect key="frame" x="16" y="94" width="254" height="34"/>
@@ -582,6 +589,10 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="59" id="9BS-8n-JDe"/>
                             </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="hMk-j5-qQr" id="5fp-uF-tVb"/>
+                                <outlet property="delegate" destination="hMk-j5-qQr" id="Z1t-sR-7mr"/>
+                            </connections>
                         </pickerView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

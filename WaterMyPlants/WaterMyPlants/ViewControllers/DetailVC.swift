@@ -9,14 +9,19 @@
 import UIKit
 
 class DetailVC: UIViewController {
-
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var plantNicknameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var waterThisPlantButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
+    // edit menu
     @IBOutlet var editMenuPopover: UIView!
+    @IBOutlet weak var editMenuPlantNameTextfield: UITextField!
+    @IBOutlet weak var editMenuDescriptionLabel: UITextField!
+    @IBOutlet weak var editMenuPickerView: UIPickerView!
+    @IBOutlet weak var editMenuSaveButton: UIButton!
     
     var injectedImage: UIImage?
     var injectedPlant: Plant?
@@ -27,6 +32,11 @@ class DetailVC: UIViewController {
     }()
     var tableViewCellContent = ["Watering Schedule" : "Error", "Next Watering Date" : "Error"]
     let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
+    let numbers = ["1", "2", "3", "4", "5", "6", "7"] // picker view
+    let calendarComponents = ["days", "weeks"] // picker view
+    var number: Int = 1 // pickerViewDefault
+    var multiplier: Int = 1 // pickerViewDefault
+    var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +49,6 @@ class DetailVC: UIViewController {
         imageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         imageView.image = injectedImage // image
         guard let plant = injectedPlant else { return }
-        plantNicknameLabel.text = plant.nickname // name
-        descriptionLabel.text = plant.species ?? "" // species is being treated as a description
         setupTableView(plant: plant)
         setupWaterThisPlantButton()
         setupPopover()
@@ -53,6 +61,11 @@ class DetailVC: UIViewController {
         editMenuPopover.layer.masksToBounds = true
         editMenuPopover.backgroundColor = .systemFill
         editMenuPopover.alpha = 0
+        // assign outlets existing text
+        guard let plant = injectedPlant else { return }
+        editMenuPlantNameTextfield.text = plant.nickname
+        editMenuDescriptionLabel.text = plant.species // treating species as description
+        
     }
     
     private func setupTableView(plant: Plant) {
@@ -91,11 +104,13 @@ class DetailVC: UIViewController {
             return "Every \(daysInt / week) Weeks"
         }
     }
-        
+    
     /// called to update any views that may have changes
     private func updateViews() { // FIXME: - should this VC just use observers here instead?
         guard let plant = injectedPlant else { return }
         toggleWaterThisPlantButton(plant: plant)
+        plantNicknameLabel.text = plant.nickname // name
+        descriptionLabel.text = plant.species ?? "" // species is being treated as a description
     }
     
     private func toggleWaterThisPlantButton(plant: Plant) {
@@ -144,8 +159,7 @@ class DetailVC: UIViewController {
                 self.editButton.title = "Close"
             }
             // set location
-//            editMenuPopover.center.x = self.view.center.x
-            editMenuPopover.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 20)
+            editMenuPopover.center = self.view.center
         }
     }
     
@@ -184,6 +198,56 @@ class DetailVC: UIViewController {
         }
     }
     
+    private func setInitialH20date(dayCountFromPicker: Int) -> String {
+        "\(Date()), \(dayCountFromPicker)"
+    }
+    
+    @IBAction func editMenuSaveButtonPressed(_ sender: UIButton) {
+        performSpringAnimation(forButton_: editMenuSaveButton)
+        guard let imageURL = self.injectedPlant?.imageURL,
+            let nickname = editMenuPlantNameTextfield.text,
+            !nickname.isEmpty,
+            let injectedPlant = injectedPlant else { return }
+        // format h20freq
+        let date = dateFormatter.string(from: Date())
+        let days = dayCountFromPicker ?? 1 // default catches when the user doesn't change the picker
+        let h2oFrequency = "\(date), \(days)" // date holds the due date, days hold the the repeat frequency
+        // description (using species as description)
+        let description = editMenuDescriptionLabel.text ?? ""
+        // create plant object
+        //        let newPlant = Plant(species: description,
+        //                             nickname: nickname,
+        //                             h2oFreqency: h2oFrequency,
+        //                             userID: "\(AuthService.activeUser?.identifier)", // FIXME: - this value is reading as nil. Investigate this to get the right value
+        //            imageURL: imageURL)
+        // FIXME: - the code below is altering the objects directly, while above is creating a new object to delete old and replace with new. which to use depends on network call below
+        injectedPlant.nickname = nickname
+        injectedPlant.species = description // treating species as description
+        injectedPlant.h2oFrequency = h2oFrequency
+        print("\(AuthService.activeUser?.identifier)")
+        // save to coreData
+        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
+        // send to server
+        // TODO: call update method on the plant controller to replace the old object with the newly updated one
+        // plantController.update(
+        // animate and refresh views to give the user feedback that their change saved
+        editMenuSaveButton.setTitle("Saved!", for: .normal)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.updateViews()
+            self.tableView.reloadData()
+            UIView.animate(withDuration: 0.5) {
+                // popover
+                self.editMenuPopover.alpha = 0
+                self.editMenuPopover.removeFromSuperview()
+                // blur
+                self.blurEffectView.alpha = 0
+                self.blurEffectView.removeFromSuperview()
+                // editButton
+                self.editButton.title = "Edit"
+            }
+        })
+    }
+    
 }
 
 // MARK: - TableView dataSource & delegate methods
@@ -197,6 +261,28 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = Array(tableViewCellContent.keys)[indexPath.row]
         cell.detailTextLabel?.text = Array(tableViewCellContent.values)[indexPath.row]
         return cell
+    }
+    
+}
+
+extension DetailVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 2 }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 { return self.numbers.count }
+        else { return self.calendarComponents.count }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 { return self.numbers[row] }
+        else { return self.calendarComponents[row] }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 { number = Int(numbers[row])! } // grab number
+        if component == 1 { multiplier = calendarComponents[row] == "days" ? 1 : 7 } // multiplier should be 7 if weeks was selected
+        print("\(number) * \(multiplier) = \(number * multiplier)") // test
+        self.dayCountFromPicker = number * multiplier // save day count
     }
     
 }
