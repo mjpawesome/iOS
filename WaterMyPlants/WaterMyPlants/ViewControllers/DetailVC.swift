@@ -22,6 +22,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var editMenuDescriptionLabel: UITextField!
     @IBOutlet weak var editMenuPickerView: UIPickerView!
     @IBOutlet weak var editMenuSaveButton: UIButton!
+    @IBOutlet weak var editMenuDeleteButton: UIButton!
     
     var injectedImage: UIImage?
     var injectedPlant: Plant?
@@ -54,6 +55,8 @@ class DetailVC: UIViewController {
         setupPopover()
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        editMenuSaveButton.layer.cornerRadius = 15
+        editMenuDeleteButton.layer.cornerRadius = 15
     }
     
     private func setupPopover() {
@@ -131,8 +134,6 @@ class DetailVC: UIViewController {
     }
     
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
-        // blur effect
-        
         if editMenuPopover.alpha == 1 { //close if already open
             UIView.animate(withDuration: 0.5) {
                 // popover
@@ -246,6 +247,11 @@ class DetailVC: UIViewController {
                 self.editButton.title = "Edit"
             }
         })
+    }
+    
+    @IBAction func editMenuDeleteButtonPressed(_ sender: UIButton) {
+        performSpringAnimation(forButton_: editMenuDeleteButton)
+        
     }
     
 }
