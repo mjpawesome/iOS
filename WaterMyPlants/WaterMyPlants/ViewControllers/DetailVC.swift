@@ -55,8 +55,8 @@ class DetailVC: UIViewController {
         setupPopover()
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        editMenuSaveButton.layer.cornerRadius = 15
-        editMenuDeleteButton.layer.cornerRadius = 15
+        editMenuSaveButton.layer.cornerRadius = 5
+        editMenuDeleteButton.layer.cornerRadius = 5
     }
     
     private func setupPopover() {
@@ -251,7 +251,7 @@ class DetailVC: UIViewController {
     
     @IBAction func editMenuDeleteButtonPressed(_ sender: UIButton) {
         performSpringAnimation(forButton_: editMenuDeleteButton)
-        
+        // MARK: - delete from CoreData & delete from server
     }
     
 }
