@@ -235,6 +235,9 @@ class PlantController {
                 
                 let plants = try self.jsonDecoder.decode([PlantRepresentation].self, from: data)
                 
+                try self.updatePlantsWithServer(with: plants) // calls the method that does the syncing
+                print("Found \(plants.count) tasks.") // let's see if we got the right number of objects
+                
                 self.plants = plants
                 completion(.success(true))
                 
@@ -247,6 +250,36 @@ class PlantController {
         }
             
         .resume()
+    }
+    
+    /// Updates the plants using the server. Only pulls in the plants that are in server but missing from CoreData
+    private func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
+        let identifiersToFetch = representations.compactMap { $0.identifier }
+        let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
+        var plantsToCreate = representationsByID
+        // create fetch request
+        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
+        let mainContext = CoreDataManager.shared.mainContext // grab context
+        do {
+            let existingPlants = try mainContext.fetch(fetchRequest) // fetch
+            for plant in existingPlants {
+                let id = Int(plant.id)
+                guard let representation = representationsByID[id] else { continue }
+                self.updatePlantRep(plant: plant, with: representation)
+                plantsToCreate.removeValue(forKey: id)
+            }
+            for representation in plantsToCreate.values {
+                // FIXME: - AuthService has nil values
+                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
+                                                                                                  password: AuthService.activeUser?.password,
+                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
+                                                                                                  identifier: AuthService.activeUser?.identifier))
+            }
+        } catch {
+            NSLog("Error fetching plants with plant ID's: \(identifiersToFetch), with error: \(error)")
+        }
+        try CoreDataManager.shared.mainContext.save()
     }
     
     private func postRequest(with url: URL) -> URLRequest {
