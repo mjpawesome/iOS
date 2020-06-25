@@ -34,6 +34,7 @@ class WaterMyPlantsUITests: XCTestCase {
         case addImageButton = "CreatePlantVC.AddImageButton"
         case plantNickNameTextField = "CreatePlantVC.PlantNickNameTextField"
         case plantDescriptionTextField = "CreatePlantVC.PlantDescriptionTextField"
+        case waterPlantButton = "DetailVC.WaterPlantButton"
         
         
     }
@@ -63,6 +64,10 @@ class WaterMyPlantsUITests: XCTestCase {
     
     private var app: XCUIApplication {
         return XCUIApplication()
+    }
+    
+    private var waterPlantButton: XCUIElement {
+        return buttons(identifier: .waterPlantButton)
     }
     
     private var plantNickNameTextField: XCUIElement {
@@ -135,28 +140,6 @@ class WaterMyPlantsUITests: XCTestCase {
     private var createTestUserPhoneNumber = "1234567890"
     private var createUserPassword = "1234"
     
-    func signInHelper() {
-        let signInButton = app.segmentedControls.buttons["Sign In"]
-        XCTAssert(signInButton.isHittable)
-        signInButton.tap()
-        
-        phoneNumberTextField.tap()
-        XCTAssert(phoneNumberTextField.isHittable)
-        phoneNumberTextField.typeText(testUserPhoneNumber)
-        XCTAssertTrue(phoneNumberTextField.value as? String == testUserPhoneNumber)
-        
-        passwordTextField.tap()
-        passwordTextField.typeText(testUserPW)
-        XCTAssertTrue(passwordTextField.value as? String == testUserPW)
-        
-        let point = CGPoint(x: 100, y: 100)
-        app.tapCoordinate(at: point)
-        
-        let startButton = app.buttons.element(boundBy: 2)
-        XCTAssertTrue(startButton.isHittable)
-        startButton.tap()
-    }
-    
     func testCreateUser()  throws {
         
         let signInButton = app.segmentedControls.buttons["Sign Up"]
@@ -184,7 +167,7 @@ class WaterMyPlantsUITests: XCTestCase {
         XCTAssertTrue(startButton.isHittable)
         startButton.tap()
     }
-
+    
     // Make sure you are logged out of the app before beginning
     func testUserSignIn() throws {
         
@@ -218,7 +201,6 @@ class WaterMyPlantsUITests: XCTestCase {
         }
     }
     
-    
     // Variables relevant to creating plant
     private var plantNickNameString = "Karen"
     private var plantDescriptionString = "She a thick 1"
@@ -238,12 +220,34 @@ class WaterMyPlantsUITests: XCTestCase {
         plantDescriptionTextField.tap()
         plantDescriptionTextField.typeText(plantDescriptionString)
         XCTAssertTrue(plantDescriptionTextField.value as? String == plantDescriptionString)
-  
         
         addImageButton.isAccessibilityElement = true
         XCTAssert(addImageButton.isHittable)
         addImageButton.tap()
-
+    }
+    
+    func testWaterPlant() {
+        
+        // tap first collection view cell
+        let firstChild = app.collectionViews.children(matching: .any).element(boundBy: 0)
+        if firstChild.exists {
+            firstChild.tap()
+        }
+        
+        XCTAssert(waterPlantButton.isHittable)
+        waterPlantButton.tap()
+    }
+    
+    func testEditPlant() {
+        
+        // tap collection view cell
+        let firstChild = app.collectionViews.children(matching: .any).element(boundBy: 0)
+        if firstChild.exists {
+            firstChild.tap()
+        }
+        
+        app.navigationBars.buttons.element(boundBy: 1).tap()
+        
     }
     
     

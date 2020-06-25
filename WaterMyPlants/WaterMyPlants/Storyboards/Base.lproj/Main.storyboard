@@ -482,6 +482,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUd-t7-9jd">
                                 <rect key="frame" x="322" y="770" width="62" height="62"/>
                                 <color key="backgroundColor" name="MyLightBlue"/>
+                                <accessibility key="accessibilityConfiguration" identifier="DetailVC.WaterPlantButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="FUd-t7-9jd" secondAttribute="height" multiplier="1:1" id="Kku-L7-ESy"/>
                                     <constraint firstAttribute="width" constant="62" id="kyi-d0-Fm9"/>
