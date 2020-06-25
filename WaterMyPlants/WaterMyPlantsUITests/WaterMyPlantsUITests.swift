@@ -32,6 +32,8 @@ class WaterMyPlantsUITests: XCTestCase {
         case cancelPlantButton = "CreateVC.CancelButton"
         case addPlantButton = "HomeVC.AddPlantButton"
         case addImageButton = "CreatePlantVC.AddImageButton"
+        case plantNickNameTextField = "CreatePlantVC.PlantNickNameTextField"
+        case plantDescriptionTextField = "CreatePlantVC.PlantDescriptionTextField"
         
         
     }
@@ -61,6 +63,14 @@ class WaterMyPlantsUITests: XCTestCase {
     
     private var app: XCUIApplication {
         return XCUIApplication()
+    }
+    
+    private var plantNickNameTextField: XCUIElement {
+        return textField(identifier: .plantNickNameTextField)
+    }
+    
+    private var plantDescriptionTextField: XCUIElement {
+        return textField(identifier: .plantDescriptionTextField)
     }
     
     private var addPlantButton: XCUIElement {
@@ -173,11 +183,8 @@ class WaterMyPlantsUITests: XCTestCase {
         let startButton = app.buttons.element(boundBy: 2)
         XCTAssertTrue(startButton.isHittable)
         startButton.tap()
-        
-      
-        
     }
-    
+
     // Make sure you are logged out of the app before beginning
     func testUserSignIn() throws {
         
@@ -211,27 +218,34 @@ class WaterMyPlantsUITests: XCTestCase {
         }
     }
     
-    //    func testCreatePlant() {
-    //        signInHelper()
-    //        XCTAssert(addToDoButton.isHittable)
-    //        addToDoButton.tap()
-    //
-    //        XCTAssert(addTitleTextField.isHittable)
-    //        addTitleTextField.tap()
-    //        addTitleTextField.typeText(titleTextEntry)
-    //        XCTAssertTrue(addTitleTextField.value as? String == titleTextEntry)
-    //
-    //        XCTAssert(addDetailTextView.isHittable)
-    //        addDetailTextView.tap()
-    //        addDetailTextView.typeText(detailTextEntry)
-    //        XCTAssertTrue(addDetailTextView.value as? String == detailTextEntry)
-    //
-    //        let point = CGPoint(x: 100, y: 30)
-    //        app.tapCoordinate(at: point)
-    //
-    //        XCTAssert(saveToDoButton.isHittable)
-    //        saveToDoButton.tap()
-    //    }
+    
+    // Variables relevant to creating plant
+    private var plantNickNameString = "Karen"
+    private var plantDescriptionString = "She a thick 1"
+    
+    func testCreatePlant() {
+        
+        XCTAssert(addPlantButton.isHittable)
+        addPlantButton.tap()
+        
+        XCTAssert(plantNickNameTextField.isHittable)
+        plantNickNameTextField.tap()
+        plantNickNameTextField.typeText(plantNickNameString)
+        XCTAssertTrue(plantNickNameTextField.value as? String == plantNickNameString)
+        
+        XCTAssert(plantDescriptionTextField.isHittable)
+        plantDescriptionTextField.tap()
+        plantDescriptionTextField.typeText(plantDescriptionString)
+        XCTAssertTrue(plantDescriptionTextField.value as? String == plantDescriptionString)
+        
+        let point = CGPoint(x: 100, y: 30)
+        app.tapCoordinate(at: point)
+        app.tapCoordinate(at: point)
+
+        doneCreatingPlants.isAccessibilityElement = true
+        XCTAssert(doneCreatingPlants.isHittable)
+        doneCreatingPlants.tap()
+    }
     
 }
 

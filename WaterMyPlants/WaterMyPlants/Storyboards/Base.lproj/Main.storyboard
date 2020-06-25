@@ -119,6 +119,7 @@
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Plant Nickname..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gha-II-ExH">
                                 <rect key="frame" x="20" y="478" width="374" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CreatePlantVC.PlantNickNameTextField"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="5RW-H2-SBv"/>
                                 </constraints>
@@ -130,6 +131,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z1S-8d-cTw">
                                 <rect key="frame" x="20" y="520" width="374" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CreatePlantVC.PlantDescriptionTextField"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Mco-Ds-Sxr"/>
                                 </constraints>

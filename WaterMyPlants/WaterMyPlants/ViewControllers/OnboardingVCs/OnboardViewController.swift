@@ -126,9 +126,9 @@ class OnboardViewController: UIViewController {
             break
         }
     }
-
+    
     // FIXME: - Passing dummy phonenumber....
-
+    
     @IBAction func signUp(_ sender: UIButton) {
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             password.isEmpty == false,
@@ -146,9 +146,18 @@ class OnboardViewController: UIViewController {
             if result == .success(true) {
                 print(result)
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true) {
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                    }
+                    self.signUpSignInSegmentedControl.selectedSegmentIndex = 1
+                    self.signUpSignInLabel.fadeOut()
+                    self.signUpSignInLabel.text = "Sign In"
+                    self.signUpSignInLabel.fadeIn()
+                    self.createAccountLabel.fadeOut()
+                    self.createAccountLabel.text = "Welcome Back"
+                    self.createAccountLabel.fadeIn()
+                    self.phoneNumberTextField.fadeOut()
+                    self.signInButton.isHidden = false
+                    self.signUpButton.isHidden = true
+                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                    
                 }
             } else {
                 let title =  "Registration Failed"
@@ -175,7 +184,7 @@ class OnboardViewController: UIViewController {
             else { return }
         let phoneNumber = "1234567890"
         let userRep = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber, identifier: nil)
-
+        
         plantController.logIn(for: userRep) { (result) in
             if result == .success(true) {
                 print(result)
@@ -269,11 +278,11 @@ extension OnboardViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(dismissMyKeyboard))
-
+        
         //Add this tap gesture recognizer to the parent view
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissMyKeyboard() {
         //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -281,11 +290,11 @@ extension OnboardViewController {
     func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {
         NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
-
+    
     func unsubscribeFromAllNotifications() {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     @objc func keyboardWillShowOrHide(notification: NSNotification) {
         // Get required info out of the notification
         if let scrollView = loginScrollView,
@@ -293,17 +302,17 @@ extension OnboardViewController {
             let endValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey],
             let durationValue = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey],
             let curveValue = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] {
-
+            
             // Transform the keyboard's frame into our view's coordinate system
             let endRect = view.convert((endValue as AnyObject).cgRectValue, from: view.window)
-
+            
             // Find out how much the keyboard overlaps our scroll view
             let keyboardOverlap = scrollView.frame.maxY - endRect.origin.y
-
+            
             // Set the scroll view's content inset & scroll indicator to avoid the keyboard
             scrollView.contentInset.bottom = keyboardOverlap
             scrollView.verticalScrollIndicatorInsets.bottom = keyboardOverlap
-
+            
             let duration = (durationValue as AnyObject).doubleValue
             let options = UIView.AnimationOptions(rawValue: UInt((curveValue as AnyObject).integerValue << 16))
             UIView.animate(withDuration: duration!, delay: 0, options: options, animations: {
