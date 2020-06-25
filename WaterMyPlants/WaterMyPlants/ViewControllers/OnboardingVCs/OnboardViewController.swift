@@ -129,7 +129,6 @@ class OnboardViewController: UIViewController {
         //Unsubscribe from all our notifications
         unsubscribeFromAllNotifications()
     }
-
     
     @IBAction func signUpSignInSegmentedAction(_ sender: UISegmentedControl) {
         switch signUpSignInSegmentedControl.selectedSegmentIndex {
@@ -147,7 +146,7 @@ class OnboardViewController: UIViewController {
     }
     
     // FIXME: - Passing dummy phonenumber....
-    
+    // MARK: - Actions
     @IBAction func signUp(_ sender: UIButton) {
         guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             password.isEmpty == false,
@@ -236,11 +235,12 @@ class OnboardViewController: UIViewController {
         rememberMeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
     }
     
-    @IBAction func editingDidEnd(_ sender: UITextField) {
+    @IBAction func credentialsDidUpdate(_ sender: UITextField) {
         updateRememberMeButton()
     }
     
-    func updateRememberMeButton() {
+    // MARK: - Methods
+    private func updateRememberMeButton() {
         // should rememberMeButton be selected
         if usernameTextField.text == UserDefaults.standard.object(forKey: "usernameKey") as? String
             && passwordTextField.text == UserDefaults.standard.object(forKey: "passwordKey") as? String {
@@ -259,8 +259,7 @@ class OnboardViewController: UIViewController {
     }
 }
 
-
-
+// MARK: - Extensions
 extension OnboardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let nextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {

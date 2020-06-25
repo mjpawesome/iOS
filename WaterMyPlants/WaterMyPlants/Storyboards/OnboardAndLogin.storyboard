@@ -101,7 +101,7 @@ Account</string>
                                                         <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
-                                                            <action selector="editingDidEnd:" destination="GjY-jk-uBg" eventType="editingDidEnd" id="RzO-70-prQ"/>
+                                                            <action selector="credentialsDidUpdate:" destination="GjY-jk-uBg" eventType="editingChanged" id="ypb-2V-DjJ"/>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3h-Yp-zlV">
@@ -110,9 +110,6 @@ Account</string>
                                                         <accessibility key="accessibilityConfiguration" identifier="OnboardVC.PhoneNumberTextField"/>
                                                         <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
-                                                        <connections>
-                                                            <action selector="editingDidEnd:" destination="GjY-jk-uBg" eventType="editingDidEnd" id="qY2-tx-y0N"/>
-                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pAG-Ge-oBb">
                                                         <rect key="frame" x="0.0" y="148" width="340" height="34"/>
@@ -121,7 +118,7 @@ Account</string>
                                                         <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
-                                                            <action selector="editingDidEnd:" destination="GjY-jk-uBg" eventType="editingDidEnd" id="U26-CJ-6c4"/>
+                                                            <action selector="credentialsDidUpdate:" destination="GjY-jk-uBg" eventType="editingDidEnd" id="JWD-rJ-dLm"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
