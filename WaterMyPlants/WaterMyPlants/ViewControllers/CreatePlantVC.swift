@@ -33,13 +33,13 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
     var keyboardHeight: CGFloat?
     var keyboardIsOpen = true
-    var plantController = PlantController()
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d yyyy"
         return dateFormatter
     }()
-    
+    var injectedPlantController: PlantController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialViews()
@@ -88,11 +88,8 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
                              h2oFreqency: h2oFrequency,
                              userID: "", // FIXME: - this value is reading as nil. Investigate this to get the right value
                              imageURL: imageURL)
-    
-        
-        plantController.sendPlantToServer(plant: newPlant)
-
-        
+        // call method to send & save plant
+        injectedPlantController?.sendPlantToServer(plant: newPlant)
         // save to coreData
 //        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
         // send to server

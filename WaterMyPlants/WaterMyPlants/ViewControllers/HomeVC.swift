@@ -229,6 +229,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             // inject plant object
             let plant = fetchedResultsController.fetchedObjects?[indexPath.row]
             detailVC.injectedPlant = plant
+            detailVC.injectedPlantController = self.plantController
         }
         if segue.identifier == "HorizontalShowDetail" {
             guard let indexPath = horizontalCollectionView.indexPathsForSelectedItems?.first,
@@ -241,9 +242,14 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             // inject plant object
             let plant = filterAndSortDuePlants()?[indexPath.row]
             detailVC.injectedPlant = plant
+            detailVC.injectedPlantController = self.plantController
         }
         if segue.identifier == "LogoutSegue" {
             UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        }
+        if segue.identifier == "HomeToCreatePlantVC" {
+            let createPlantVC = segue.destination as? CreatePlantVC
+            createPlantVC?.injectedPlantController = self.plantController
         }
     }
 }

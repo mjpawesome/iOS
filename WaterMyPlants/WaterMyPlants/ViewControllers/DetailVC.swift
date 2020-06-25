@@ -27,6 +27,7 @@ class DetailVC: UIViewController {
     
     var injectedImage: UIImage?
     var injectedPlant: Plant?
+    var injectedPlantController: PlantController?
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d yyyy"
@@ -278,8 +279,7 @@ class DetailVC: UIViewController {
         guard let plant = self.injectedPlant,
             let imageURL = plant.imageURL else { return }
         // MARK: - delete from CoreData & delete from server
-        // plantController.delete <--- should handle both coreData and network deletion
-        CoreDataManager.shared.mainContext.delete(plant)
+        injectedPlantController?.delete(plant: plant)
         // plant is deleted. now animate back to the homeVC
         //            self.editMenuDeleteButton.setTitle("Deleted!", for: .normal)
         self.tableView.reloadData()
