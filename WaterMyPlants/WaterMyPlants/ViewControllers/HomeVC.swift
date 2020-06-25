@@ -44,6 +44,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         sendUserToLoginIfNecessary()
         fetchNewTasksFromServer()
         setupInitialViews()
+        fetchNewTasksFromServer() // fetch tasks from server 
         print(fetchedResultsController.fetchedObjects?.first?.h2oFrequency) // this print statement can be used to check which properties of the core data object are saving
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +69,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
  
     /// Calls the method in the plantController that will start syncing any new tasks and updates the FRC and views
     private func fetchNewTasksFromServer() {
-        plantController.fet { (result) in
+        plantController.fetchPlantsFromServer() { (result) in
             DispatchQueue.main.async {
                 self.horizontalCollectionView.reloadData()
             }
