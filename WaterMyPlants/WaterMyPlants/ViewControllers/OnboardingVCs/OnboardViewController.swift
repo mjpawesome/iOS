@@ -28,9 +28,9 @@ class OnboardViewController: UIViewController {
     @IBOutlet weak var loginScrollView: UIScrollView!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var rememberMeButton: UIButton!
     
     //MARK: - Properties
-    
     var plantController = PlantController()
     var selectedLoginType: LoginType = .signIn {
         
@@ -50,6 +50,8 @@ class OnboardViewController: UIViewController {
                 phoneNumberTextField.isHidden = false
                 signUpButton.isHidden = false
                 signInButton.isHidden = true
+                rememberMeButton.fadeOut()
+                rememberMeButton.isHidden = true
                 
             case .signIn:
                 signUpSignInLabel.fadeOut()
@@ -61,7 +63,8 @@ class OnboardViewController: UIViewController {
                 phoneNumberTextField.fadeOut()
                 signInButton.isHidden = false
                 signUpButton.isHidden = true
-                
+                rememberMeButton.fadeIn()
+                rememberMeButton.isHidden = false
             }
         }
     }
@@ -75,6 +78,8 @@ class OnboardViewController: UIViewController {
         greyView1.layer.cornerRadius = 15.0
         greyView2.layer.cornerRadius = 15.0
         signInButton.isHidden = true
+        autofillTextFields()
+        updateRememberMeButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -195,7 +200,37 @@ class OnboardViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func rememberMeButtonPressed(_ sender: UIButton) {
+        // save username and pass
+        UserDefaults.standard.set(usernameTextField.text, forKey: "usernameKey")
+        UserDefaults.standard.set(passwordTextField.text, forKey: "passwordKey")
+        rememberMeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+    }
+    
+    @IBAction func editingDidEnd(_ sender: UITextField) {
+        updateRememberMeButton()
+    }
+    
+    func updateRememberMeButton() {
+        // should rememberMeButton be selected
+        if usernameTextField.text == UserDefaults.standard.object(forKey: "usernameKey") as? String
+            && passwordTextField.text == UserDefaults.standard.object(forKey: "passwordKey") as? String {
+            rememberMeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+        } else {
+            rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
+        }
+    }
+    
+    private func autofillTextFields() {
+        guard let rememberUsername = UserDefaults.standard.object(forKey: "usernameKey") as? String,
+            let rememberPassword = UserDefaults.standard.object(forKey: "passwordKey") as? String else { return }
+        
+        usernameTextField.text = rememberUsername
+        passwordTextField.text = rememberPassword
+    }
 }
+
 
 
 extension OnboardViewController: UITextFieldDelegate {

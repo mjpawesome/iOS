@@ -100,6 +100,9 @@ Account</string>
                                                         <accessibility key="accessibilityConfiguration" identifier="OnboardVC.UsernameTextField"/>
                                                         <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="editingDidEnd:" destination="GjY-jk-uBg" eventType="editingDidEnd" id="RzO-70-prQ"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3h-Yp-zlV">
                                                         <rect key="frame" x="0.0" y="74" width="340" height="34"/>
@@ -107,6 +110,9 @@ Account</string>
                                                         <accessibility key="accessibilityConfiguration" identifier="OnboardVC.PhoneNumberTextField"/>
                                                         <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="editingDidEnd:" destination="GjY-jk-uBg" eventType="editingDidEnd" id="qY2-tx-y0N"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pAG-Ge-oBb">
                                                         <rect key="frame" x="0.0" y="148" width="340" height="34"/>
@@ -114,6 +120,9 @@ Account</string>
                                                         <accessibility key="accessibilityConfiguration" identifier="OnboardVC.PasswordTextField"/>
                                                         <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="editingDidEnd:" destination="GjY-jk-uBg" eventType="editingDidEnd" id="U26-CJ-6c4"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -127,12 +136,25 @@ Account</string>
                                         <viewLayoutGuide key="contentLayoutGuide" id="hiC-aP-t7W"/>
                                         <viewLayoutGuide key="frameLayoutGuide" id="8Qr-hU-STu"/>
                                     </scrollView>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbL-Eh-tCS">
+                                        <rect key="frame" x="192.5" y="526" width="142.5" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="142.5" id="lcp-fP-hag"/>
+                                        </constraints>
+                                        <state key="normal" title=" Remember Me" image="square" catalog="system">
+                                            <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rememberMeButtonPressed:" destination="GjY-jk-uBg" eventType="touchUpInside" id="msP-sk-Yfl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="DgV-Ym-hqO" firstAttribute="leading" secondItem="zpV-pl-lnR" secondAttribute="leading" id="5ol-Fh-RdX"/>
                                     <constraint firstAttribute="bottom" secondItem="Zis-TJ-rS0" secondAttribute="bottom" constant="60" id="9TN-Wa-7Ef"/>
                                     <constraint firstItem="1Fb-sv-82U" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="bottom" constant="8" id="AXK-Qo-e3a"/>
                                     <constraint firstAttribute="trailing" secondItem="0q6-uO-f5I" secondAttribute="trailing" constant="33" id="BUH-c7-jBj"/>
+                                    <constraint firstItem="QbL-Eh-tCS" firstAttribute="trailing" secondItem="Zis-TJ-rS0" secondAttribute="trailing" id="D3Y-eM-MJq"/>
                                     <constraint firstItem="17V-Na-T99" firstAttribute="leading" secondItem="zpV-pl-lnR" secondAttribute="leading" constant="8" id="HUy-7Y-tKZ"/>
                                     <constraint firstItem="Gxa-I9-bWh" firstAttribute="top" secondItem="zpV-pl-lnR" secondAttribute="top" constant="8" id="Hgy-cE-zDc"/>
                                     <constraint firstAttribute="bottom" secondItem="0q6-uO-f5I" secondAttribute="bottom" constant="60" id="LlG-Xo-QNg"/>
@@ -142,6 +164,7 @@ Account</string>
                                     <constraint firstAttribute="bottom" secondItem="Wp1-UH-CRY" secondAttribute="bottom" constant="25" id="cwN-pU-46E"/>
                                     <constraint firstAttribute="trailing" secondItem="Gxa-I9-bWh" secondAttribute="trailing" constant="8" id="eIm-9E-Ip6"/>
                                     <constraint firstItem="DgV-Ym-hqO" firstAttribute="top" secondItem="1Fb-sv-82U" secondAttribute="bottom" constant="8" id="ezV-Iu-ZrT"/>
+                                    <constraint firstItem="QbL-Eh-tCS" firstAttribute="top" secondItem="DgV-Ym-hqO" secondAttribute="bottom" constant="15" id="kuc-sR-kVU"/>
                                     <constraint firstItem="17V-Na-T99" firstAttribute="top" secondItem="Gxa-I9-bWh" secondAttribute="bottom" constant="3" id="pCL-LR-DMQ"/>
                                     <constraint firstAttribute="trailing" secondItem="17V-Na-T99" secondAttribute="trailing" constant="8" id="rJv-SL-Ca9"/>
                                     <constraint firstItem="Wp1-UH-CRY" firstAttribute="leading" secondItem="zpV-pl-lnR" secondAttribute="leading" constant="17" id="sUZ-ic-6d3"/>
@@ -168,6 +191,7 @@ Account</string>
                         <outlet property="loginScrollView" destination="DgV-Ym-hqO" id="iPo-Mp-7EZ"/>
                         <outlet property="passwordTextField" destination="pAG-Ge-oBb" id="XPh-zo-Cf8"/>
                         <outlet property="phoneNumberTextField" destination="Q3h-Yp-zlV" id="PJm-7S-se8"/>
+                        <outlet property="rememberMeButton" destination="QbL-Eh-tCS" id="thv-Y8-GRf"/>
                         <outlet property="signInButton" destination="Zis-TJ-rS0" id="8A3-Du-zQa"/>
                         <outlet property="signUpButton" destination="0q6-uO-f5I" id="1os-DX-f4b"/>
                         <outlet property="signUpSignInLabel" destination="Wp1-UH-CRY" id="hec-gH-T51"/>
@@ -200,6 +224,7 @@ Account</string>
     </scenes>
     <resources>
         <image name="logo" width="500" height="500"/>
+        <image name="square" catalog="system" width="128" height="114"/>
         <namedColor name="MyLightBlue">
             <color red="0.71399998664855957" green="0.77600002288818359" blue="0.79199999570846558" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
