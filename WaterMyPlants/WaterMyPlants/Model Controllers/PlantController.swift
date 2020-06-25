@@ -198,7 +198,7 @@ class PlantController {
         guard let bearer = PlantController.getBearer?.token else { return }
         guard let userID = PlantController.getBearer?.userID else { return }
 
-        let requestURL = baseURL.appendingPathComponent("api/users/\(userID)/plants")
+        let requestURL = baseURL.appendingPathComponent("/users/\(userID)/plants")
 
         var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
