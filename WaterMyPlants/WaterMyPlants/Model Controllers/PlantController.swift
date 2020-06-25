@@ -171,37 +171,6 @@ class PlantController {
         }
     }
     
-    
-    //    func sendPlantToServer(plant: PlantRepresentation, completion: @escaping CompletionHandler = { _ in }) {
-    //
-    //
-    //        let identity = plant.identifier
-    //        let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants").appendingPathExtension("json")
-    //        guard var request = networkService.createRequest(url: requestURL, method: .put) else { return }
-    //        networkService.encode(from: plant, request: &request)
-    //        networkService.dataLoader.loadData(using: request) { _, _, error in
-    //            if let error = error {
-    //                NSLog("Error sending plant to server \(plant): \(error)")
-    //                completion(.failure(.failedPost))
-    //                return
-    //            }
-    //            completion(.success(true))
-    //        }
-    //
-    //
-    //
-    //        networkService.dataLoader.loadData(using: request) { _, _, error in
-    //            if let error = error {
-    //                NSLog("Error sending plant to server \(plant): \(error)")
-    //                completion(.failure(.failedPost))
-    //                return
-    //            }
-    //            completion(.success(true))
-    //            print("You added a plant buddy")
-    //        }
-    //
-    //    }
-    
     func sendPlantToServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         
         let identity = plant.id
@@ -235,58 +204,31 @@ class PlantController {
         
     }
     
-//    func fetchPlants(completion: @escaping (Result<Bool, NetworkError>) -> Void)
-    
-    //    func fetchPlants(completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-    //
-    //        guard case let .loggedIn(bearer) = LoginStatus.isLoggedIn else {
-    //
-    //            return completion(.failure(.notSignedIn))
-    //
-    //        }
-    //
-    //        let request = plantHandler(with: allPlantsURL, with: bearer, requestType: .get)
-    //
-    //        URLSession.shared.dataTask(with: request) { data, response, error in
-    //
-    //            if let error = error {
-    //
-    //                print("Failed to fetch gigs with error: \(error.localizedDescription)")
-    //                return completion(.failure(.failedPost))
-    //
-    //            }
-    //
-    //            guard let response = response as? HTTPURLResponse, response.statusCode == 200
-    //
-    //                else {
-    //
-    //                    print("Fetch gigs recieved bad response.")
-    //                    return completion(.failure(.failedPost))
-    //
-    //            }
-    //
-    //            guard let data = data else { return completion(.failure(.badData))}
-    //
-    //            do {
-    //
-    //                let plants = try self.jsonDecoder.decode([PlantRepresentation].self, from: data)
-    //
-    //                try self.updatePlantsWithServer(with: plants) // calls the method that does the syncing
-    //                print("Found \(plants.count) tasks.") // let's see if we got the right number of objects
-    //
-    //                self.plants = plants
-    //                completion(.success(true))
-    //
-    //            } catch {
-    //
-    //                print("Error decoding gigs: \(error.localizedDescription)")
-    //                completion(.failure(.failedPost))
-    //
-    //            }
-    //        }
-    //
-    //        .resume()
-    //    }
+    func fetchEntriesFromServer(completion: @escaping CompletionHandler = { _ in }) {
+        let requestURL = baseURL.appendingPathExtension("json")
+        
+        URLSession.shared.dataTask(with: requestURL) { data, _, error in
+            if let error = error {
+                NSLog("Error fetching tasks: \(error)")
+                completion(.failure(.noData))
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from Firebase (fetching entries).")
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let plantRepresentation = Array(try JSONDecoder().decode([String : PlantRepresentation].self, from: data).values)
+                try self.updatePlants(with: plantRepresentation)
+            } catch {
+                NSLog("Error deocding entries from Firebase: \(error)")
+                completion(.failure(.noData))
+            }
+        }.resume()
+    }
     
     func deletePlantFromServer(_ plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         
@@ -313,7 +255,7 @@ class PlantController {
     }
     
     /// Updates the plants using the server. Only pulls in the plants that are in server but missing from CoreData
-    private func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
+    private func updatePlants(with representations: [PlantRepresentation]) throws {
         let identifiersToFetch = representations.compactMap { $0.identifier }
         let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
         var plantsToCreate = representationsByID
@@ -331,16 +273,21 @@ class PlantController {
             }
             for representation in plantsToCreate.values {
                 // FIXME: - AuthService has nil values
-//                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
-//                                                                                                  password: AuthService.activeUser?.password,
-//                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
-//                                                                                                  identifier: AuthService.activeUser?.identifier))
+                //                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
+                //                                                                                                  password: AuthService.activeUser?.password,
+                //                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
+                //                                                                                                  identifier: AuthService.activeUser?.identifier))
             }
         } catch {
             NSLog("Error fetching plants with plant ID's: \(identifiersToFetch), with error: \(error)")
         }
         try CoreDataManager.shared.mainContext.save()
     }
+    
+    
+    
+    
+    
     
     private func postRequest(with url: URL) -> URLRequest {
         var request = URLRequest(url: url)
