@@ -30,26 +30,7 @@ enum NetworkError: Error {
 typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
 
 class PlantController {
-    
-    //MARK: - Login Status
-    //    enum LoginStatus {
-    //
-    //        case notLoggedIn
-    //        case loggedIn(Bearer)
-    //
-    //        static var isLoggedIn: Self {
-    //
-    //            if let bearer = PlantController.bearer {
-    //
-    //                return .loggedIn(bearer)
-    //
-    //            } else {
-    //
-    //                return .notLoggedIn
-    //            }
-    //        }
-    //    }
-    
+
     // MARK: - Properties
     private let networkService = NetworkService()
     var plants: [Plant] = []
@@ -104,25 +85,20 @@ class PlantController {
         var request = postRequest(with: signUpURL)
         
         do {
-            
             let jsonData = try jsonEncoder.encode(user)
             request.httpBody = jsonData
             
             URLSession.shared.dataTask(with: request) { _, response, error in
-                
+
                 if let error = error {
-                    
                     print("Sign up failed with error: \(error.localizedDescription)")
                     return completion(.failure(.failedSignUp))
-                    
                 }
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 201
                     else {
-                        
                         print("Sign up was unsuccessful.")
                         return completion(.failure(.failedSignUp))
-                        
                 }
                 
                 completion(.success(true))
@@ -140,35 +116,27 @@ class PlantController {
     //MARK: - Authentication Method: Sign In
 
     func logIn(for user: UserRepresentation, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        
         var request = postRequest(with: logInURL)
         
         do {
-            
             let jsonData = try jsonEncoder.encode(user)
             request.httpBody = jsonData
-            
+
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    
                     print("Log in failed with error: \(error.localizedDescription)")
                     return
-                    
                 }
                 if let response = response as? HTTPURLResponse { print(response.statusCode) }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200
-                    
+
                     else {
                         print("Log in was unsuccessful.")
                         return completion(.failure(.failedLogIn))
-                        
                 }
-                
                 guard let data = data else {
-                    
                     print("No data was returned.")
                     return completion(.failure(.noData))
-                    
                 }
                 
                 do {
@@ -180,13 +148,9 @@ class PlantController {
                     
                     print("Error decoding bearer: \(error.localizedDescription)")
                     completion(.failure(.failedLogIn))
-                    
                 }
-                
-            }
-                
-            .resume()
-            
+            }  .resume()
+
         } catch {
             
             print("Error encoding user: \(error.localizedDescription)")
@@ -197,7 +161,6 @@ class PlantController {
     // MARK: - Create Method: Add Plant to Server
 
     func sendPlantToServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
-        
         let identity = plant.id
         let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants").appendingPathExtension("json")
         
@@ -235,7 +198,7 @@ class PlantController {
         guard let bearer = PlantController.getBearer?.token else { return }
         guard let userID = PlantController.getBearer?.userID else { return }
 
-        let requestURL = baseURL.appendingPathExtension("api/users/\(userID)/plants")
+        let requestURL = baseURL.appendingPathComponent("api/users/\(userID)/plants")
 
         var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
@@ -294,7 +257,7 @@ class PlantController {
 
     // MARK: - Update Method
 
-    private func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
+    func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
         let identifiersToFetch = representations.compactMap { $0.identifier }
         let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
         var plantsToCreate = representationsByID
@@ -318,36 +281,6 @@ class PlantController {
         }
         try CoreDataManager.shared.mainContext.save()
     }
-
-    //    /// Updates the plants using the server. Only pulls in the plants that are in server but missing from CoreData
-    //    private func updatePlants(with representations: [PlantRepresentation]) throws {
-    //        let identifiersToFetch = representations.compactMap { $0.identifier }
-    //        let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
-    //        var plantsToCreate = representationsByID
-    //        // create fetch request
-    //        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-    //        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
-    //        let mainContext = CoreDataManager.shared.mainContext // grab context
-    //        do {
-    //            let existingPlants = try mainContext.fetch(fetchRequest) // fetch
-    //            for plant in existingPlants {
-    //                let id = Int(plant.id)
-    //                guard let representation = representationsByID[id] else { continue }
-    //                self.updatePlantRep(plant: plant, with: representation)
-    //                plantsToCreate.removeValue(forKey: id)
-    //            }
-    //            for representation in plantsToCreate.values {
-    //                // FIXME: - AuthService has nil values
-    //                //                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
-    //                //                                                                                                  password: AuthService.activeUser?.password,
-    //                //                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
-    //                //                                                                                                  identifier: AuthService.activeUser?.identifier))
-    //            }
-    //        } catch {
-    //            NSLog("Error fetching plants with plant ID's: \(identifiersToFetch), with error: \(error)")
-    //        }
-    //        try CoreDataManager.shared.mainContext.save()
-    //    }
 
     private func postRequest(with url: URL) -> URLRequest {
         var request = URLRequest(url: url)
