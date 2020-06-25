@@ -33,7 +33,6 @@
 		8EEA5D8B249DC7E7000E4420 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D89249DC7E7000E4420 /* OnboardViewController.swift */; };
 		8EEA5D8F249DC809000E4420 /* TextFieldBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */; };
 		8EEA5D91249DC82D000E4420 /* OnboardAndLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EEA5D90249DC82D000E4420 /* OnboardAndLogin.storyboard */; };
-		8EED60E924A00461007DCC84 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EED60E824A00461007DCC84 /* AuthService.swift */; };
 		929D576C09AE9A93A7469B95 /* Pods_WaterMyPlants.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F16284BF08332BFB45AE3 /* Pods_WaterMyPlants.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +87,6 @@
 		8EEA5D89249DC7E7000E4420 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldBottomBorder.swift; sourceTree = "<group>"; };
 		8EEA5D90249DC82D000E4420 /* OnboardAndLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OnboardAndLogin.storyboard; sourceTree = "<group>"; };
-		8EED60E824A00461007DCC84 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C86F16284BF08332BFB45AE3 /* Pods_WaterMyPlants.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaterMyPlants.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFAA7399E27BA495586568F4 /* Pods-WaterMyPlants.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterMyPlants.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaterMyPlants/Pods-WaterMyPlants.debug.xcconfig"; sourceTree = "<group>"; };
 		DC94E6C0612E5CFF0FAC9489 /* Pods-WaterMyPlants.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaterMyPlants.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaterMyPlants/Pods-WaterMyPlants.release.xcconfig"; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 		8EEA5D8D249DC800000E4420 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8EED60E824A00461007DCC84 /* AuthService.swift */,
 				8EDF5B14249FD63000653993 /* NetworkService.swift */,
 				8EEA5D8E249DC809000E4420 /* TextFieldBottomBorder.swift */,
 				1D7DB67F24A0129B00D3544F /* UIImageView+ImageDownloader.swift */,
@@ -503,7 +500,6 @@
 				8E1413F5249FF016006C862E /* User + Convenience.swift in Sources */,
 				1DF93F88249DB82D007D15C3 /* HomeVC.swift in Sources */,
 				8EEA5D8B249DC7E7000E4420 /* OnboardViewController.swift in Sources */,
-				8EED60E924A00461007DCC84 /* AuthService.swift in Sources */,
 				8EEA5D8F249DC809000E4420 /* TextFieldBottomBorder.swift in Sources */,
 				1D7E5EFF249D83760033B97B /* AppDelegate.swift in Sources */,
 				1D7DB68024A0129B00D3544F /* UIImageView+ImageDownloader.swift in Sources */,

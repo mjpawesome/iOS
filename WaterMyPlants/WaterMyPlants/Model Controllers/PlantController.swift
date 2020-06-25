@@ -331,10 +331,10 @@ class PlantController {
             }
             for representation in plantsToCreate.values {
                 // FIXME: - AuthService has nil values
-                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
-                                                                                                  password: AuthService.activeUser?.password,
-                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
-                                                                                                  identifier: AuthService.activeUser?.identifier))
+//                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
+//                                                                                                  password: AuthService.activeUser?.password,
+//                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
+//                                                                                                  identifier: AuthService.activeUser?.identifier))
             }
         } catch {
             NSLog("Error fetching plants with plant ID's: \(identifiersToFetch), with error: \(error)")

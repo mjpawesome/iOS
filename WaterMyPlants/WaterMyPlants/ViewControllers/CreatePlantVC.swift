@@ -33,8 +33,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     var dayCountFromPicker: Int? // this contains the time interval the user has selected in the picker view (in days)
     var keyboardHeight: CGFloat?
     var keyboardIsOpen = true
-    var plantController = PlantController() 
-    var user = AuthService.activeUser
+    var plantController = PlantController()
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d yyyy"
@@ -87,18 +86,12 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
         let newPlant = Plant(species: description,
                              nickname: nickname,
                              h2oFreqency: h2oFrequency,
-                             userID: "\(user?.identifier)", // FIXME: - this value is reading as nil. Investigate this to get the right value
+                             userID: "", // FIXME: - this value is reading as nil. Investigate this to get the right value
                              imageURL: imageURL)
-        print("\(user?.identifier)")
-        
+    
         
         plantController.sendPlantToServer(plant: newPlant)
-        
-        
-        // just made some space, nothing changed.
-        
-        
-        
+
         
         // save to coreData
 //        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block

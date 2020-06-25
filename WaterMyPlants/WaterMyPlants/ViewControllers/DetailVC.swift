@@ -228,7 +228,7 @@ class DetailVC: UIViewController {
         injectedPlant.nickname = nickname
         injectedPlant.species = description // treating species as description
         injectedPlant.h2oFrequency = h2oFrequency
-        print("\(AuthService.activeUser?.identifier)")
+
         // save to coreData
         try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
         // send to server
