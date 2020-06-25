@@ -44,13 +44,7 @@ extension Plant {
     
     @discardableResult convenience init?(
         plantRepresentation: PlantRepresentation,
-        context: NSManagedObjectContext = CoreDataManager.shared.mainContext,
-        userRepresentation: UserRepresentation) {
-
-//        //used to establish relationship
-//        guard let user = User(userRep: userRepresentation, context: context),
-//            let userContext = user.managedObjectContext
-//            else { return nil }
+        context: NSManagedObjectContext = CoreDataManager.shared.mainContext) {
         
         self.init(context: context)
         id = Int16(plantRepresentation.identifier)
