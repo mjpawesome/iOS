@@ -30,7 +30,7 @@ enum NetworkError: Error {
 typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
 
 class PlantController {
-
+    
     // MARK: - Properties
     private let networkService = NetworkService()
     var plants: [Plant] = []
@@ -79,7 +79,7 @@ class PlantController {
     private lazy var allPlantsURL: URL = baseURL.appendingPathComponent("/auth/plants")
     
     //MARK: - Authentication Method: Sign Up
-
+    
     func signUp(for user: UserRepresentation, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
         var request = postRequest(with: signUpURL)
@@ -89,7 +89,7 @@ class PlantController {
             request.httpBody = jsonData
             
             URLSession.shared.dataTask(with: request) { _, response, error in
-
+                
                 if let error = error {
                     print("Sign up failed with error: \(error.localizedDescription)")
                     return completion(.failure(.failedSignUp))
@@ -112,16 +112,16 @@ class PlantController {
             completion(.failure(.failedSignUp))
         }
     }
-
+    
     //MARK: - Authentication Method: Sign In
-
+    
     func logIn(for user: UserRepresentation, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         var request = postRequest(with: logInURL)
         
         do {
             let jsonData = try jsonEncoder.encode(user)
             request.httpBody = jsonData
-
+            
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     print("Log in failed with error: \(error.localizedDescription)")
@@ -129,7 +129,7 @@ class PlantController {
                 }
                 if let response = response as? HTTPURLResponse { print(response.statusCode) }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200
-
+                    
                     else {
                         print("Log in was unsuccessful.")
                         return completion(.failure(.failedLogIn))
@@ -150,16 +150,16 @@ class PlantController {
                     completion(.failure(.failedLogIn))
                 }
             }  .resume()
-
+            
         } catch {
             
             print("Error encoding user: \(error.localizedDescription)")
             completion(.failure(.failedLogIn))
         }
     }
-
+    
     // MARK: - Create Method: Add Plant to Server
-
+    
     func sendPlantToServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         guard let bearer = PlantController.getBearer?.token else { return }
         guard let identity = PlantController.getBearer?.userID else { return }
@@ -198,19 +198,19 @@ class PlantController {
         }.resume()
         
     }
-
+    
     // MARK: - Read Method: Fetch Plants From Server
-
+    
     func fetchPlantsFromServer(completion: @escaping CompletionHandler = { _ in }) {
         guard let bearer = PlantController.getBearer?.token else { return }
         guard let userID = PlantController.getBearer?.userID else { return }
-
-        let requestURL = baseURL.appendingPathComponent("/users/\(userID)/plants")
-
+        
+        let requestURL = baseURL.appendingPathComponent("api/users/\(userID)/plants")
+        
         var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
         request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
-
+        
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching plants: \(error)")
@@ -219,13 +219,13 @@ class PlantController {
                 }
                 return
             }
-
+            
             guard let data = data else {
                 NSLog("No data returned from server (fetching entries).")
                 completion(.failure(.noData))
                 return
             }
-
+            
             do {
 //                let plantRepresentations = Array(try JSONDecoder().decode([String: PlantRepresentation].self, from: data).values)
                 let plantRepresentations = Array(arrayLiteral: try self.jsonDecoder.decode(PlantRepresentation.self, from: data))
@@ -239,14 +239,14 @@ class PlantController {
     }
     
     //MARK: - Delete Method
-
+    
     private func deletePlantFromServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         //FIXME: Need to make .id optional in order to guard here or other safety check.
         let identifier = plant.id
         let requestURL = baseURL.appendingPathComponent("plants/\(identifier)").appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "DELETE"
-
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 NSLog("Error deleting plant from server: \(error)")
@@ -256,15 +256,15 @@ class PlantController {
             completion(.success(true))
         }.resume()
     }
-
+    
     func delete(plant: Plant) {
         deletePlantFromServer(plant: plant)
         CoreDataManager.shared.mainContext.delete(plant)
         print("tried to delete plant.  need error checking for coredata.")
     }
-
+    
     // MARK: - Update Method
-
+    
     func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
         let identifiersToFetch = representations.compactMap { $0.identifier }
         let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
@@ -289,7 +289,7 @@ class PlantController {
         }
         try CoreDataManager.shared.mainContext.save()
     }
-
+    
     private func postRequest(with url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
