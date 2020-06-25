@@ -30,6 +30,10 @@ class WaterMyPlantsUITests: XCTestCase {
         case removeThisImageButton = "CreatePlantVC.RemoveImageButton"
         case doneCreatingPlantButton = "CreateVC.DoneCreatingPlantButton"
         case cancelPlantButton = "CreateVC.CancelButton"
+        case addPlantButton = "HomeVC.AddPlantButton"
+        case addImageButton = "CreatePlantVC.AddImageButton"
+        
+        
     }
     
     //MARK: - Private
@@ -57,6 +61,14 @@ class WaterMyPlantsUITests: XCTestCase {
     
     private var app: XCUIApplication {
         return XCUIApplication()
+    }
+    
+    private var addPlantButton: XCUIElement {
+        return buttons(identifier: .addPlantButton)
+    }
+    
+    private var addImageButton: XCUIElement {
+        return buttons(identifier: .addImageButton)
     }
     
     private var userNameTextField: XCUIElement {
