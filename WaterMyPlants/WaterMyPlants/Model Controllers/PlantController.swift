@@ -211,7 +211,7 @@ class PlantController {
         request.httpMethod = "PUT"
         
         do {
-            guard let plantRep = plant.plantRepresentation else {
+            guard let plantRep = plant.plantRepresentation?.identifier else {
                 completion(.failure(.noData))
                 return
             }
@@ -235,56 +235,58 @@ class PlantController {
         
     }
     
-    func fetchPlants(completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        
-        guard case let .loggedIn(bearer) = LoginStatus.isLoggedIn else {
-            
-            return completion(.failure(.notSignedIn))
-            
-        }
-        
-        let request = plantHandler(with: allPlantsURL, with: bearer, requestType: .get)
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            if let error = error {
-                
-                print("Failed to fetch gigs with error: \(error.localizedDescription)")
-                return completion(.failure(.failedPost))
-                
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200
-                
-                else {
-                    
-                    print("Fetch gigs recieved bad response.")
-                    return completion(.failure(.failedPost))
-                    
-            }
-            
-            guard let data = data else { return completion(.failure(.badData))}
-            
-            do {
-                
-                let plants = try self.jsonDecoder.decode([PlantRepresentation].self, from: data)
-                
-                try self.updatePlantsWithServer(with: plants) // calls the method that does the syncing
-                print("Found \(plants.count) tasks.") // let's see if we got the right number of objects
-                
-                self.plants = plants
-                completion(.success(true))
-                
-            } catch {
-                
-                print("Error decoding gigs: \(error.localizedDescription)")
-                completion(.failure(.failedPost))
-                
-            }
-        }
-            
-        .resume()
-    }
+//    func fetchPlants(completion: @escaping (Result<Bool, NetworkError>) -> Void)
+    
+    //    func fetchPlants(completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    //
+    //        guard case let .loggedIn(bearer) = LoginStatus.isLoggedIn else {
+    //
+    //            return completion(.failure(.notSignedIn))
+    //
+    //        }
+    //
+    //        let request = plantHandler(with: allPlantsURL, with: bearer, requestType: .get)
+    //
+    //        URLSession.shared.dataTask(with: request) { data, response, error in
+    //
+    //            if let error = error {
+    //
+    //                print("Failed to fetch gigs with error: \(error.localizedDescription)")
+    //                return completion(.failure(.failedPost))
+    //
+    //            }
+    //
+    //            guard let response = response as? HTTPURLResponse, response.statusCode == 200
+    //
+    //                else {
+    //
+    //                    print("Fetch gigs recieved bad response.")
+    //                    return completion(.failure(.failedPost))
+    //
+    //            }
+    //
+    //            guard let data = data else { return completion(.failure(.badData))}
+    //
+    //            do {
+    //
+    //                let plants = try self.jsonDecoder.decode([PlantRepresentation].self, from: data)
+    //
+    //                try self.updatePlantsWithServer(with: plants) // calls the method that does the syncing
+    //                print("Found \(plants.count) tasks.") // let's see if we got the right number of objects
+    //
+    //                self.plants = plants
+    //                completion(.success(true))
+    //
+    //            } catch {
+    //
+    //                print("Error decoding gigs: \(error.localizedDescription)")
+    //                completion(.failure(.failedPost))
+    //
+    //            }
+    //        }
+    //
+    //        .resume()
+    //    }
     
     func deletePlantFromServer(_ plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         
@@ -304,8 +306,8 @@ class PlantController {
                 return
             }
             
+            completion(.success(true))
             NSLog("Successfully deleted plant with ID of: \(identity)")
-            print(completion(.success(true)))
             
         }.resume()
     }

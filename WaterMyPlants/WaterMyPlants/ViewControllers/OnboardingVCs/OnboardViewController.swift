@@ -132,7 +132,9 @@ class OnboardViewController: UIViewController {
             let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             phoneNumber.isEmpty == false
             else { return }
-
+        
+        
+        
         let userRep = UserRepresentation(username: username, password: password, phoneNumber: phoneNumber, identifier: nil)
         
         plantController.signUp(for: userRep) { (result) in
