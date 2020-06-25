@@ -32,29 +32,51 @@ typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
 class PlantController {
     
     //MARK: - Login Status
-    enum LoginStatus {
-        
-        case notLoggedIn
-        case loggedIn(Bearer)
-        
-        static var isLoggedIn: Self {
-            
-            if let bearer = PlantController.bearer {
-                
-                return .loggedIn(bearer)
-                
+//    enum LoginStatus {
+//
+//        case notLoggedIn
+//        case loggedIn(Bearer)
+//
+//        static var isLoggedIn: Self {
+//
+//            if let bearer = PlantController.bearer {
+//
+//                return .loggedIn(bearer)
+//
+//            } else {
+//
+//                return .notLoggedIn
+//            }
+//        }
+//    }
+    
+    // MARK: - Properties
+    private let networkService = NetworkService()
+    var plants: [Plant] = []
+    
+    /// persists the bearer after writing to it
+    static var bearer: Bearer? {
+        didSet {
+            if let bearer = bearer {
+                UserDefaults.standard.setValue(bearer.token, forKey: "token")
+                UserDefaults.standard.setValue(bearer.userID, forKey: "userId")
             } else {
-                
-                return .notLoggedIn
+                print("bearer was set to nil")
             }
         }
     }
     
-    // MARK: - Properties
-    private let networkService = NetworkService()
-    static var bearer: Bearer?
-    var plants: [PlantRepresentation] = []
-    var bearer: Bearer?
+    /// reads the persisted bearer
+    static var getBearer: Bearer? {
+        get {
+            let token = UserDefaults.standard.value(forKey: "token") as? String
+            let userId = UserDefaults.standard.value(forKey: "userId") as? Int
+            guard let tempToken = token, let tempUserId = userId else {
+                return nil
+            }
+            return Bearer(welcome: "username goes here if using", userID: tempUserId, token: tempToken)
+        }
+    }
     
     private lazy var jsonEncoder: JSONEncoder = {
         let encoder = JSONEncoder()
@@ -64,7 +86,7 @@ class PlantController {
     }()
     private lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+//        decoder.dateDecodingStrategy = .iso8601 <-- not needed?
         return decoder
     }()
     
@@ -131,11 +153,10 @@ class PlantController {
                     return
                     
                 }
-                
+                if let response = response as? HTTPURLResponse { print(response.statusCode) }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200
                     
                     else {
-                        
                         print("Log in was unsuccessful.")
                         return completion(.failure(.failedLogIn))
                         
@@ -149,7 +170,7 @@ class PlantController {
                 }
                 
                 do {
-                    
+                    print(data)
                     Self.bearer = try self.jsonDecoder.decode(Bearer.self, from: data)
                     completion(.success(true))
                     
@@ -205,29 +226,29 @@ class PlantController {
     }
     
     func fetchPlantsFromServer(completion: @escaping CompletionHandler = { _ in }) {
-        let requestURL = baseURL.appendingPathExtension("json")
-        
-        URLSession.shared.dataTask(with: requestURL) { data, _, error in
-            if let error = error {
-                NSLog("Error fetching tasks: \(error)")
-                completion(.failure(.noData))
-                return
-            }
-            
-            guard let data = data else {
-                NSLog("No data returned from Firebase (fetching entries).")
-                completion(.failure(.noData))
-                return
-            }
-            
-            do {
-                let plantRepresentation = Array(try JSONDecoder().decode([String : PlantRepresentation].self, from: data).values)
-                try self.updatePlants(with: plantRepresentation)
-            } catch {
-                NSLog("Error deocding entries from Firebase: \(error)")
-                completion(.failure(.noData))
-            }
-        }.resume()
+//        let requestURL = baseURL.appendingPathExtension("json")
+//        
+//        URLSession.shared.dataTask(with: requestURL) { data, _, error in
+//            if let error = error {
+//                NSLog("Error fetching tasks: \(error)")
+//                completion(.failure(.noData))
+//                return
+//            }
+//            
+//            guard let data = data else {
+//                NSLog("No data returned from Firebase (fetching entries).")
+//                completion(.failure(.noData))
+//                return
+//            }
+//            
+//            do {
+//                let plantRepresentation = Array(try JSONDecoder().decode([String : PlantRepresentation].self, from: data).values)
+//                try self.updatePlants(with: plantRepresentation)
+//            } catch {
+//                NSLog("Error deocding entries from Firebase: \(error)")
+//                completion(.failure(.noData))
+//            }
+//        }.resume()
     }
     
     func deletePlantFromServer(_ plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
