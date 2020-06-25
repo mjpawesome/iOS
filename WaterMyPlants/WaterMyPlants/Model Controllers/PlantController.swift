@@ -171,33 +171,67 @@ class PlantController {
         }
     }
     
-    func sendPlantToServer(plant: PlantRepresentation, completion: @escaping CompletionHandler = { _ in }) {
+    
+    //    func sendPlantToServer(plant: PlantRepresentation, completion: @escaping CompletionHandler = { _ in }) {
+    //
+    //
+    //        let identity = plant.identifier
+    //        let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants").appendingPathExtension("json")
+    //        guard var request = networkService.createRequest(url: requestURL, method: .put) else { return }
+    //        networkService.encode(from: plant, request: &request)
+    //        networkService.dataLoader.loadData(using: request) { _, _, error in
+    //            if let error = error {
+    //                NSLog("Error sending plant to server \(plant): \(error)")
+    //                completion(.failure(.failedPost))
+    //                return
+    //            }
+    //            completion(.success(true))
+    //        }
+    //
+    //
+    //
+    //        networkService.dataLoader.loadData(using: request) { _, _, error in
+    //            if let error = error {
+    //                NSLog("Error sending plant to server \(plant): \(error)")
+    //                completion(.failure(.failedPost))
+    //                return
+    //            }
+    //            completion(.success(true))
+    //            print("You added a plant buddy")
+    //        }
+    //
+    //    }
+    
+    func sendPlantToServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         
-        
-        let identity = plant.identifier
+        let identity = plant.id
         let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants").appendingPathExtension("json")
-        guard var request = networkService.createRequest(url: requestURL, method: .put) else { return }
-        networkService.encode(from: plant, request: &request)
-        networkService.dataLoader.loadData(using: request) { _, _, error in
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "PUT"
+        
+        do {
+            guard let plantRep = plant.plantRepresentation else {
+                completion(.failure(.noData))
+                return
+            }
+            request.httpBody = try JSONEncoder().encode(plantRep)
+        } catch {
+            NSLog("Error encoding plant \(plant): \(error.localizedDescription)")
+            completion(.failure(.noData))
+            return
+        }
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
-                NSLog("Error sending plant to server \(plant): \(error)")
+                NSLog("Error sending plant to server \(plant): \(error.localizedDescription)")
                 completion(.failure(.failedPost))
                 return
             }
+            try! CoreDataManager.shared.save()
             completion(.success(true))
-        }
-        
-        
-        
-        networkService.dataLoader.loadData(using: request) { _, _, error in
-            if let error = error {
-                NSLog("Error sending plant to server \(plant): \(error)")
-                completion(.failure(.failedPost))
-                return
-            }
-            completion(.success(true))
-            print("You added a plant buddy")
-        }
+            print("Saved a plant, pal")
+            
+        }.resume()
         
     }
     
@@ -250,6 +284,30 @@ class PlantController {
         }
             
         .resume()
+    }
+    
+    func deletePlantFromServer(_ plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
+        
+        //grab plants ID for URL
+        let identity = plant.id
+        
+        let requestURL = baseURL.appendingPathComponent("plants/\(identity)/").appendingPathExtension("json")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { _, _, error in
+            //check for error
+            if let error = error {
+                NSLog("Error deleting plant from server: \(error.localizedDescription)")
+                completion(.failure(.badData))
+                return
+            }
+            
+            NSLog("Successfully deleted plant with ID of: \(identity)")
+            print(completion(.success(true)))
+            
+        }.resume()
     }
     
     /// Updates the plants using the server. Only pulls in the plants that are in server but missing from CoreData

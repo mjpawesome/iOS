@@ -87,8 +87,18 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
                              userID: "\(user?.identifier)", // FIXME: - this value is reading as nil. Investigate this to get the right value
                              imageURL: imageURL)
         print("\(user?.identifier)")
+        
+        
+        plantController.sendPlantToServer(plant: newPlant)
+        
+        
+        // just made some space, nothing changed.
+        
+        
+        
+        
         // save to coreData
-        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
+//        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
         // send to server
 //        plantController?.sendPlantToServer(plant: newPlant) // FIXME: - <-- should be sending managed object Plant
         self.dismiss(animated: false)
