@@ -204,7 +204,7 @@ class PlantController {
         
     }
     
-    func fetchEntriesFromServer(completion: @escaping CompletionHandler = { _ in }) {
+    func fetchPlantsFromServer(completion: @escaping CompletionHandler = { _ in }) {
         let requestURL = baseURL.appendingPathExtension("json")
         
         URLSession.shared.dataTask(with: requestURL) { data, _, error in

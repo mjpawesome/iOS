@@ -68,11 +68,11 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
  
     /// Calls the method in the plantController that will start syncing any new tasks and updates the FRC and views
     private func fetchNewTasksFromServer() {
-//        plantController.fetchPlants { (result) in
-//            DispatchQueue.main.async {
-//                self.horizontalCollectionView.reloadData()
-//            }
-//        }
+        plantController.fet { (result) in
+            DispatchQueue.main.async {
+                self.horizontalCollectionView.reloadData()
+            }
+        }
     }
     
     /// sets up views to their intial state
