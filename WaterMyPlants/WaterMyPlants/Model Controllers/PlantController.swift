@@ -161,12 +161,15 @@ class PlantController {
     // MARK: - Create Method: Add Plant to Server
 
     func sendPlantToServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
-        let identity = plant.id
+        guard let bearer = PlantController.getBearer?.token else { return }
+        guard let identity = PlantController.getBearer?.userID else { return }
+
         let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants").appendingPathExtension("json")
-        
+
         var request = URLRequest(url: requestURL)
         request.httpMethod = "PUT"
-        
+        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+                
         do {
             guard let plantRep = plant.plantRepresentation?.identifier else {
                 completion(.failure(.noData))
