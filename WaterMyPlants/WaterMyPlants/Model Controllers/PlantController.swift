@@ -167,7 +167,8 @@ class PlantController {
         let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants")
 
         var request = URLRequest(url: requestURL)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(bearer, forHTTPHeaderField: "Authorization")
                 
         do {
@@ -209,7 +210,7 @@ class PlantController {
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
-        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        request.addValue(bearer, forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
@@ -228,6 +229,8 @@ class PlantController {
             
             do {
 //                let plantRepresentations = Array(try JSONDecoder().decode([String: PlantRepresentation].self, from: data).values)
+                print(PlantController.getBearer?.token)
+                print(data.prettyPrintedJSONString)
                 let plantRepresentations = Array(arrayLiteral: try self.jsonDecoder.decode(PlantRepresentation.self, from: data))
                 try self.updatePlantsWithServer(with: plantRepresentations)
             } catch {
