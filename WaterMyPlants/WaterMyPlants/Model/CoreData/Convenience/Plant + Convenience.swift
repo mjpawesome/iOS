@@ -17,12 +17,13 @@ extension Plant {
             let nickname = nickname,
             let h2oFrequency = h2oFrequency,
             let userID = userID else { return nil }
-        return PlantRepresentation(nickname: nickname,
-                                   species: species,
-                                   h2oFrequency: h2oFrequency,
-                                   identifier: Int(Int16(id)),
-                                   userID: userID,
-                                   imageURL: imageURL
+        return PlantRepresentation(
+            identifier: Int(Int16(id)),
+            nickname: nickname,
+            userID: userID,
+            species: species,
+            h2oFrequency: h2oFrequency,
+            imageURL: imageURL
         )
     }
     

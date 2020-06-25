@@ -220,7 +220,8 @@ class PlantController {
             }
 
             do {
-                let plantRepresentations = Array(try JSONDecoder().decode([String: PlantRepresentation].self, from: data).values)
+//                let plantRepresentations = Array(try JSONDecoder().decode([String: PlantRepresentation].self, from: data).values)
+                let plantRepresentations = Array(arrayLiteral: try self.jsonDecoder.decode(PlantRepresentation.self, from: data))
                 try self.updatePlantsWithServer(with: plantRepresentations)
             } catch {
                 print("Error decoding plant representation: \(error)")
