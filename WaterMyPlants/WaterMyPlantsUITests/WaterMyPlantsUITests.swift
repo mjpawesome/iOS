@@ -20,7 +20,7 @@ class WaterMyPlantsUITests: XCTestCase {
     //MARK: - View Identifiers
     enum Identifier: String {
         case userNameTextField = "OnboardVC.UsernameTextField"
-        case phoneNumberTextField = "OnboardVC.PhoneNuberTextField"
+        case phoneNumberTextField = "OnboardVC.PhoneNumberTextField"
         case passwordTextField = "OnboardVC.PasswordTextField"
         case signInButton = "OnboardVC.SignInButton"
         case topCVImageView = "WaterTodayScene.TopCollectionViewImage"
@@ -121,50 +121,86 @@ class WaterMyPlantsUITests: XCTestCase {
     private var detailTextEntry = "Test detail entry for UI Testing."
     private var titleTextEntry = "Test title entry for UI Testing."
     
+    private var createUserName = "UITest"
+    private var createTestUserPhoneNumber = "1234567890"
+    private var createUserPassword = "1234"
+    
     func signInHelper() {
         let signInButton = app.segmentedControls.buttons["Sign In"]
         XCTAssert(signInButton.isHittable)
         signInButton.tap()
-
+        
         phoneNumberTextField.tap()
         XCTAssert(phoneNumberTextField.isHittable)
         phoneNumberTextField.typeText(testUserPhoneNumber)
         XCTAssertTrue(phoneNumberTextField.value as? String == testUserPhoneNumber)
-
+        
         passwordTextField.tap()
         passwordTextField.typeText(testUserPW)
         XCTAssertTrue(passwordTextField.value as? String == testUserPW)
-
+        
         let point = CGPoint(x: 100, y: 100)
         app.tapCoordinate(at: point)
-
+        
         let startButton = app.buttons.element(boundBy: 2)
         XCTAssertTrue(startButton.isHittable)
         startButton.tap()
     }
     
+    func testCreateUser()  throws {
+        
+        let signInButton = app.segmentedControls.buttons["Sign Up"]
+        XCTAssert(signInButton.isHittable)
+        signInButton.tap()
+        
+        userNameTextField.tap()
+        XCTAssert(userNameTextField.isHittable)
+        userNameTextField.typeText(createUserName)
+        XCTAssertTrue(userNameTextField.value as? String == createUserName)
+        
+        phoneNumberTextField.tap()
+        XCTAssert(phoneNumberTextField.isHittable)
+        phoneNumberTextField.typeText(createTestUserPhoneNumber)
+        XCTAssertTrue(phoneNumberTextField.value as? String == createTestUserPhoneNumber)
+        
+        passwordTextField.tap()
+        passwordTextField.typeText(createUserPassword)
+        XCTAssertTrue(passwordTextField.value as? String == createUserPassword)
+        
+        let point = CGPoint(x: 100, y: 100)
+        app.tapCoordinate(at: point)
+        
+        let startButton = app.buttons.element(boundBy: 2)
+        XCTAssertTrue(startButton.isHittable)
+        startButton.tap()
+        
+      
+        
+    }
+    
     // Make sure you are logged out of the app before beginning
     func testUserSignIn() throws {
-           let signInButton = app.segmentedControls.buttons["Sign In"]
-           XCTAssert(signInButton.isHittable)
-           signInButton.tap()
-
-           userNameTextField.tap()
-           XCTAssert(userNameTextField.isHittable)
-           userNameTextField.typeText(testUserName)
-           XCTAssertTrue(userNameTextField.value as? String == testUserName)
-
-           passwordTextField.tap()
-           passwordTextField.typeText(testUserPW)
-           XCTAssertTrue(passwordTextField.value as? String == testUserPW)
-
-           let point = CGPoint(x: 100, y: 100)
-           app.tapCoordinate(at: point)
-
-           let startButton = app.buttons.element(boundBy: 2)
-           XCTAssertTrue(startButton.isHittable)
-           startButton.tap()
-       }
+        
+        let signInButton = app.segmentedControls.buttons["Sign In"]
+        XCTAssert(signInButton.isHittable)
+        signInButton.tap()
+        
+        userNameTextField.tap()
+        XCTAssert(userNameTextField.isHittable)
+        userNameTextField.typeText(testUserName)
+        XCTAssertTrue(userNameTextField.value as? String == testUserName)
+        
+        passwordTextField.tap()
+        passwordTextField.typeText(testUserPW)
+        XCTAssertTrue(passwordTextField.value as? String == testUserPW)
+        
+        let point = CGPoint(x: 100, y: 100)
+        app.tapCoordinate(at: point)
+        
+        let startButton = app.buttons.element(boundBy: 2)
+        XCTAssertTrue(startButton.isHittable)
+        startButton.tap()
+    }
     
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
@@ -175,28 +211,28 @@ class WaterMyPlantsUITests: XCTestCase {
         }
     }
     
-//    func testCreatePlant() {
-//        signInHelper()
-//        XCTAssert(addToDoButton.isHittable)
-//        addToDoButton.tap()
-//
-//        XCTAssert(addTitleTextField.isHittable)
-//        addTitleTextField.tap()
-//        addTitleTextField.typeText(titleTextEntry)
-//        XCTAssertTrue(addTitleTextField.value as? String == titleTextEntry)
-//
-//        XCTAssert(addDetailTextView.isHittable)
-//        addDetailTextView.tap()
-//        addDetailTextView.typeText(detailTextEntry)
-//        XCTAssertTrue(addDetailTextView.value as? String == detailTextEntry)
-//
-//        let point = CGPoint(x: 100, y: 30)
-//        app.tapCoordinate(at: point)
-//
-//        XCTAssert(saveToDoButton.isHittable)
-//        saveToDoButton.tap()
-//    }
-
+    //    func testCreatePlant() {
+    //        signInHelper()
+    //        XCTAssert(addToDoButton.isHittable)
+    //        addToDoButton.tap()
+    //
+    //        XCTAssert(addTitleTextField.isHittable)
+    //        addTitleTextField.tap()
+    //        addTitleTextField.typeText(titleTextEntry)
+    //        XCTAssertTrue(addTitleTextField.value as? String == titleTextEntry)
+    //
+    //        XCTAssert(addDetailTextView.isHittable)
+    //        addDetailTextView.tap()
+    //        addDetailTextView.typeText(detailTextEntry)
+    //        XCTAssertTrue(addDetailTextView.value as? String == detailTextEntry)
+    //
+    //        let point = CGPoint(x: 100, y: 30)
+    //        app.tapCoordinate(at: point)
+    //
+    //        XCTAssert(saveToDoButton.isHittable)
+    //        saveToDoButton.tap()
+    //    }
+    
 }
 
 extension XCUIApplication {

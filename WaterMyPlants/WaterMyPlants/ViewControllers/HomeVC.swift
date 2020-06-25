@@ -15,6 +15,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     @IBOutlet weak var verticalCollectionView: UICollectionView!
     @IBOutlet weak var plusButton: UIButton!
     
+    
     let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d yyyy"
