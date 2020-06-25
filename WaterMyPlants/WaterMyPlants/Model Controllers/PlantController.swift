@@ -164,14 +164,14 @@ class PlantController {
         guard let bearer = PlantController.getBearer?.token else { return }
         guard let identity = PlantController.getBearer?.userID else { return }
 
-        let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants").appendingPathExtension("json")
+        let requestURL = baseURL.appendingPathComponent("users/\(identity)/plants")
 
         var request = URLRequest(url: requestURL)
-        request.httpMethod = "PUT"
-        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.addValue(bearer, forHTTPHeaderField: "Authorization")
                 
         do {
-            guard let plantRep = plant.plantRepresentation?.identifier else {
+            guard let plantRep = plant.plantRepresentation else {
                 completion(.failure(.noData))
                 return
             }
@@ -187,9 +187,13 @@ class PlantController {
                 completion(.failure(.failedPost))
                 return
             }
+            if let data = data {
+                print(PlantController.getBearer?.token)
+                print(data.prettyPrintedJSONString)
+            }
             try! CoreDataManager.shared.save()
             completion(.success(true))
-            print("Saved a plant, pal")
+            print("Saved a plant")
             
         }.resume()
         
@@ -308,5 +312,15 @@ class PlantController {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
         return request
+    }
+}
+
+extension Data {
+    var prettyPrintedJSONString: NSString? { /// NSString gives us a nice sanitized debugDescription
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+            let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+            let prettyPrintedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return nil }
+        
+        return prettyPrintedString
     }
 }
