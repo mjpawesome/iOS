@@ -25,6 +25,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqB-jS-7xN">
                                 <rect key="frame" x="100" y="145" width="214" height="177.5"/>
+                                <accessibility key="accessibilityConfiguration" identifier="CreatePlantVC.AddImageButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EqB-jS-7xN" secondAttribute="height" multiplier="119:100" id="pdo-eu-ZbO"/>
                                 </constraints>
@@ -369,6 +370,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjd-UY-mgg">
                                 <rect key="frame" x="322" y="770" width="62" height="62"/>
                                 <color key="backgroundColor" name="MyLightBlue"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HomeVC.AddPlantButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Xjd-UY-mgg" secondAttribute="height" multiplier="1:1" id="kH3-bO-ujs"/>
                                     <constraint firstAttribute="width" constant="62" id="po7-Ig-kes"/>
