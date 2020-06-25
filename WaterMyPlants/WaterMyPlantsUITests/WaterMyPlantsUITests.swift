@@ -233,19 +233,20 @@ class WaterMyPlantsUITests: XCTestCase {
         plantNickNameTextField.typeText(plantNickNameString)
         XCTAssertTrue(plantNickNameTextField.value as? String == plantNickNameString)
         
+        plantDescriptionTextField.isAccessibilityElement = true
         XCTAssert(plantDescriptionTextField.isHittable)
         plantDescriptionTextField.tap()
         plantDescriptionTextField.typeText(plantDescriptionString)
         XCTAssertTrue(plantDescriptionTextField.value as? String == plantDescriptionString)
+  
         
-        let point = CGPoint(x: 100, y: 30)
-        app.tapCoordinate(at: point)
-        app.tapCoordinate(at: point)
+        addImageButton.isAccessibilityElement = true
+        XCTAssert(addImageButton.isHittable)
+        addImageButton.tap()
 
-        doneCreatingPlants.isAccessibilityElement = true
-        XCTAssert(doneCreatingPlants.isHittable)
-        doneCreatingPlants.tap()
     }
+    
+    
     
 }
 
