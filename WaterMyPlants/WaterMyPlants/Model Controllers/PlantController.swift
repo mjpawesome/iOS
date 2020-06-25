@@ -197,7 +197,6 @@ class PlantController {
             print("Saved a plant")
             
         }.resume()
-        
     }
     
     // MARK: - Read Method: Fetch Plants From Server
@@ -206,12 +205,13 @@ class PlantController {
         guard let bearer = PlantController.getBearer?.token else { return }
         guard let userID = PlantController.getBearer?.userID else { return }
         
-        let requestURL = baseURL.appendingPathComponent("api/users/\(userID)/plants")
-        
+        let requestURL = baseURL.appendingPathComponent("users/\(userID)/plants")
         var request = URLRequest(url: requestURL)
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethod.get.rawValue
         request.addValue(bearer, forHTTPHeaderField: "Authorization")
-        
+
+        print(request)
+
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching plants: \(error)")
@@ -228,10 +228,8 @@ class PlantController {
             }
             
             do {
-//                let plantRepresentations = Array(try JSONDecoder().decode([String: PlantRepresentation].self, from: data).values)
-                print(PlantController.getBearer?.token)
-                print(data.prettyPrintedJSONString)
-                let plantRepresentations = Array(arrayLiteral: try self.jsonDecoder.decode(PlantRepresentation.self, from: data))
+                let plantRepresentations = Array(try JSONDecoder().decode([String: PlantRepresentation].self, from: data).values)
+//                let plantRepresentations = Array(arrayLiteral: try self.jsonDecoder.decode(PlantRepresentation.self, from: data))
                 try self.updatePlantsWithServer(with: plantRepresentations)
             } catch {
                 print("Error decoding plant representation: \(error)")
