@@ -39,32 +39,51 @@ class OnboardViewController: UIViewController {
             switch selectedLoginType {
                 
             case .signUp:
+                // signUp label
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign Up"
                 signUpSignInLabel.fadeIn()
+                // createAccount label
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Create Account"
                 createAccountLabel.fadeIn()
+                // phoneText
                 phoneNumberTextField.isHidden = false
                 phoneNumberTextField.fadeIn()
                 phoneNumberTextField.isHidden = false
-                signUpButton.isHidden = false
-                signInButton.isHidden = true
+                // signInButton
+                signInButton.fadeOut()
+                signInButton.isEnabled = false
+                // signUpButton
+                signUpButton.fadeIn()
+                signUpButton.isEnabled = true
+                // rememberMe button
                 rememberMeButton.fadeOut()
-                rememberMeButton.isHidden = true
+                rememberMeButton.isEnabled = false
                 
             case .signIn:
+                // Sign In label
                 signUpSignInLabel.fadeOut()
                 signUpSignInLabel.text = "Sign In"
                 signUpSignInLabel.fadeIn()
+                // create account label
                 createAccountLabel.fadeOut()
                 createAccountLabel.text = "Welcome Back"
                 createAccountLabel.fadeIn()
+                // phoneText
                 phoneNumberTextField.fadeOut()
+                // signIn button
+                signInButton.fadeOut()
                 signInButton.isHidden = false
-                signUpButton.isHidden = true
+                signInButton.fadeIn()
+                signInButton.isEnabled = true
+                // signUp button
+                signUpButton.fadeOut()
+                signUpButton.isEnabled = false
+                // remember me button
                 rememberMeButton.fadeIn()
-                rememberMeButton.isHidden = false
+                rememberMeButton.isEnabled = true
+
             }
         }
     }
