@@ -32,23 +32,23 @@ typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
 class PlantController {
     
     //MARK: - Login Status
-//    enum LoginStatus {
-//
-//        case notLoggedIn
-//        case loggedIn(Bearer)
-//
-//        static var isLoggedIn: Self {
-//
-//            if let bearer = PlantController.bearer {
-//
-//                return .loggedIn(bearer)
-//
-//            } else {
-//
-//                return .notLoggedIn
-//            }
-//        }
-//    }
+    //    enum LoginStatus {
+    //
+    //        case notLoggedIn
+    //        case loggedIn(Bearer)
+    //
+    //        static var isLoggedIn: Self {
+    //
+    //            if let bearer = PlantController.bearer {
+    //
+    //                return .loggedIn(bearer)
+    //
+    //            } else {
+    //
+    //                return .notLoggedIn
+    //            }
+    //        }
+    //    }
     
     // MARK: - Properties
     private let networkService = NetworkService()
@@ -86,7 +86,7 @@ class PlantController {
     }()
     private lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
-//        decoder.dateDecodingStrategy = .iso8601 <-- not needed?
+        //        decoder.dateDecodingStrategy = .iso8601 <-- not needed?
         return decoder
     }()
     
@@ -97,8 +97,8 @@ class PlantController {
     private lazy var logInURL: URL = baseURL.appendingPathComponent("/auth/login")
     private lazy var allPlantsURL: URL = baseURL.appendingPathComponent("/auth/plants")
     
-    //MARK: - Authentication Methods
-    //        ======================
+    //MARK: - Authentication Method: Sign Up
+
     func signUp(for user: UserRepresentation, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
         var request = postRequest(with: signUpURL)
@@ -136,7 +136,9 @@ class PlantController {
             completion(.failure(.failedSignUp))
         }
     }
-    
+
+    //MARK: - Authentication Method: Sign In
+
     func logIn(for user: UserRepresentation, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
         var request = postRequest(with: logInURL)
@@ -191,7 +193,9 @@ class PlantController {
             completion(.failure(.failedLogIn))
         }
     }
-    
+
+    // MARK: - Create Method: Add Plant to Server
+
     func sendPlantToServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         
         let identity = plant.id
@@ -224,68 +228,82 @@ class PlantController {
         }.resume()
         
     }
-    
+
+    // MARK: - Read Method: Fetch Plants From Server
+
     func fetchPlantsFromServer(completion: @escaping CompletionHandler = { _ in }) {
-//        let requestURL = baseURL.appendingPathExtension("json")
-//        
-//        URLSession.shared.dataTask(with: requestURL) { data, _, error in
-//            if let error = error {
-//                NSLog("Error fetching tasks: \(error)")
-//                completion(.failure(.noData))
-//                return
-//            }
-//            
-//            guard let data = data else {
-//                NSLog("No data returned from Firebase (fetching entries).")
-//                completion(.failure(.noData))
-//                return
-//            }
-//            
-//            do {
-//                let plantRepresentation = Array(try JSONDecoder().decode([String : PlantRepresentation].self, from: data).values)
-//                try self.updatePlants(with: plantRepresentation)
-//            } catch {
-//                NSLog("Error deocding entries from Firebase: \(error)")
-//                completion(.failure(.noData))
-//            }
-//        }.resume()
-    }
-    
-    func deletePlantFromServer(_ plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
-        
-        //grab plants ID for URL
-        let identity = plant.id
-        
-        let requestURL = baseURL.appendingPathComponent("plants/\(identity)/").appendingPathExtension("json")
-        
+        guard let bearer = PlantController.getBearer?.token else { return }
+        guard let userID = PlantController.getBearer?.userID else { return }
+
+        let requestURL = baseURL.appendingPathExtension("api/users/\(userID)/plants")
+
         var request = URLRequest(url: requestURL)
-        request.httpMethod = "DELETE"
-        
-        URLSession.shared.dataTask(with: request) { _, _, error in
-            //check for error
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
-                NSLog("Error deleting plant from server: \(error.localizedDescription)")
-                completion(.failure(.badData))
+                print("Error fetching plants: \(error)")
+                DispatchQueue.main.async {
+                    completion(.failure(.noData))
+                }
                 return
             }
-            
-            completion(.success(true))
-            NSLog("Successfully deleted plant with ID of: \(identity)")
-            
+
+            guard let data = data else {
+                NSLog("No data returned from server (fetching entries).")
+                completion(.failure(.noData))
+                return
+            }
+
+            do {
+                let plantRepresentations = Array(try JSONDecoder().decode([String: PlantRepresentation].self, from: data).values)
+                try self.updatePlantsWithServer(with: plantRepresentations)
+            } catch {
+                print("Error decoding plant representation: \(error)")
+                completion(.failure(.noData))
+                return
+            }
         }.resume()
     }
     
-    /// Updates the plants using the server. Only pulls in the plants that are in server but missing from CoreData
-    private func updatePlants(with representations: [PlantRepresentation]) throws {
+    //MARK: - Delete Method
+
+    private func deletePlantFromServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
+        //FIXME: Need to make .id optional in order to guard here or other safety check.
+        let identifier = plant.id
+        let requestURL = baseURL.appendingPathComponent("plants/\(identifier)").appendingPathExtension("json")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                NSLog("Error deleting plant from server: \(error)")
+                completion(.failure(.noData))
+                return
+            }
+            completion(.success(true))
+        }.resume()
+    }
+
+    func delete(plant: Plant) {
+        deletePlantFromServer(plant: plant)
+        CoreDataManager.shared.mainContext.delete(plant)
+        print("tried to delete plant.  need error checking for coredata.")
+    }
+
+    // MARK: - Update Method
+
+    private func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
         let identifiersToFetch = representations.compactMap { $0.identifier }
         let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
         var plantsToCreate = representationsByID
         // create fetch request
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
-        let mainContext = CoreDataManager.shared.mainContext // grab context
+        let context = CoreDataManager.shared.mainContext
         do {
-            let existingPlants = try mainContext.fetch(fetchRequest) // fetch
+            let existingPlants = try context.fetch(fetchRequest) // fetch
             for plant in existingPlants {
                 let id = Int(plant.id)
                 guard let representation = representationsByID[id] else { continue }
@@ -293,23 +311,44 @@ class PlantController {
                 plantsToCreate.removeValue(forKey: id)
             }
             for representation in plantsToCreate.values {
-                // FIXME: - AuthService has nil values
-                //                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
-                //                                                                                                  password: AuthService.activeUser?.password,
-                //                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
-                //                                                                                                  identifier: AuthService.activeUser?.identifier))
+                Plant(plantRepresentation: representation, context: context)
             }
         } catch {
             NSLog("Error fetching plants with plant ID's: \(identifiersToFetch), with error: \(error)")
         }
         try CoreDataManager.shared.mainContext.save()
     }
-    
-    
-    
-    
-    
-    
+
+    //    /// Updates the plants using the server. Only pulls in the plants that are in server but missing from CoreData
+    //    private func updatePlants(with representations: [PlantRepresentation]) throws {
+    //        let identifiersToFetch = representations.compactMap { $0.identifier }
+    //        let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
+    //        var plantsToCreate = representationsByID
+    //        // create fetch request
+    //        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+    //        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
+    //        let mainContext = CoreDataManager.shared.mainContext // grab context
+    //        do {
+    //            let existingPlants = try mainContext.fetch(fetchRequest) // fetch
+    //            for plant in existingPlants {
+    //                let id = Int(plant.id)
+    //                guard let representation = representationsByID[id] else { continue }
+    //                self.updatePlantRep(plant: plant, with: representation)
+    //                plantsToCreate.removeValue(forKey: id)
+    //            }
+    //            for representation in plantsToCreate.values {
+    //                // FIXME: - AuthService has nil values
+    //                //                Plant(plantRepresentation: representation, userRepresentation: UserRepresentation(username: AuthService.activeUser!.username,
+    //                //                                                                                                  password: AuthService.activeUser?.password,
+    //                //                                                                                                  phoneNumber: AuthService.activeUser?.phoneNumber,
+    //                //                                                                                                  identifier: AuthService.activeUser?.identifier))
+    //            }
+    //        } catch {
+    //            NSLog("Error fetching plants with plant ID's: \(identifiersToFetch), with error: \(error)")
+    //        }
+    //        try CoreDataManager.shared.mainContext.save()
+    //    }
+
     private func postRequest(with url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
