@@ -52,7 +52,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewDidAppear(true)
         fetchNewTasksFromServer()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.horizontalCollectionView.reloadData()
