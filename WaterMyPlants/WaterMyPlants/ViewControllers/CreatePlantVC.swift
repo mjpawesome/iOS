@@ -87,7 +87,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
                              nickname: nickname,
                              h2oFreqency: h2oFrequency,
                              userID: "", // FIXME: - this value is reading as nil. Investigate this to get the right value
-                             imageURL: imageURL)
+                             img_url: imageURL)
         // call method to send & save plant
         injectedPlantController?.sendPlantToServer(plant: newPlant)
         // save to coreData

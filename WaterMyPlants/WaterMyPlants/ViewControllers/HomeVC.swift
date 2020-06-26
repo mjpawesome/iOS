@@ -141,14 +141,14 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             // badge
             horizontalCell.badgeLabel.text = assignBadgeText(plant: plant!)
             horizontalCell.badgeLabel.isHidden = horizontalCell.badgeLabel.text == "" ? true : false
-            if let plantImage = plant?.imageURL { horizontalCell.imageView.downloaded(from: plantImage) } // image
+            if let plantImage = plant?.img_url { horizontalCell.imageView.downloaded(from: plantImage) } // image
             if let plantNickname = plant?.nickname { horizontalCell.nicknameLabel.text = plantNickname } // name
             stylizeCell(horizontalCell)
             return horizontalCell
         } else { // verticalCollectionView
             let  verticalCell = verticalCollectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCVCell
             let plant = fetchedResultsController.fetchedObjects?[indexPath.row] // grab plant
-            if let plantImage = plant?.imageURL { verticalCell.imageView.downloaded(from: plantImage) } // image
+            if let plantImage = plant?.img_url { verticalCell.imageView.downloaded(from: plantImage) } // image
             if let plantNickname = plant?.nickname { verticalCell.nicknameLabel.text = plantNickname } // name
             stylizeCell(verticalCell)
             return verticalCell

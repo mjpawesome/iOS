@@ -13,17 +13,17 @@ extension Plant {
     //MARK: -Properties
     var plantRepresentation: PlantRepresentation? {
         guard let species = species,
-            let imageURL = imageURL,
+            let img_url = img_url,
             let nickname = nickname,
             let h2oFrequency = h2oFrequency,
             let userID = userID else { return nil }
         return PlantRepresentation(
-            identifier: Int(Int16(id)),
+            plantID: Int(Int16(id)),
             nickname: nickname,
-            userID: userID,
             species: species,
             h2oFrequency: h2oFrequency,
-            imageURL: imageURL
+            img_url: img_url,
+            user: userID
         )
     }
     
@@ -32,14 +32,14 @@ extension Plant {
                                         nickname: String,
                                         h2oFreqency: String,
                                         userID: String,
-                                        imageURL: String,
+                                        img_url: String,
                                         context: NSManagedObjectContext = CoreDataManager.shared.mainContext) {
         self.init(context: context)
         self.species = species
         self.nickname = nickname
         self.h2oFrequency = h2oFreqency
         self.userID = userID
-        self.imageURL = imageURL
+        self.img_url = img_url
         self.id = Int16(id)
     }
     
@@ -48,12 +48,12 @@ extension Plant {
         context: NSManagedObjectContext = CoreDataManager.shared.mainContext) {
         
         self.init(context: context)
-        id = Int16(plantRepresentation.identifier)
+        id = Int16(plantRepresentation.plantID)
         species = plantRepresentation.species
         nickname = plantRepresentation.nickname
         h2oFrequency = plantRepresentation.h2oFrequency
-        userID = plantRepresentation.userID
-        imageURL = plantRepresentation.imageURL
+        userID = plantRepresentation.user
+        img_url = plantRepresentation.img_url
         self.user = user
     }
 }

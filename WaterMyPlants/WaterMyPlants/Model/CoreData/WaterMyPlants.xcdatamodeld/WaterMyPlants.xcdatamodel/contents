@@ -3,7 +3,7 @@
     <entity name="Plant" representedClassName="Plant" syncable="YES" codeGenerationType="class">
         <attribute name="h2oFrequency" attributeType="String"/>
         <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="imageURL" optional="YES" attributeType="String"/>
+        <attribute name="img_url" optional="YES" attributeType="String"/>
         <attribute name="nickname" optional="YES" attributeType="String"/>
         <attribute name="species" optional="YES" attributeType="String"/>
         <attribute name="userID" attributeType="String"/>

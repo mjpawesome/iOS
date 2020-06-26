@@ -267,12 +267,12 @@ class PlantController {
     // MARK: - Update Method
     
     func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
-        let identifiersToFetch = representations.compactMap { $0.identifier }
+        let identifiersToFetch = representations.compactMap { $0.plantID }
         let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
         var plantsToCreate = representationsByID
         // create fetch request
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
+        fetchRequest.predicate = NSPredicate(format: "id IN %@", identifiersToFetch)
         let context = CoreDataManager.shared.mainContext
         do {
             let existingPlants = try context.fetch(fetchRequest) // fetch
@@ -299,12 +299,12 @@ class PlantController {
     }
     
     private func updatePlantRep(plant: Plant, with representation: PlantRepresentation) {
-        plant.id = Int16(representation.identifier)
+        plant.id = Int16(representation.plantID)
         plant.nickname = representation.nickname
         plant.species = representation.species
-        plant.userID = representation.userID
+        plant.userID = representation.user
         plant.h2oFrequency = representation.h2oFrequency
-        plant.imageURL = representation.imageURL
+        plant.img_url = representation.img_url
     }
     
     private func plantHandler(with url: URL, with bearer: Bearer, requestType: HTTPMethod) -> URLRequest {
