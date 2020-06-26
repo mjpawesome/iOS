@@ -166,7 +166,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     
     /// uploads an image and returns a URL of it's location in the imageURL property in the CreatePlantVC
     private func uploadImage() {
-        guard let imageData: Data = selectedImage.image?.jpegData(compressionQuality: 1) else { return }
+        guard let imageData: Data = selectedImage.image?.jpegData(compressionQuality: 0.5) else { return }
         cloudinaryController.createUploader().upload(data: imageData, uploadPreset: "dwx67sbr", progress: { (progress) in
             // handle progress
             self.uploadProgressBar.alpha = 1
