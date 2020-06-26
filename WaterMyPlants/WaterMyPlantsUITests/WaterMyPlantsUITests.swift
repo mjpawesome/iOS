@@ -130,7 +130,7 @@ class WaterMyPlantsUITests: XCTestCase {
         return buttons(identifier: .cancelPlantButton)
     }
     
-    private var testUserName = "Test Name"
+    private var testUserName = "Test Name1"
     private var testUserPhoneNumber = "1234567890"
     private var testUserPW = "password"
     private var detailTextEntry = "Test detail entry for UI Testing."
@@ -141,6 +141,7 @@ class WaterMyPlantsUITests: XCTestCase {
     private var createUserPassword = "1234"
     
     func testCreateUser()  throws {
+   
         
         let signInButton = app.segmentedControls.buttons["Sign Up"]
         XCTAssert(signInButton.isHittable)
@@ -170,6 +171,7 @@ class WaterMyPlantsUITests: XCTestCase {
     
     // Make sure you are logged out of the app before beginning
     func testUserSignIn() throws {
+        
         
         let signInButton = app.segmentedControls.buttons["Sign In"]
         XCTAssert(signInButton.isHittable)
