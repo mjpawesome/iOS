@@ -118,6 +118,7 @@ class DetailVC: UIViewController {
         toggleWaterThisPlantButton(plant: plant)
         plantNicknameLabel.text = plant.nickname // name
         descriptionLabel.text = plant.species ?? "" // species is being treated as a description
+        setupTableView(plant: plant)
     }
     
     private func toggleWaterThisPlantButton(plant: Plant) {
@@ -183,7 +184,8 @@ class DetailVC: UIViewController {
         let h20Frequency = "\(nextDateString), \(daysString!)" // reformat string to be stored in coreData & network
         // save update
         plant.h2oFrequency = h20Frequency
-        try! CoreDataManager.shared.save() // TODO: <-- temporary. proper method call here
+        injectedPlantController?.updateAPlant(plant: plant)
+//        try! CoreDataManager.shared.save() // TODO: <-- temporary. proper method call here
         // animate button to show the user that the UI is responding
         waterThisPlantButton.setTitle("Done!", for: .normal)
         performSpringAnimation(forButton_: sender)
@@ -234,6 +236,7 @@ class DetailVC: UIViewController {
 //        let newPlant = injectedPlant
 //        injectedPlantController?.sendPlantToServer(plant: newPlant)
 //        injectedPlantController?.delete(plant: injectedPlant)
+        injectedPlantController?.updateAPlant(plant: injectedPlant)
 //        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
         // send to server
         // TODO: call update method on the plant controller to replace the old object with the newly updated one
@@ -241,7 +244,7 @@ class DetailVC: UIViewController {
         // animate and refresh views to give the user feedback that their change saved
         editMenuSaveButton.setTitle("Saved!", for: .normal)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-//            self.updateViews()
+            self.updateViews()
             self.tableView.reloadData()
             UIView.animate(withDuration: 0.5) {
                 // popover

@@ -279,12 +279,13 @@ class PlantController {
     
     // MARK: - Update Method
     
-    func updatePlant(plant: Plant) {
-        delete(plant: plant)
-        sendPlantToServer(plant: plant)
-    }
+//    func updatePlant(plant: Plant) {
+//        delete(plant: plant)
+//        sendPlantToServer(plant: plant)
+//    }
 
-    private func updateAPlant(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
+    func updateAPlant(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
+        try! CoreDataManager.shared.mainContext.save()
         guard let bearer = PlantController.getBearer?.token else { return }
         let identifier = plant.id
         let requestURL = baseURL.appendingPathComponent("plants/\(identifier)")
@@ -300,6 +301,7 @@ class PlantController {
                 completion(.failure(.noData))
                 return
             }
+
             completion(.success(true))
         }.resume()
     }
