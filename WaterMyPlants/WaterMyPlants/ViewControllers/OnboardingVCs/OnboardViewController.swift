@@ -217,6 +217,7 @@ class OnboardViewController: UIViewController {
         
         plantController.logIn(for: userRep) { (result) in
             if result == .success(true) {
+                UserDefaults.standard.set(true, forKey: "isSigningIn") // this just makes sure the fetch method will be called
                 print(result)
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {

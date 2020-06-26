@@ -39,7 +39,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         return fetchedResultsController
     }()
     var plantController = PlantController()
-    var didLogIn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,9 +56,9 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.horizontalCollectionView.reloadData()
         }
-        guard didLogIn == false else { return }
+        guard UserDefaults.standard.bool(forKey: "isSigningIn") == true else { return }
         fetchNewTasksFromServer()
-        didLogIn = true
+        UserDefaults.standard.set(false, forKey: "isSigningIn")
     }
     
     deinit {
