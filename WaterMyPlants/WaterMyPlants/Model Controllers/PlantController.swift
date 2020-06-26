@@ -273,6 +273,7 @@ class PlantController {
     func delete(plant: Plant) {
         deletePlantFromServer(plant: plant)
         CoreDataManager.shared.mainContext.delete(plant)
+        try! CoreDataManager.shared.mainContext.save()
         print("tried to delete plant.  need error checking for coredata.")
     }
     
