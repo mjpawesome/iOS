@@ -165,15 +165,27 @@ class OnboardViewController: UIViewController {
                 print(result)
                 DispatchQueue.main.async {
                     self.signUpSignInSegmentedControl.selectedSegmentIndex = 1
+                    // Sign In label
                     self.signUpSignInLabel.fadeOut()
                     self.signUpSignInLabel.text = "Sign In"
                     self.signUpSignInLabel.fadeIn()
+                    // create account label
                     self.createAccountLabel.fadeOut()
                     self.createAccountLabel.text = "Welcome Back"
                     self.createAccountLabel.fadeIn()
+                    // phoneText
                     self.phoneNumberTextField.fadeOut()
+                    // signIn button
+                    self.signInButton.fadeOut()
                     self.signInButton.isHidden = false
-                    self.signUpButton.isHidden = true
+                    self.signInButton.fadeIn()
+                    self.signInButton.isEnabled = true
+                    // signUp button
+                    self.signUpButton.fadeOut()
+                    self.signUpButton.isEnabled = false
+                    // remember me button
+                    self.rememberMeButton.fadeIn()
+                    self.rememberMeButton.isEnabled = true
                     UserDefaults.standard.set(true, forKey: "isLoggedIn")
                     
                 }
