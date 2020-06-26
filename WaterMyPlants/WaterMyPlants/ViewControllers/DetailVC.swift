@@ -178,7 +178,9 @@ class DetailVC: UIViewController {
         let daysInt = Int(daysString!) // convert to int
         let date = dateFormatter.date(from: dateString!)// format dateString to date
         print("Old Date: \(dateString!)")
-        let nextDate = Calendar.current.date(byAdding: .day, value: daysInt!, to: date!) // calculate nextDate
+        let currentDate = Date()
+        print(currentDate)
+        let nextDate = Calendar.current.date(byAdding: .day, value: daysInt!, to: currentDate) // calculate nextDate
         let nextDateString = dateFormatter.string(from: nextDate!)
         print("New Date : \(nextDateString)")
         let h20Frequency = "\(nextDateString), \(daysString!)" // reformat string to be stored in coreData & network
