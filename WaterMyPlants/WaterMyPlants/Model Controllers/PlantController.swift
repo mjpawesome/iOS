@@ -280,8 +280,8 @@ class PlantController {
     // MARK: - Update Method
     
     func updatePlant(plant: Plant) {
-        sendPlantToServer(plant: plant)
         delete(plant: plant)
+        sendPlantToServer(plant: plant)
     }
 
     private func updateAPlant(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
