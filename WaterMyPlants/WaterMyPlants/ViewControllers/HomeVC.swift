@@ -45,7 +45,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         sendUserToLoginIfNecessary()
         setupInitialViews()
         fetchNewTasksFromServer()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.horizontalCollectionView.reloadData()
         }
         print(fetchedResultsController.fetchedObjects?.first?.h2oFrequency) // this print statement can be used to check which properties of the core data object are saving
