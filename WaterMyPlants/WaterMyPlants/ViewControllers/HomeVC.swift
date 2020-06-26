@@ -46,7 +46,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         sendUserToLoginIfNecessary()
         setupInitialViews()
         fetchNewTasksFromServer()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.horizontalCollectionView.reloadData()
         }
         print(fetchedResultsController.fetchedObjects?.first?.h2oFrequency) // this print statement can be used to check which properties of the core data object are saving
@@ -54,11 +54,11 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        guard didLogIn == false else { return }
-        fetchNewTasksFromServer()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.horizontalCollectionView.reloadData()
         }
+        guard didLogIn == false else { return }
+        fetchNewTasksFromServer()
         didLogIn = true
     }
     
