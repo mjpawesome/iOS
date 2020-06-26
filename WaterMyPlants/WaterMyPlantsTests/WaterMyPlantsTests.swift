@@ -31,24 +31,27 @@ class WaterMyPlantsTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testUserCreate() {
+        let user = UserRepresentation( username: "usertest", password: "new", phoneNumber: "555-555-5555", identifier: 1)
+        if user.identifier == 1,
+            user.username == "usertest",
+            user.password == "new",
+            user.phoneNumber == "555-555-5555" {
+            XCTAssert(user.identifier == 1)
+            XCTAssert(user.username == "usertest")
+            XCTAssert(user.password == "new")
+            XCTAssert(user.phoneNumber == "555-555-5555")
         }
     }
+    
+    func testForLoginResults() {
+            let expectation = self.expectation(description: "Wait for results")
+            let controller = UserRepresentation()
+        controller. {_ in
+                print("Returned Results ⚠️")
+                expectation.fulfill()
+            }
+            wait(for: [expectation], timeout: 5)
+        }
 
 }
