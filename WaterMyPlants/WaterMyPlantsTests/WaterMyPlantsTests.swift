@@ -43,15 +43,5 @@ class WaterMyPlantsTests: XCTestCase {
             XCTAssert(user.phoneNumber == "555-555-5555")
         }
     }
-    
-    func testForLoginResults() {
-            let expectation = self.expectation(description: "Wait for results")
-            let controller = UserRepresentation()
-        controller. {_ in
-                print("Returned Results ⚠️")
-                expectation.fulfill()
-            }
-            wait(for: [expectation], timeout: 5)
-        }
 
 }

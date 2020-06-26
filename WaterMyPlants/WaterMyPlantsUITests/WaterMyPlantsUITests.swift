@@ -248,7 +248,7 @@ class WaterMyPlantsUITests: XCTestCase {
             firstChild.tap()
         }
         
-        app.navigationBars.buttons.element(boundBy: 1).tap()
+        
         
     }
     
