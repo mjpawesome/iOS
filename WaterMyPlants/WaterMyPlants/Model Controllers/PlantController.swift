@@ -170,7 +170,7 @@ class PlantController {
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(bearer, forHTTPHeaderField: "Authorization")
-                
+
         do {
             guard let plantRep = plant.plantRepresentation else {
                 completion(.failure(.noData))
@@ -238,7 +238,7 @@ class PlantController {
             
             do {
                 let plantRepresentations = try JSONDecoder().decode([PlantRepresentation].self, from: data)
-//                let plantRepresentations = Array(arrayLiteral: try self.jsonDecoder.decode(PlantRepresentation.self, from: data))
+                //                let plantRepresentations = Array(arrayLiteral: try self.jsonDecoder.decode(PlantRepresentation.self, from: data))
                 try self.updatePlantsWithServer(with: plantRepresentations)
             } catch {
                 print("Error decoding plant representation: \(error)")
@@ -249,7 +249,14 @@ class PlantController {
     }
     
     //MARK: - Delete Method
-    
+
+    func delete(plant: Plant) {
+        deletePlantFromServer(plant: plant)
+        CoreDataManager.shared.mainContext.delete(plant)
+        try! CoreDataManager.shared.mainContext.save()
+        print("tried to delete plant.  need error checking for coredata.")
+    }
+
     private func deletePlantFromServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
         guard let bearer = PlantController.getBearer?.token else { return }
         let identifier = plant.id
@@ -259,7 +266,7 @@ class PlantController {
         request.httpMethod = "DELETE"
 
         print(request)
-        
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 NSLog("Error deleting plant from server: \(error)")
@@ -270,15 +277,33 @@ class PlantController {
         }.resume()
     }
     
-    func delete(plant: Plant) {
-        deletePlantFromServer(plant: plant)
-        CoreDataManager.shared.mainContext.delete(plant)
-        try! CoreDataManager.shared.mainContext.save()
-        print("tried to delete plant.  need error checking for coredata.")
-    }
-    
     // MARK: - Update Method
     
+    func updatePlant(plant: Plant) {
+        sendPlantToServer(plant: plant)
+        delete(plant: plant)
+    }
+
+    private func updateAPlant(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
+        guard let bearer = PlantController.getBearer?.token else { return }
+        let identifier = plant.id
+        let requestURL = baseURL.appendingPathComponent("plants/\(identifier)")
+        var request = URLRequest(url: requestURL)
+        request.addValue(bearer, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "PUT"
+
+        print(request)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                NSLog("Error updating plant on server: \(error)")
+                completion(.failure(.noData))
+                return
+            }
+            completion(.success(true))
+        }.resume()
+    }
+
     func updatePlantsWithServer(with representations: [PlantRepresentation]) throws {
         let identifiersToFetch = representations.compactMap { $0.plantID }
         let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))

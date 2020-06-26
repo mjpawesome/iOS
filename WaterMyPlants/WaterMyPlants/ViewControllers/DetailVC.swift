@@ -231,14 +231,15 @@ class DetailVC: UIViewController {
         injectedPlant.h2oFrequency = h2oFrequency
 
         // save to coreData
-        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
+        injectedPlantController?.updatePlant(plant: injectedPlant)
+//        try! CoreDataManager.shared.save() // FIXME: - <-- this is should really be built into the controller method  below with catch block
         // send to server
         // TODO: call update method on the plant controller to replace the old object with the newly updated one
         // plantController.update(
         // animate and refresh views to give the user feedback that their change saved
         editMenuSaveButton.setTitle("Saved!", for: .normal)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.updateViews()
+//            self.updateViews()
             self.tableView.reloadData()
             UIView.animate(withDuration: 0.5) {
                 // popover
