@@ -251,11 +251,14 @@ class PlantController {
     //MARK: - Delete Method
     
     private func deletePlantFromServer(plant: Plant, completion: @escaping CompletionHandler = { _ in }) {
-        //FIXME: Need to make .id optional in order to guard here or other safety check.
+        guard let bearer = PlantController.getBearer?.token else { return }
         let identifier = plant.id
-        let requestURL = baseURL.appendingPathComponent("plants/\(identifier)").appendingPathExtension("json")
+        let requestURL = baseURL.appendingPathComponent("plants/\(identifier)")
         var request = URLRequest(url: requestURL)
+        request.addValue(bearer, forHTTPHeaderField: "Authorization")
         request.httpMethod = "DELETE"
+
+        print(request)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
