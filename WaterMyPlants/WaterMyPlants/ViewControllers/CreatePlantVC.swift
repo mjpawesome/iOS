@@ -23,7 +23,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var timeIntervalPicker: UIPickerView!
     
     public var imagePicker: UIImagePickerController? // save reference to it
-    lazy var cloudinaryConfiguration = CLDConfiguration(cloudName: "dehqhte0i", apiKey: "959718959598545", secure: true)
+    lazy var cloudinaryConfiguration = CLDConfiguration(cloudName: "dvlhbfwmm", apiKey: "346953818272633", secure: true)
     lazy var cloudinaryController = CLDCloudinary(configuration: cloudinaryConfiguration)
     var imageURL: String? // this contains the url for the image that was uploaded
     let numbers = ["1", "2", "3", "4", "5", "6", "7"] // picker view
@@ -167,7 +167,7 @@ class CreatePlantVC: UIViewController, UITextFieldDelegate {
     /// uploads an image and returns a URL of it's location in the imageURL property in the CreatePlantVC
     private func uploadImage() {
         guard let imageData: Data = selectedImage.image?.jpegData(compressionQuality: 1) else { return }
-        cloudinaryController.createUploader().upload(data: imageData, uploadPreset: "y1v3bbv4", progress: { (progress) in
+        cloudinaryController.createUploader().upload(data: imageData, uploadPreset: "dwx67sbr", progress: { (progress) in
             // handle progress
             self.uploadProgressBar.alpha = 1
             self.uploadProgressPercentLabel.alpha = 1
