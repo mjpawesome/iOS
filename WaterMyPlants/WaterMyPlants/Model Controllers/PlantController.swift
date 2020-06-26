@@ -191,8 +191,17 @@ class PlantController {
             if let data = data {
                 print(PlantController.getBearer?.token)
                 print(data.prettyPrintedJSONString)
+                do {
+                    let plantRepresentations = try JSONDecoder().decode(PlantRepresentation.self, from: data)
+                    let plantID = plantRepresentations.plantID
+                    plant.id = Int16(plantID)
+                } catch {
+                    print("Error decoding plant representation: \(error)")
+                    completion(.failure(.noData))
+                    return
+                }
             }
-            try! CoreDataManager.shared.save()
+            try! CoreDataManager.shared.mainContext.save()
             completion(.success(true))
             print("Saved a plant")
             

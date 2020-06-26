@@ -43,9 +43,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         sendUserToLoginIfNecessary()
-        fetchNewTasksFromServer()
+//        fetchNewTasksFromServer()
         setupInitialViews()
-        fetchNewTasksFromServer() // fetch tasks from server
         print(fetchedResultsController.fetchedObjects?.first?.h2oFrequency) // this print statement can be used to check which properties of the core data object are saving
     }
     override func viewWillAppear(_ animated: Bool) {
