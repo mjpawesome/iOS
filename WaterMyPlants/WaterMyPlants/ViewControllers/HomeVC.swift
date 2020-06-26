@@ -45,9 +45,13 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         sendUserToLoginIfNecessary()
         setupInitialViews()
         fetchNewTasksFromServer()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.horizontalCollectionView.reloadData()
+        }
         print(fetchedResultsController.fetchedObjects?.first?.h2oFrequency) // this print statement can be used to check which properties of the core data object are saving
     }
-    override func viewWillAppear(_ animated: Bool) {
+    
+    override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchNewTasksFromServer()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
